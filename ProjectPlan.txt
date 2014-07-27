@@ -5,6 +5,9 @@ Project Plan:
 Concerns:
   - Multiple branches could cause issues with DB migrations
 
+Progress Tracking:
+  - We'll use GIT issues for Project Tracking
+
 Database Schema:
   - Books
     - Reviews and Tags
