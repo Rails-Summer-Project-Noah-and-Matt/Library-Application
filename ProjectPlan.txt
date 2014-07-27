@@ -14,7 +14,8 @@ Database Schema:
     - Multiple Books can have the same title
     - Book title can have different ISBNs 
     - is_active
-    - picture (multiple books could share)
+    - picture (foreign key to book_covers)
+    - owner (foreign key to user_id, for req 5 only edit book you entered)
     - has_many :book_authors
     - has_many :authors, through :book_authors
     - has_many :isbn
@@ -23,6 +24,8 @@ Database Schema:
     - has_many :book_ratings
     - has_many :ratings, through :book_ratings
     - has_many :reviews
+  - Book_Covers
+    - has_many :books
   - Tags
     - has_many :book_tags
     - has_many :books, through :book_tags
@@ -30,6 +33,8 @@ Database Schema:
     - has_many :book_ratings
     - has_many :books, through :book_ratings
   - Reviews
+    - (req 19) Renee - what do you mean by search on review? date, or contents,
+      or both, or "figure it out"?
     - book
     - user
     - review
@@ -44,7 +49,12 @@ Database Schema:
     - email
     - username
     - is admin ?
-    - email preferences - how to handle
+    - is_blocked (req 18)
+    - email preferences - how to handle - req 11-16 - probably one or more 
+      add'l tables
+    - ? should we do a hook for "activity", or gen reports as requested?
+      (for req 20) - I think as requested.
+
   Database:
     - SQlite for Dev and Test
     - Postgres for Production
