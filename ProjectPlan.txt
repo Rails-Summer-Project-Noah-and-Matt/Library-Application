@@ -7,13 +7,18 @@ Concerns:
 
 Database Schema:
   - Books
-    - Reviews and Tags
+    - Reviews and Tags, ratings
     - Multiple Books can have the same title
     - Book title can have different ISBNs 
+    - is_active
+    - picture (multiple books could share)
   - Authors 
   - Users
-    - Reviews and Tags
-
+    - Reviews and Tags, ratings
+    - email
+    - username
+    - is admin ?
+    - email preferences - how to handle
   Database:
     - SQlite for Dev and Test
     - Postgres for Production
