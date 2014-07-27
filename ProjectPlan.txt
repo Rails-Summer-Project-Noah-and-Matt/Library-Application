@@ -1,0 +1,16 @@
+Project Plan: 
+  - Build a GIT repo to share with Noah
+  - We are going to be strict about testing
+
+Concerns:
+  - Multiple branches could cause issues with DB migrations
+
+Database Schema:
+  - Books
+    - Reviews and Tags
+    - Multiple Books can have the same title
+    - Book title can have different ISBNs 
+  - Authors 
+  - Users
+    - Reviews and Tags
+
