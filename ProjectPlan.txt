@@ -14,3 +14,7 @@ Database Schema:
   - Users
     - Reviews and Tags
 
+  Database:
+    - SQlite for Dev and Test
+    - Postgres for Production
+
