@@ -15,7 +15,30 @@ Database Schema:
     - Book title can have different ISBNs 
     - is_active
     - picture (multiple books could share)
+    - has_many :book_authors
+    - has_many :authors, through :book_authors
+    - has_many :isbn
+    - has_many :book_tags
+    - has_many :tags, through :book_tags
+    - has_many :book_ratings
+    - has_many :ratings, through :book_ratings
+    - has_many :reviews
+  - Tags
+    - has_many :book_tags
+    - has_many :books, through :book_tags
+  - Ratings
+    - has_many :book_ratings
+    - has_many :books, through :book_ratings
+  - Reviews
+    - book
+    - user
+    - review
+  - ISBN has many books
   - Authors 
+    - first_name
+    - last_name
+    - has_many :book_authors
+    - has_many :books, through :book_authors
   - Users
     - Reviews and Tags, ratings
     - email
