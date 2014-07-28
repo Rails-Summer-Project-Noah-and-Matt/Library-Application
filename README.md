@@ -29,6 +29,9 @@ Things to cover:
 Project Plan: 
   - Build a GIT repo to share with Noah
   - We are going to be strict about testing
+  - Failing tests or code w/o tests gets committed to a branch
+  - Passing tests get merged to master with an issue number
+  - No commits / merges to master w/o issue number
 
 Concerns:
   - Multiple branches could cause issues with DB migrations
