@@ -63,8 +63,8 @@ Database Schema:
     - has_many :book_ratings
     - has_many :books, through :book_ratings
   - Reviews
-    - (req 19) Renee - what do you mean by search on review? date, or contents,
-      or both, or "figure it out"?
+    - text will be searchable - we think we will use a rails sql wrapper,
+      not regex/ruby
     - book
     - user
     - review
