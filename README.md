@@ -81,7 +81,20 @@ Database Schema:
       add'l tables
     - ? should we do a hook for "activity", or gen reports as requested?
       (for req 20) - I think as requested.
-
+    - has_many :owned_books
+    - has_many :books, through :owned_books
+    - has_many :followed_books           #(req 12)
+    - has_many :books, through :followed_books
+    - receives_ratings (boolean)  #(req13)
+    - receives_reviews (boolean)  #(req14)
+    - receives_notifications_of_owned_book_rating_or_review (boolean) #(req11)
+    - emails_as_daily_digest (boolean) #(req16)
+  - Followed_Books
+    - book
+    - user
+    - following (boolean)
+    - receives_ratings (boolean)  #(req13)
+    - receives_reviews (boolean)  #(req14)
   Database:
     - SQlite for Dev and Test
     - Postgres for Production
