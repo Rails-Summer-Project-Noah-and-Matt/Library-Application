@@ -51,12 +51,17 @@ Database Schema:
     - has_many :isbn
     - has_many :book_tags
     - has_many :tags, through :book_tags
-    - has_many :reviews (we will pull ratings from the reviews)
+    - has many :book_ratings
+    - has_many :ratings, though :book_ratings
+    - has_many :reviews
   - Book_Covers
     - has_many :books
   - Tags
     - has_many :book_tags
     - has_many :books, through :book_tags
+  - Ratings
+    - has_many :book_ratings
+    - has_many :books, through :book_ratings
   - Reviews
     - (req 19) Renee - what do you mean by search on review? date, or contents,
       or both, or "figure it out"?
