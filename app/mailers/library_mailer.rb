@@ -1,5 +1,5 @@
 class LibraryMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "TheLibraryMailer@TheLibrary.com"
 
 
   def update_user_rating_email(user, book)
