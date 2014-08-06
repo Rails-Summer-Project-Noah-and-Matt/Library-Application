@@ -68,8 +68,6 @@ Database Schema:
     - book
     - user
     - review
-    - ratings (we are temporarily saying this is part of reviews, but 
-      it is possible we will want to pull it out)
   - ISBN 
     - foreign key book
     - isbn
