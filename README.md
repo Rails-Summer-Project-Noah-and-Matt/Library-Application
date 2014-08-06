@@ -43,7 +43,6 @@ Progress Tracking:
 Database Schema:
   - Books
     - Multiple Books can have the same title
-    - Book title can have different ISBNs 
     - is_active
     - picture (foreign key to book_covers)
     - owner (foreign key to user_id, for req 5 only edit book you entered)
@@ -71,7 +70,9 @@ Database Schema:
     - review
     - ratings (we are temporarily saying this is part of reviews, but 
       it is possible we will want to pull it out)
-  - ISBN has many books
+  - ISBN 
+    - foreign key book
+    - isbn
   - Authors 
     - first_name
     - last_name
