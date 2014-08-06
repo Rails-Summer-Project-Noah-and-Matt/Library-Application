@@ -49,13 +49,15 @@ Database Schema:
     - has_many :book_authors
     - has_many :authors, through :book_authors
     - has_many :isbn
+    - has_many :book_covers
     - has_many :book_tags
     - has_many :tags, through :book_tags
     - has many :book_ratings
     - has_many :ratings, though :book_ratings
     - has_many :reviews
   - Book_Covers
-    - has_many :books
+    - foreign key book
+    - book_cover
   - Tags
     - has_many :book_tags
     - has_many :books, through :book_tags
