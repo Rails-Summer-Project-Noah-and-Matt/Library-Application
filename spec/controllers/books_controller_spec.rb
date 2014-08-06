@@ -102,15 +102,15 @@ RSpec.describe BooksController, :type => :controller do
 
   describe "PUT update" do
     describe "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+      let(:new_attributes) { { title: 'Alice in Wonderland',
+                               is_active: true
+      }}
 
       it "updates the requested book" do
         book = Book.create! valid_attributes
         put :update, {:id => book.to_param, :book => new_attributes}, valid_session
         book.reload
-        skip("Add assertions for updated state")
+        expect(assigns(:book)).to eq(book)
       end
 
       it "assigns the requested book as @book" do
