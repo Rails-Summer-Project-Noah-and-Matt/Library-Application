@@ -1,5 +1,4 @@
 require 'rails_helper'
-#require 'test_helper'
 
 RSpec.describe User, :type => :model do
   it  "should create a user" do
