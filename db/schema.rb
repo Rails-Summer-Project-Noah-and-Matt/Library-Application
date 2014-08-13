@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 20140812191500) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "owner_id"
-    t.integer  "isbn10"
-    t.integer  "isbn13"
+    t.string   "isbn10"
+    t.string   "isbn13"
   end
 
   add_index "books", ["isbn10"], name: "index_books_on_isbn10"
