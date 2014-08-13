@@ -46,9 +46,10 @@ Database Schema:
     - is_active
     - picture (foreign key to book_covers)
     - owner (foreign key to user_id, for req 5 only edit book you entered)
+    - isbn10
+    - isbn13
     - has_many :book_authors
     - has_many :authors, through :book_authors
-    - has_many :isbn
     - has_many :book_covers
     - has_many :book_tags
     - has_many :tags, through :book_tags
@@ -70,9 +71,6 @@ Database Schema:
     - book
     - user
     - review
-  - ISBN 
-    - foreign key book
-    - isbn
   - Authors 
     - first_name
     - last_name
