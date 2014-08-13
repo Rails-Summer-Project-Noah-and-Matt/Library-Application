@@ -28,7 +28,8 @@ RSpec.describe BooksController, :type => :controller do
   } }
 
   let(:invalid_attributes) { { title: '',
-                               is_active: true
+                               isbn10: '1234567',
+                               isbn13: '12345678901234'
   } }
 
   # This should return the minimal set of values that should be in the session

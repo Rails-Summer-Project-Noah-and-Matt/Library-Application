@@ -5,13 +5,13 @@ class Book < ActiveRecord::Base
     message: 'Titles must be between 1 and 256 characters long'
   }
   
-  validates :isbn10, length: { 
-    is: 10,
+  validates :isbn10, allow_blank: true, format: { 
+    with: /\A[[:digit:]]{10}\z/,
     message: 'ISBN10 is a 10 digit format'
   }
-  
-  validates :isbn13, length: { 
-    is: 13,
+
+  validates :isbn13, allow_blank: true, format: { 
+    with: /\A[[:digit:]]{13}\z/,
     message: 'ISBN13 is a 13 digit format'
   }
 
