@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-  get 'welcome/index'
-  root 'welcome#index'
+  root 'books#index'
   devise_for :users
   resources :books
 
