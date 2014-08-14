@@ -19,7 +19,12 @@ ActiveRecord::Schema.define(version: 20140813023144) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "owner_id"
+    t.string   "isbn10"
+    t.string   "isbn13"
   end
+
+  add_index "books", ["isbn10"], name: "index_books_on_isbn10"
+  add_index "books", ["isbn13"], name: "index_books_on_isbn13"
 
   create_table "reviews", force: true do |t|
     t.text     "text"
