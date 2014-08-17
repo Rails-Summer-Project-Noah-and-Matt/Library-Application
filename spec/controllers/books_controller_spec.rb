@@ -24,7 +24,10 @@ RSpec.describe BooksController, :type => :controller do
   # Book. As you add validations to Book, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) { { title: 'The Horror at Dunwich',
-                             is_active: true
+                             is_active: true,
+                             author: Author.create!( given_name:  "H.P.",
+                                       family_name: "Lovecraft"
+                             )
   } }
 
   let(:invalid_attributes) { { title: '',
