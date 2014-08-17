@@ -1,3 +1,3 @@
 class Author < ActiveRecord::Base
-  has many :books
+  has_many :books
 end
