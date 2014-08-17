@@ -5,6 +5,7 @@ RSpec.describe User, :type => :model do
     user = User.new
     user.email = "testuser@email.com"
     user.password = "password"
+    user.name = "Matt"
     assert user.save
   end
   
@@ -13,6 +14,7 @@ RSpec.describe User, :type => :model do
     user.email = "admin@email.com"
     user.password = "password"
     user.admin = true
+    user.name  = "admin"
     assert user.save
   end
   
