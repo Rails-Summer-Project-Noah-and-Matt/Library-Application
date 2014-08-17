@@ -14,7 +14,7 @@
   - @books.each do |book|
     %tr
       %td= book.title
-      %td= book.author
+      %td= book.author.sortable_name
       %td= book.isbn10
       %td= book.isbn13
       %td= book.is_active
