@@ -1,35 +1,40 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
 
-  # GET /reviews
-  # GET /reviews.json
+  
+  # GET /posts/:post_id/comments
   def index
-    @reviews = Review.all
+    book = Book.find(params[:book_id])
+    @reviews = book.reviews
   end
 
-  # GET /reviews/1
-  # GET /reviews/1.json
+  # GET /books/:book_id/comments/:id
   def show
+    book = Book.find(params[:book_id])
+    @review = book.reviews.find(params[:id])
   end
 
-  # GET /reviews/new
+  # GET /books/:book_id/comments/new
   def new
-    @review = Review.new
+    book = Book.find(params[:book_id])
+    @review = book.reviews.build 
   end
 
-  # GET /reviews/1/edit
-  def edit
+  # GET /books/:book_id/reviews/:id/edit
+  def edit      
+    book = Book.find(params[:book_id])
+    @review = book.reviews.find(params[:id])
   end
 
-  # POST /reviews
-  # POST /reviews.json
+  # POST /books/:book_id/reviews
   def create
-    @review = Review.new(review_params)
-
+    book = Book.find(params[:book_id])
+    @review = book.reviews.create(review_params)
+    @review.user_id = current_user.id
     respond_to do |format|
       if @review.save
-        format.html { redirect_to @review, notice: 'Review was successfully created.' }
-        format.json { render :show, status: :created, location: @review }
+        format.html { redirect_to([@review.book, @review],  notice: 'Review was successfully created.') }
+        format.json { render :show, status: :created, location: [@review.book, @review] }
       else
         format.html { render :new }
         format.json { render json: @review.errors, status: :unprocessable_entity }
@@ -37,13 +42,18 @@ class ReviewsController < ApplicationController
     end
   end
 
+
+  # PUT /posts/:post_id/comments/:id
   # PATCH/PUT /reviews/1
-  # PATCH/PUT /reviews/1.json
   def update
+   
+    book = Book.find(params[:book_id])
+    @review = book.reviews.find(params[:id])
+   
     respond_to do |format|
       if @review.update(review_params)
-        format.html { redirect_to @review, notice: 'Review was successfully updated.' }
-        format.json { render :show, status: :ok, location: @review }
+        format.html { redirect_to([@review.book, @review], notice: 'Review was successfully updated.') }
+        format.json { render :show, status: :ok, location: [@review.book, @review] }
       else
         format.html { render :edit }
         format.json { render json: @review.errors, status: :unprocessable_entity }
@@ -56,7 +66,7 @@ class ReviewsController < ApplicationController
   def destroy
     @review.destroy
     respond_to do |format|
-      format.html { redirect_to reviews_url, notice: 'Review was successfully destroyed.' }
+      format.html { redirect_to(books_review_url, notice: 'Review was successfully destroyed.' )}
       format.json { head :no_content }
     end
   end
@@ -69,6 +79,6 @@ class ReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params[:review]
+      params.require(:review).permit(:review)
     end
 end

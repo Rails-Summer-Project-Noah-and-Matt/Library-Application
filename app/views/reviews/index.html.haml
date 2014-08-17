@@ -2,16 +2,20 @@
 
 %table
   %tr
+    %th Review
+    %th Reviewer
     %th
     %th
     %th
 
   - @reviews.each do |review|
     %tr
-      %td= link_to 'Show', review
-      %td= link_to 'Edit', edit_review_path(review)
-      %td= link_to 'Destroy', review, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= review.text
+      %td= User.find(review.user_id).name
+      %td= link_to 'Show', [review.book, review] 
+      %td= link_to 'Edit', edit_book_review_path(review.book, review)
+      %td= link_to 'Destroy', [review.book, review], :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 
-= link_to 'New Review', new_review_path
+= link_to 'New Review', new_book_review_path
