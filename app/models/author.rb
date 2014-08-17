@@ -12,6 +12,7 @@ class Author < ActiveRecord::Base
   }
   
   has_many :books
+  before_destroy :check_for_books
 
   def full_name
     first = given_name ? "#{given_name} " : ''
@@ -21,6 +22,15 @@ class Author < ActiveRecord::Base
   def sortable_name
     first = given_name ? ", #{given_name}" : ''
     "#{family_name}#{first}"
+  end
+
+  private
+
+  def check_for_books
+    if books.count > 0
+      errors.add_to_base("cannot delete Author while books exist")
+      return false
+    end
   end
 
 end
