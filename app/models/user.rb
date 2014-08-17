@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  validates :name, presence: true
 
   has_many :books, :foreign_key => "owner_id"
   has_many :subscriptions, foreign_key: "follower_id", dependent: :destroy

@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Subscription, :type => :model do
   before(:example) do 
-    @user = User.create(email: "ugh@test.com", password: "password", password_confirmation: "password")
+    @user = User.create(email: "ugh@test.com", name: "user", password: "password", password_confirmation: "password")
     @book1 = Book.create(title: "This is a test book", owner_id: 1)
     @book2 = Book.create(title: "This is another test book", owner_id: 2)
   end
