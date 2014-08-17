@@ -2,16 +2,14 @@
 
 %table
   %tr
-    %th Given name
-    %th Family name
+    %th Author
     %th
     %th
     %th
 
   - @authors.each do |author|
     %tr
-      %td= author.given_name
-      %td= author.family_name
+      %td= author.sortable_name
       %td= link_to 'Show', author
       %td= link_to 'Edit', edit_author_path(author)
       %td= link_to 'Destroy', author, :method => :delete, :data => { :confirm => 'Are you sure?' }
