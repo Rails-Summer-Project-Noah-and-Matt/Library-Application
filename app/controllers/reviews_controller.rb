@@ -66,7 +66,7 @@ class ReviewsController < ApplicationController
   def destroy
     @review.destroy
     respond_to do |format|
-      format.html { redirect_to(books_review_url, notice: 'Review was successfully destroyed.' )}
+      format.html { redirect_to(book_reviews_url, notice: 'Review was successfully destroyed.' )}
       format.json { head :no_content }
     end
   end
@@ -79,6 +79,6 @@ class ReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.require(:review).permit(:review)
+      params.require(:review).permit(:text)
     end
 end

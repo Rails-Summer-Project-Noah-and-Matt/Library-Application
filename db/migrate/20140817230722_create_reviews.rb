@@ -8,4 +8,3 @@ class CreateReviews < ActiveRecord::Migration
     end
   end
 end
-
