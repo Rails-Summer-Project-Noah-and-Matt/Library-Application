@@ -49,7 +49,7 @@ Database Schema:
     - isbn10
     - isbn13
     - belongs_to :author
-    - has_many :book_covers
+    - has_one :book_cover
     - has_many :book_tags
     - has_many :tags, through :book_tags
     - has many :book_ratings
@@ -58,6 +58,7 @@ Database Schema:
   - Book_Covers
     - foreign key book
     - book_cover
+    (or however carrierwave wants to do this)
   - Tags
     - has_many :book_tags
     - has_many :books, through :book_tags
