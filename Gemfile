@@ -62,3 +62,6 @@ group :production do
   # sqlite3 for test / devel ; postgres for production
   gem 'pg'
 end
+
+# upload photos
+gem 'carrierwave'
