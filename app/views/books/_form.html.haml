@@ -10,6 +10,10 @@
     = f.label :title
     = f.text_field :title
   .field
+    = fields_for :author do |fa| 
+      = fa.label :full_name
+      = collection_select(:book, :author_id, Author.all, :id, :full_name)
+  .field
     = f.label :isbn10
     = f.text_field :isbn10
   .field

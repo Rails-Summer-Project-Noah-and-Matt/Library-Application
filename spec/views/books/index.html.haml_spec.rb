@@ -2,13 +2,19 @@ require 'rails_helper'
 
 RSpec.describe "books/index", :type => :view do
   before(:each) do
+    @author = assign(:author, Author.create!(
+      :given_name => "Douglas",
+      :family_name => "Adams"
+    ))
     assign(:books, [
       Book.create!(
         :title => "Title",
+        :author => @author,
         :is_active => false
       ),
       Book.create!(
         :title => "Title",
+        :author => @author,
         :is_active => false
       )
     ])

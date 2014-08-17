@@ -3,6 +3,7 @@
 %table
   %tr
     %th Title
+    %th Author
     %th ISBN 10
     %th ISBN 13
     %th Is active
@@ -13,6 +14,7 @@
   - @books.each do |book|
     %tr
       %td= book.title
+      %td= book.author.sortable_name
       %td= book.isbn10
       %td= book.isbn13
       %td= book.is_active

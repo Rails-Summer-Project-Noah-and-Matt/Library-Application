@@ -1,4 +1,6 @@
-%p= link_to 'Books', root_path 
+%p
+  = link_to_unless_current 'Books', root_path 
+  = link_to_unless_current 'Authors', authors_path 
 %p{:class => "navbar-text pull-right"}
 - if user_signed_in?
   %p 

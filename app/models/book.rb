@@ -16,6 +16,8 @@ class Book < ActiveRecord::Base
   }
 
   belongs_to :owner, class_name: User
+  belongs_to :author
+  accepts_nested_attributes_for :author
  
   has_many :subscriptions, foreign_key: "followed_id", dependent: :destroy 
   has_many :followers, through: :subscriptions, source: :follower
