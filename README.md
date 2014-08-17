@@ -48,9 +48,8 @@ Database Schema:
     - owner (foreign key to user_id, for req 5 only edit book you entered)
     - isbn10
     - isbn13
-    - has_many :book_authors
-    - has_many :authors, through :book_authors
-    - has_many :book_covers
+    - belongs_to :author
+    - has_one :book_cover
     - has_many :book_tags
     - has_many :tags, through :book_tags
     - has many :book_ratings
@@ -59,6 +58,7 @@ Database Schema:
   - Book_Covers
     - foreign key book
     - book_cover
+    (or however carrierwave wants to do this)
   - Tags
     - has_many :book_tags
     - has_many :books, through :book_tags
@@ -74,8 +74,7 @@ Database Schema:
   - Authors 
     - first_name
     - last_name
-    - has_many :book_authors
-    - has_many :books, through :book_authors
+    - has_many :books
   - Users
     - Reviews and Tags, ratings
     - email
