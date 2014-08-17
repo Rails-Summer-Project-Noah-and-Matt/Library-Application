@@ -28,7 +28,7 @@ class Author < ActiveRecord::Base
 
   def check_for_books
     if books.count > 0
-      errors.add_to_base("cannot delete Author while books exist")
+      errors.add :base, "cannot delete Author while books exist"
       return false
     end
   end
