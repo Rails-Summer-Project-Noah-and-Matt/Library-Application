@@ -55,9 +55,14 @@ group :test, :development do
   gem "factory_girl_rails", "~> 4.0"
   # show our test coverage
   gem 'simplecov', require: false
+  # flog and flay to test complexity quickly and locally
+  gem 'flog'
+  gem 'flay'
 end
 
 group :production do
   # sqlite3 for test / devel ; postgres for production
   gem 'pg'
 end
+
+
