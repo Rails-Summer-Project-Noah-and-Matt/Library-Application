@@ -26,7 +26,7 @@ class AuthorsController < ApplicationController
   def create
     @author = Author.new(author_params)
 
-    respond_to_create @author, @author, "Author"
+    respond_to_create({thing: @author})
   end
 
   # PATCH/PUT /authors/1
@@ -47,7 +47,7 @@ class AuthorsController < ApplicationController
   # DELETE /authors/1.json
   def destroy
     @author.destroy
-    respond_to_destroy @author, authors_url, "Author"
+    respond_to_destroy({thing: @author, redirect: authors_url})
   end
 
   private

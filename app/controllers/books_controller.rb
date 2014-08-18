@@ -26,7 +26,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
 
-    respond_to_create @book, @book, "Book"
+    respond_to_create({thing: @book})
   end
 
   # PATCH/PUT /books/1
@@ -47,7 +47,7 @@ class BooksController < ApplicationController
   # DELETE /books/1.json
   def destroy
     @book.destroy
-    respond_to_destroy @book, books_url, "Book"
+    respond_to_destroy({thing: @book, redirect: books_url})
   end
 
   private

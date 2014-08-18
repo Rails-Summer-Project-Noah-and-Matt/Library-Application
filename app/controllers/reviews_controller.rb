@@ -32,7 +32,7 @@ class ReviewsController < ApplicationController
     @review = book.reviews.create(review_params)
     @review.user_id = current_user.id
 
-    respond_to_create @review, [@review.book, @review], "Review"
+    respond_to_create({thing: @review, redirect: ([@review.book, @review])})
   end
 
 
@@ -58,7 +58,7 @@ class ReviewsController < ApplicationController
   # DELETE /reviews/1.json
   def destroy
     @review.destroy
-    respond_to_destroy @review, book_reviews_url, "Review"
+    respond_to_destroy({thing: @review, redirect: book_reviews_url, name: "Review"})
   end
 
   private
