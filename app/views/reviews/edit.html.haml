@@ -1,0 +1,7 @@
+%h1 Editing review
+
+= render 'form'
+
+= link_to 'Show', [@review.book, @review]
+\|
+= link_to 'Back', book_reviews_path(@review.book)

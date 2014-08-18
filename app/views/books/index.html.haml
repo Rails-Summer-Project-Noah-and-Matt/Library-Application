@@ -10,6 +10,7 @@
     %th
     %th
     %th
+    %th 
 
   - @books.each do |book|
     %tr
@@ -18,6 +19,7 @@
       %td= book.isbn10
       %td= book.isbn13
       %td= book.is_active
+      %td= link_to 'Reviews', book_reviews_path(book)
       %td= link_to 'Show', book
       %td= link_to 'Edit', edit_book_path(book)
       %td= link_to 'Destroy', book, :method => :delete, :data => { :confirm => 'Are you sure?' }

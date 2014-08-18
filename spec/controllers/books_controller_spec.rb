@@ -20,6 +20,11 @@ require 'rails_helper'
 
 RSpec.describe BooksController, :type => :controller do
 
+  before(:all) do
+    Book.destroy_all
+  end
+
+
   # This should return the minimal set of attributes required to create a valid
   # Book. As you add validations to Book, be sure to
   # adjust the attributes here as well.

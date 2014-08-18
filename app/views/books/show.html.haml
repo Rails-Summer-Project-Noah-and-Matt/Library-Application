@@ -18,6 +18,8 @@
 %p
   = image_tag @book.cover_url(:thumb) if @book.cover?
 
+
+= link_to 'Reviews', book_reviews_path(@book)
 = link_to 'Edit', edit_book_path(@book)
 \|
 = link_to 'Back', books_path
