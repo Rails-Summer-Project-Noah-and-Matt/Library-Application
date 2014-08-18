@@ -63,5 +63,7 @@ group :production do
   gem 'pg'
 end
 
-# upload photos
+# upload book covers
 gem 'carrierwave'
+# process images
+gem 'rmagick'
