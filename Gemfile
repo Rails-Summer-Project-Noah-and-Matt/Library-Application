@@ -61,3 +61,8 @@ group :production do
   # sqlite3 for test / devel ; postgres for production
   gem 'pg'
 end
+
+# upload book covers
+gem 'carrierwave'
+# process images
+gem 'rmagick'

@@ -15,6 +15,7 @@ FactoryGirl.define do
  factory :book do
    association :owner_id, factory: :user
    title "This is a test book"
+   cover { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'covers', 'cover.gif')) }
    is_active true
  end
 
