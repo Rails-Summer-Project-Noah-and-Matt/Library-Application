@@ -52,8 +52,7 @@ group :test, :development do
   gem 'rake'
   # sqlite3 for test / devel ; postgres for production
   gem 'sqlite3'
-
-  gem 'factory_girl'
+  gem "factory_girl_rails", "~> 4.0"
   # show our test coverage
   gem 'simplecov', require: false
 end
