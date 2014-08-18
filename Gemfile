@@ -61,3 +61,6 @@ group :production do
   # sqlite3 for test / devel ; postgres for production
   gem 'pg'
 end
+
+# for the pretty
+gem "twitter-bootstrap-rails"
