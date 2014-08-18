@@ -23,4 +23,7 @@ class Book < ActiveRecord::Base
   has_many :followers, through: :subscriptions, source: :follower
 
   has_many :reviews
+
+  # carrierwave 
+  mount_uploader :cover, CoverUploader
 end
