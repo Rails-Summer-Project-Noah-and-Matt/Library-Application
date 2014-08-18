@@ -26,15 +26,7 @@ class AuthorsController < ApplicationController
   def create
     @author = Author.new(author_params)
 
-    respond_to do |format|
-      if @author.save
-        format.html { redirect_to @author, notice: 'Author was successfully created.' }
-        format.json { render :show, status: :created, location: @author }
-      else
-        format.html { render :new }
-        format.json { render json: @author.errors, status: :unprocessable_entity }
-      end
-    end
+    respond_to_create({thing: @author})
   end
 
   # PATCH/PUT /authors/1
@@ -55,10 +47,7 @@ class AuthorsController < ApplicationController
   # DELETE /authors/1.json
   def destroy
     @author.destroy
-    respond_to do |format|
-      format.html { redirect_to authors_url, notice: 'Author was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    respond_to_destroy({thing: @author, redirect: authors_url})
   end
 
   private
