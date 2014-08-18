@@ -22,5 +22,5 @@ class Book < ActiveRecord::Base
   has_many :subscriptions, foreign_key: "followed_id", dependent: :destroy 
   has_many :followers, through: :subscriptions, source: :follower
 
-  has_many :reviews
+  has_many :reviews, dependent: :destroy
 end
