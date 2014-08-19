@@ -1,5 +1,8 @@
 class Book < ActiveRecord::Base
 
+  before_validation :clean_isbn
+  before_validation :squash_whitespace
+
   validates :title, presence: true, length: { 
     minimum: 1, 
     maximum: 256,
@@ -30,4 +33,34 @@ class Book < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
 
   mount_uploader :cover, CoverUploader
+
+  private
+
+  def clean_isbn
+    ##FIXME this is what I *want* to do:
+    #[:isbn10, :isbn13].each do |isbn|
+    #  preprocess isbn { |i| i.gsub(/[- ]/, '') }
+    #  preprocess isbn { |i| i.gsub(/x/, 'X') }
+    #end
+
+    self.isbn10 = self.isbn10.gsub(/[- ]/, '') if attribute_present?("isbn10")
+    self.isbn10 = self.isbn10.gsub(/x/, 'X')   if attribute_present?("isbn10")
+    self.isbn13 = self.isbn13.gsub(/[- ]/, '') if attribute_present?("isbn13")
+    self.isbn13 = self.isbn13.gsub(/x/, 'X')   if attribute_present?("isbn13")
+  end
+
+  def squash_whitespace
+    self.title = self.title.gsub(/  +/, ' ') if attribute_present?("title")
+  end
+
+  ##FIXME a first attempt at refactoring the above two
+  #def preprocess param
+  #  @attribute = param.to_s
+  #  @param = eval "self.#{param}"
+  #  @param = yield @param if attribute_present?(@attribute)
+  #end
+
+    
+
+
 end
