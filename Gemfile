@@ -65,4 +65,6 @@ group :production do
   gem 'pg'
 end
 
+# hopefully easy implementation of tags
+gem 'acts-as-taggable-on'
 
