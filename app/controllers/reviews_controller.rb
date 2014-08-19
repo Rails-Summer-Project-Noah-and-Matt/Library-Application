@@ -43,15 +43,7 @@ class ReviewsController < ApplicationController
     book = Book.find(params[:book_id])
     @review = book.reviews.find(params[:id])
    
-    respond_to do |format|
-      if @review.update(review_params)
-        format.html { redirect_to([@review.book, @review], notice: 'Review was successfully updated.') }
-        format.json { render :show, status: :ok, location: [@review.book, @review] }
-      else
-        format.html { render :edit }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
-    end
+    respond_to_update({thing: @review, redirect: ([@review.book, @review])})
   end
 
   # DELETE /reviews/1

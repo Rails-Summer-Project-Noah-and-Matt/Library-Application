@@ -32,15 +32,7 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
-    respond_to do |format|
-      if @book.update(book_params)
-        format.html { redirect_to @book, notice: 'Book was successfully updated.' }
-        format.json { render :show, status: :ok, location: @book }
-      else
-        format.html { render :edit }
-        format.json { render json: @book.errors, status: :unprocessable_entity }
-      end
-    end
+    respond_to_update({thing: @book})
   end
 
   # DELETE /books/1
@@ -58,6 +50,14 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:title, :isbn10, :isbn13, :is_active, :tag_list, :author_id, author_attributes: [:given_name, :family_name])
+      params.require(:book).permit(:title,
+                                   :isbn10,
+                                   :isbn13,
+                                   :is_active,
+                                   :tag_list,
+                                   :cover,
+                                   :remote_cover_url,
+                                   :author_id,
+                                   author_attributes: [:given_name, :family_name])
     end
 end

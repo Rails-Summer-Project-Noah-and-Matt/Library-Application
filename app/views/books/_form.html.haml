@@ -22,5 +22,10 @@
   .field
     = f.label :is_active
     = f.check_box :is_active
+  .field
+    = f.file_field :cover
+  .field
+    = f.label :remote_cover_url, "or image URL"
+    - f.text_field :remote_cover_url
   .actions
     = f.submit 'Save'

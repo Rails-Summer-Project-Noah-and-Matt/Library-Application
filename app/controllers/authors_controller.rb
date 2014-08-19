@@ -32,15 +32,7 @@ class AuthorsController < ApplicationController
   # PATCH/PUT /authors/1
   # PATCH/PUT /authors/1.json
   def update
-    respond_to do |format|
-      if @author.update(author_params)
-        format.html { redirect_to @author, notice: 'Author was successfully updated.' }
-        format.json { render :show, status: :ok, location: @author }
-      else
-        format.html { render :edit }
-        format.json { render json: @author.errors, status: :unprocessable_entity }
-      end
-    end
+    respond_to_update({thing: @author})
   end
 
   # DELETE /authors/1
