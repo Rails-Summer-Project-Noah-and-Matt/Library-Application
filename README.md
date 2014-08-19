@@ -1,6 +1,15 @@
 Library-Application
 ===================
 
+Production Dependencies
+=======================
+You will need
+libpq-dev
+for postgres
+$ sudo apt-get install libpq-dev
+on Ubuntu / Debian
+https://www.digitalocean.com/community/tutorials/how-to-setup-ruby-on-rails-with-postgres
+
 Rails Summer Library Application
 
 Things to cover:
