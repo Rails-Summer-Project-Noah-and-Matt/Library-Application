@@ -2,6 +2,7 @@
 
 %table
   %tr
+    %th
     %th Title
     %th Author
     %th ISBN 10
@@ -14,6 +15,7 @@
 
   - @books.each do |book|
     %tr
+      %td= image_tag book.cover_url(:thumb) if book.cover?
       %td= book.title
       %td= book.author.sortable_name
       %td= book.isbn10

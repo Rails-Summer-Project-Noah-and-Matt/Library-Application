@@ -25,7 +25,7 @@ class CoverUploader < CarrierWave::Uploader::Base
   # end
 
   # Process files as they are uploaded:
-  # process :scale => [200, 300]
+  process :resize_to_fit => [200, 300]
   #
   # def scale(width, height)
   #   # do something
@@ -34,7 +34,7 @@ class CoverUploader < CarrierWave::Uploader::Base
   # Create different versions of your uploaded files:
   version :thumb do
     # took these dimensions from oreilly
-    process :resize_to_fit => [180, 235]
+    process :resize_to_fit => [90, 112]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

@@ -16,7 +16,7 @@
   %b Is active:
   = @book.is_active
 %p
-  = image_tag @book.cover_url(:thumb) if @book.cover?
+  = image_tag @book.cover.url if @book.cover?
 
 
 = link_to 'Reviews', book_reviews_path(@book)
