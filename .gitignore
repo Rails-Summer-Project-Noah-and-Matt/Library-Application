@@ -24,3 +24,6 @@
 
 # Ignore commit notes
 /commit-notes
+
+# Ignore carrierwave image uploads
+/public/uploads

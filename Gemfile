@@ -65,4 +65,7 @@ group :production do
   gem 'pg'
 end
 
-
+# upload book covers
+gem 'carrierwave'
+# process images
+gem 'rmagick', require: false
