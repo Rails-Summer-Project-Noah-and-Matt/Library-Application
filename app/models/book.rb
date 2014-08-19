@@ -1,4 +1,5 @@
 class Book < ActiveRecord::Base
+
   validates :title, presence: true, length: { 
     minimum: 1, 
     maximum: 256,
@@ -15,6 +16,10 @@ class Book < ActiveRecord::Base
     message: 'ISBN13 is a 13 digit format'
   }
 
+  ##FIXME this breaks everything.
+  ##Matt, could you convert the book tests to FactoryGirl and make this work?
+  #validates :cover, presence: true
+
   belongs_to :owner, class_name: User
   belongs_to :author
   accepts_nested_attributes_for :author
@@ -23,4 +28,6 @@ class Book < ActiveRecord::Base
   has_many :followers, through: :subscriptions, source: :follower
 
   has_many :reviews, dependent: :destroy
+
+  mount_uploader :cover, CoverUploader
 end
