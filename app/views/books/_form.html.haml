@@ -23,7 +23,9 @@
     = f.label :is_active
     = f.check_box :is_active
   .field
+    = image_tag(@book.cover_url(:thumb)) if @book.cover?
     = f.file_field :cover
+    = f.hidden_field :cover_cache
   .field
     = f.label :remote_cover_url, "or image URL"
     - f.text_field :remote_cover_url
