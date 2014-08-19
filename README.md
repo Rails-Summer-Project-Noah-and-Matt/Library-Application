@@ -21,6 +21,7 @@ for centos
 $ brew install imagemagick
 for Mac OS (using Homebrew)
 
+
 http://stackoverflow.com/questions/3894225/imagemagick-rmagick-cant-install-rmagick-2-13-1-cant-find-magick-config
 
 
