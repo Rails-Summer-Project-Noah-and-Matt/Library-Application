@@ -23,6 +23,9 @@
     = f.label :is_active
     = f.check_box :is_active
   .field
+    = f.label :tags
+    = f.text_field :tag_list
+  .field
     = f.file_field :cover
   .field
     = f.label :remote_cover_url, "or image URL"

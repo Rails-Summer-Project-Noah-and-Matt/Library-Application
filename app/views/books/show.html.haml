@@ -17,7 +17,7 @@
   = @book.is_active
 %p
   %b Tags
-  = @book.tags
+  = @book.tag_list
 %p
   = image_tag @book.cover_url(:thumb) if @book.cover?
 
