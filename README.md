@@ -1,6 +1,15 @@
 Library-Application
 ===================
 
+Deploying
+==========
+You will need 
+libmagickwand-dev or something similar for rmagick
+on apt-based distros (Debian, Ubuntu):
+sudo apt-get install libmagickwand-dev
+http://stackoverflow.com/questions/3894225/imagemagick-rmagick-cant-install-rmagick-2-13-1-cant-find-magick-config
+
+
 Rails Summer Library Application
 
 Things to cover:
