@@ -7,12 +7,12 @@ class Book < ActiveRecord::Base
   }
   
   validates :isbn10, allow_blank: true, format: { 
-    with: /\A[[:digit:]]{10}\z/,
+    with: /\A[[:digit:]Xx]{10}\z/,
     message: 'ISBN10 is a 10 digit format'
   }
 
   validates :isbn13, allow_blank: true, format: { 
-    with: /\A[[:digit:]]{13}\z/,
+    with: /\A[[:digit:]Xx]{13}\z/,
     message: 'ISBN13 is a 13 digit format'
   }
 
