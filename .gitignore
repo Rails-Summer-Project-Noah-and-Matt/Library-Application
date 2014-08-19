@@ -6,7 +6,6 @@
 
 # Ignore bundler config.
 /.bundle
-.DS_Store
 
 # Ignore the default SQLite database.
 /db/*.sqlite3
@@ -27,3 +26,6 @@
 
 # Ignore carrierwave image uploads
 /public/uploads
+
+# Ignore .orig files generated during git conflicts
+.orig
