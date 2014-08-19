@@ -19,6 +19,23 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def respond_to_update params
+    thing    = params[:thing]
+    redirect = params[:redirect] ? params[:redirect] : thing
+    name     = params[:name]     ? params[:name]     : thing.class.to_s
+    thing_params = params[:thing_params] ? params[:thing_params] : eval(thing.class.to_s.downcase.sub(/$/, "_params"))
+
+    respond_to do |format|
+      if thing.update(thing_params)
+        format.html { redirect_to redirect, notice: "#{name} was successfully updated." }
+        format.json { render :show, status: :created, location: redirect }
+      else
+        format.html { render :edit }
+        format.json { render json: thing.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   def respond_to_destroy params
     thing    = params[:thing]
     redirect = params[:redirect]
