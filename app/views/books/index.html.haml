@@ -7,7 +7,8 @@
     %th ISBN 10
     %th ISBN 13
     %th Is active
-    %th
+    %th Tags
+    %th 
     %th
     %th
     %th 
@@ -19,6 +20,7 @@
       %td= book.isbn10
       %td= book.isbn13
       %td= book.is_active
+      %td= book.tag_list.to_s.sub(/(.{15}).*/, '\1...')
       %td= link_to 'Reviews', book_reviews_path(book)
       %td= link_to 'Show', book
       %td= link_to 'Edit', edit_book_path(book)

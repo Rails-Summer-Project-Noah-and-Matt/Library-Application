@@ -69,3 +69,6 @@ end
 gem 'carrierwave'
 # process images
 gem 'rmagick', require: false
+
+# hopefully easy implementation of tags
+gem 'acts-as-taggable-on'
