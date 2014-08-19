@@ -1,12 +1,26 @@
 Library-Application
 ===================
 
-Deploying
+Production Dependencies
 ==========
 You will need 
 libmagickwand-dev or something similar for rmagick
-on apt-based distros (Debian, Ubuntu):
-sudo apt-get install libmagickwand-dev
+$ sudo apt-get install libmagickwand-dev 
+or 
+$ sudo apt-get install graphicsmagick-libmagick-dev-compat 
+for ubuntu 12
+
+$ sudo apt-get install libmagickwand-dev 
+or
+$ sudo apt-get install libmagick9-dev 
+for ubuntu 11 or below.
+
+$ yum install ImageMagick-devel 
+for centos
+
+$ brew install imagemagick
+for Mac OS (using Homebrew)
+
 http://stackoverflow.com/questions/3894225/imagemagick-rmagick-cant-install-rmagick-2-13-1-cant-find-magick-config
 
 
