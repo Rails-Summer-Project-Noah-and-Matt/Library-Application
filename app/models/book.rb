@@ -1,4 +1,6 @@
 class Book < ActiveRecord::Base
+  acts_as_taggable
+
   validates :title, presence: true, length: { 
     minimum: 1, 
     maximum: 256,
