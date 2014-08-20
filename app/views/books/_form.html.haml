@@ -26,7 +26,9 @@
     = f.label :tags
     = f.text_field :tag_list
   .field
+    = image_tag(@book.cover_url(:thumb)) if @book.cover?
     = f.file_field :cover
+    = f.hidden_field :cover_cache
   .field
     = f.label :remote_cover_url, "or image URL"
     - f.text_field :remote_cover_url

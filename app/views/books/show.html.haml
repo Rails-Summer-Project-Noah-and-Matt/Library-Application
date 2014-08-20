@@ -16,11 +16,11 @@
   %b Is active:
   = @book.is_active
 %p
-  %b Tags
+  %b Tags:
   = @book.tag_list
 %p
-  = image_tag @book.cover_url(:thumb) if @book.cover?
-
+  %b Cover
+  = image_tag @book.cover.url if @book.cover?
 
 = link_to 'Reviews', book_reviews_path(@book)
 = link_to 'Edit', edit_book_path(@book)

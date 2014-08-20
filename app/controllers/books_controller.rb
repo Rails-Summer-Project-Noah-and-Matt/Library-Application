@@ -56,6 +56,7 @@ class BooksController < ApplicationController
                                    :is_active,
                                    :tag_list,
                                    :cover,
+                                   :cover_cache,
                                    :remote_cover_url,
                                    :author_id,
                                    author_attributes: [:given_name, :family_name])
