@@ -19,7 +19,6 @@
   %b Tags:
   = @book.tag_list
 %p
-  %b Cover
   = image_tag @book.cover.url if @book.cover?
 
 = link_to 'Reviews', book_reviews_path(@book)
