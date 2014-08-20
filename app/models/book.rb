@@ -1,6 +1,9 @@
 class Book < ActiveRecord::Base
   acts_as_taggable
 
+  before_validation :clean_isbn
+  before_validation :squash_whitespace
+
   validates :title, presence: true, length: { 
     minimum: 1, 
     maximum: 256,
@@ -8,12 +11,12 @@ class Book < ActiveRecord::Base
   }
   
   validates :isbn10, allow_blank: true, format: { 
-    with: /\A[[:digit:]]{10}\z/,
+    with: /\A[[:digit:]Xx]{10}\z/,
     message: 'ISBN10 is a 10 digit format'
   }
 
   validates :isbn13, allow_blank: true, format: { 
-    with: /\A[[:digit:]]{13}\z/,
+    with: /\A[[:digit:]Xx]{13}\z/,
     message: 'ISBN13 is a 13 digit format'
   }
 
@@ -31,4 +34,34 @@ class Book < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
 
   mount_uploader :cover, CoverUploader
+
+  private
+
+  def clean_isbn
+    ##FIXME this is what I *want* to do:
+    #[:isbn10, :isbn13].each do |isbn|
+    #  preprocess isbn { |i| i.gsub(/[- ]/, '') }
+    #  preprocess isbn { |i| i.gsub(/x/, 'X') }
+    #end
+
+    self.isbn10 = self.isbn10.gsub(/[- ]/, '') if attribute_present?("isbn10")
+    self.isbn10 = self.isbn10.gsub(/x/, 'X')   if attribute_present?("isbn10")
+    self.isbn13 = self.isbn13.gsub(/[- ]/, '') if attribute_present?("isbn13")
+    self.isbn13 = self.isbn13.gsub(/x/, 'X')   if attribute_present?("isbn13")
+  end
+
+  def squash_whitespace
+    self.title = self.title.gsub(/  +/, ' ') if attribute_present?("title")
+  end
+
+  ##FIXME a first attempt at refactoring the above two
+  #def preprocess param
+  #  @attribute = param.to_s
+  #  @param = eval "self.#{param}"
+  #  @param = yield @param if attribute_present?(@attribute)
+  #end
+
+    
+
+
 end
