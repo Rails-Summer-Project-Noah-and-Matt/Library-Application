@@ -72,3 +72,6 @@ gem 'rmagick', require: false
 
 # hopefully easy implementation of tags
 gem 'acts-as-taggable-on'
+
+# try again to make not-ugly
+gem "twitter-bootstrap-rails"
