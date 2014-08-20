@@ -44,3 +44,8 @@ Book.new({ :title => 'The Opinionated Palate',
            :author_id => 5,
            :cover => File.open(File.join(Rails.root, '/db/seed-images/cover.gif')) 
 }).save
+
+taglist = ['science fiction', 'food', 'funny', 'fantasy', 'chimpanzees']
+taglist.each do |tag|
+    ActsAsTaggableOn::Tag.new(:name => tag).save
+end
