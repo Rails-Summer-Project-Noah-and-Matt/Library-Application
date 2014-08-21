@@ -16,7 +16,7 @@ describe 'Book Features' do
         @book = FactoryGirl.create(:book)
       end
       it "should be deletable" do
-        expect { @book.delete }.to change(Book, :count).by(-1)
+        expect(@book.destroyable?).to be true
       end
     end
 
@@ -27,7 +27,7 @@ describe 'Book Features' do
         @review   = FactoryGirl.create(:review, book: @book, user: @reviewer)
       end
       it "should not be deletable" do
-        expect { @book.delete }.to_not change(Book, :count)
+        expect(@book.destroyable?).to be false
       end
     end
 

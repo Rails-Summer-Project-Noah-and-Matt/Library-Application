@@ -35,6 +35,10 @@ class Book < ActiveRecord::Base
 
   mount_uploader :cover, CoverUploader
 
+  def destroyable?
+    !reviews.any?
+  end
+
   private
 
   def clean_isbn
