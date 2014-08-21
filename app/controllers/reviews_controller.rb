@@ -5,6 +5,7 @@ class ReviewsController < ApplicationController
   # GET /posts/:post_id/comments
   def index
     book = Book.find(params[:book_id])
+    @book = book
     @reviews = book.reviews
   end
 

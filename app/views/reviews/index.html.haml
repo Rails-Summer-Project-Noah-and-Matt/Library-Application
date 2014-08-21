@@ -1,21 +1,23 @@
-%h1 Listing reviews
-
-%table
-  %tr
-    %th Review
-    %th Reviewer
-    %th
-    %th
-    %th
-
-  - @reviews.each do |review|
+- model_class = Review
+.page-header
+  %h1=t '.title', :default => "Reviews: #{@book.title}"
+%table.table.table-striped
+  %thead
     %tr
-      %td= review.text
-      %td= User.find(review.user_id).email
-      %td= link_to 'Show', [review.book, review] 
-      %td= link_to 'Edit', edit_book_review_path(review.book, review)
-      %td= link_to 'Destroy', [review.book, review], :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %th= model_class.human_attribute_name(:id)
+      %th= model_class.human_attribute_name(:text)
+      %th= model_class.human_attribute_name(:reviewer)
+      %th= model_class.human_attribute_name(:created_at)
+      %th=t '.actions', :default => t("helpers.actions")
+  %tbody
+    - @reviews.each do |review|
+      %tr
+        %td= link_to review.id, [review.book, review] 
+        %td= review.text
+        %td= User.find(review.user_id).email
+        %td=l review.created_at
+        %td
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_book_review_path(review.book, review), :class => 'btn btn-default btn-xs'
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), [review.book, review], :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
 
-%br
-
-= link_to 'New Review', new_book_review_path
+= link_to t('.new', :default => t("helpers.links.new")), new_book_review_path, :class => 'btn btn-primary'
