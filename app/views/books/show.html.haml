@@ -29,7 +29,7 @@
 %p
   %strong= model_class.human_attribute_name(:owner_id) + ':'
   %br
-  = @book.owner_id
+  = User.find_by(@book.owner_id).email
 %p
   %strong= model_class.human_attribute_name(:cover) + ':'
   %br

@@ -7,13 +7,8 @@
   .form-group
     = f.label :is_active, class: 'control-label'
     .controls
-      = f.text_field :is_active, class: 'form-control', required: true
+      = f.check_box :is_active, class: 'form-control', required: true
     = error_span(@book[:is_active])
-  .form-group
-    = f.label :owner_id, class: 'control-label'
-    .controls
-      = f.text_field :owner_id, class: 'form-control', required: true
-    = error_span(@book[:owner_id])
   .form-group
     = f.label :isbn10, class: 'control-label'
     .controls

@@ -26,7 +26,7 @@
         %td= book.isbn13
         %td= book.is_active
         %td= book.tag_list.to_s.sub(/(.{15}).*/, '\1...')
-        %td= book.owner
+        %td= User.find_by(book.owner_id).email
         %td=l book.created_at
         %td
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_book_path(book), :class => 'btn btn-default btn-xs'
