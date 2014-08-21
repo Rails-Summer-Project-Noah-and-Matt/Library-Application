@@ -4,9 +4,9 @@ describe 'Book Features' do
 
   DatabaseCleaner.clean_with(:truncation)
 
-  let(:user) { FactoryGirl.create(:user) }
+  let(:user)   { FactoryGirl.create(:user) }
   let(:author) { FactoryGirl.create(:author) }
-  let(:book) { FactoryGirl.create(:book, owner_id: user) }
+  let(:book)   { FactoryGirl.create(:book, owner_id: user) }
   let(:review) { FactoryGirl.create(:review, book: book) }
 
   describe 'deleting' do
@@ -22,8 +22,9 @@ describe 'Book Features' do
 
     describe 'a book with reviews' do
       before(:each) do
-        @book = FactoryGirl.create(:book)
-        @review = FactoryGirl.create(:review, book: @book)
+        @reviewer = FactoryGirl.create(:user)
+        @book     = FactoryGirl.create(:book)
+        @review   = FactoryGirl.create(:review, book: @book, user: @reviewer)
       end
       it "should not be deletable" do
         expect { @book.delete }.to_not change(Book, :count)
