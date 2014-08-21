@@ -11,8 +11,7 @@ class Author < ActiveRecord::Base
     message: 'Family names must be between 1 and 256 characters long'
   }
   
-  has_many :books
-  before_destroy :check_for_books
+  has_many :books, :dependent => :restrict_with_exception
 
   def full_name
     first = given_name ? "#{given_name} " : ''
@@ -24,13 +23,8 @@ class Author < ActiveRecord::Base
     "#{family_name}#{first}"
   end
 
-  private
-
-  def check_for_books
-    if books.count > 0
-      errors.add :base, "cannot delete Author while books exist"
-      return false
-    end
+  def destroyable?
+    !books.any?
   end
 
 end

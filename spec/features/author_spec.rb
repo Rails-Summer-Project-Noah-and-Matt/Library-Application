@@ -14,7 +14,7 @@ describe 'Author Features' do
         @author = FactoryGirl.create(:author)
       end
       it "should be deletable" do
-        expect { @author.delete }.to change(Author, :count).by(-1)
+        expect(@author.destroyable?).to be true
       end
     end
 
@@ -24,7 +24,7 @@ describe 'Author Features' do
         @book   = FactoryGirl.create(:book, author: @author)
       end
       it "should not be deletable" do
-        expect { @author.delete }.to_not change(Author, :count)
+        expect(@author.destroyable?).to be false
       end
     end
 

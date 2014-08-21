@@ -36,9 +36,13 @@ class AuthorsController < ApplicationController
   end
 
   def destroy
-    @author.destroy
+    notice = "You can't destroy a published author."
+    if @author.destroyable?
+      @author.destroy
+      notice = 'Author was successfully destroyed.'
+    end
     respond_to do |format|
-      format.html { redirect_to authors_url, notice: 'Author was successfully destroyed.' }
+      format.html { redirect_to authors_url, notice: notice }
       format.json { head :no_content }
     end
   end
