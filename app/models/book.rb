@@ -1,5 +1,5 @@
 class Book < ActiveRecord::Base
-  acts_as_taggable
+  acts_as_taggable_on :tags
 
   before_validation :clean_isbn
   before_validation :squash_whitespace
