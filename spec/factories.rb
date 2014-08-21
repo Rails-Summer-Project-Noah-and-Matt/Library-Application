@@ -12,9 +12,15 @@ FactoryGirl.define do
    admin true
  end
 
+ factory :author do
+   given_name 'A. A.'
+   family_name 'Milnes'
+ end
+
  factory :book do
    association :owner_id, factory: :user
-   title "This is a test book"
+   association :author_id, factory: :author
+   title 'The House at Pooh Corner'
    cover { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'covers', 'cover.gif')) }
    is_active true
  end

@@ -163,6 +163,7 @@ RSpec.describe BooksController, :type => :controller do
       delete :destroy, {:id => book.to_param}, valid_session
       expect(response).to redirect_to(books_url)
     end
+
   end
 
 end
