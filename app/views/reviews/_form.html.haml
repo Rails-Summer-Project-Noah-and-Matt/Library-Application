@@ -1,13 +1,8 @@
-= form_for [@review.book, @review] do |f|
-  - if @review.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@review.errors.count, "error")} prohibited this review from being saved:"
-      %ul
-        - @review.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :review
-    = f.text_area :text
-  .actions
-    = f.submit 'Save'
+= form_for [@review.book, @review], html: { class: "form form-horizontal review" } do |f|
+  .form-group
+    = f.label :text, class: 'control-label'
+    .controls
+      = f.text_field :text, class: 'form-control', required: true
+    = error_span(@review[:text])
+  = f.submit nil,class: 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), book_reviews_path(@review.book), :class => 'btn btn-default'

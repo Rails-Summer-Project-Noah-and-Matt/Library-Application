@@ -5,12 +5,14 @@ class ReviewsController < ApplicationController
   # GET /posts/:post_id/comments
   def index
     book = Book.find(params[:book_id])
+    @book = book
     @reviews = book.reviews
   end
 
   # GET /books/:book_id/comments/:id
   def show
     book = Book.find(params[:book_id])
+    @book = book
     @review = book.reviews.find(params[:id])
   end
 

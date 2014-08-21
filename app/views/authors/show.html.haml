@@ -1,18 +1,25 @@
-%p#notice= notice
+- model_class = Author
+.page-header
+  %h1=t '.title', :default => @author.full_name
 
 %p
-  %b Full name:
+  %strong= model_class.human_attribute_name(:full_name) + ':'
+  %br
   = @author.full_name
 %p
-  %b Sort name:
+  %strong= "Last, First:"
+  %br
   = @author.sortable_name
 %p
-  %b Given name:
+  %strong= model_class.human_attribute_name(:given_name) + ':'
+  %br
   = @author.given_name
 %p
-  %b Family name:
+  %strong= model_class.human_attribute_name(:family_name) + ':'
+  %br
   = @author.family_name
 
-= link_to 'Edit', edit_author_path(@author)
-\|
-= link_to 'Back', authors_path
+
+= link_to t('.back', :default => t("helpers.links.back")), authors_path, :class => 'btn btn-default'
+= link_to t('.edit', :default => t("helpers.links.edit")), edit_author_path(@author), :class => 'btn btn-default'
+= link_to t('.destroy', :default => t("helpers.links.destroy")), author_path(@author), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

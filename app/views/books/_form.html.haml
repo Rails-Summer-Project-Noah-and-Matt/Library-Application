@@ -1,36 +1,41 @@
-= form_for @book do |f|
-  - if @book.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@book.errors.count, "error")} prohibited this book from being saved:"
-      %ul
-        - @book.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :title
-    = f.text_field :title
-  .field
+= form_for @book, html: { class: "form form-horizontal book" } do |f|
+  .form-group
+    = f.label :title, class: 'control-label'
+    .controls
+      = f.text_field :title, class: 'form-control', required: true
+    = error_span(@book[:title])
+  .form-group
+    = f.label :is_active, class: 'control-label'
+    .controls
+      = f.check_box :is_active, class: 'form-control'
+    = error_span(@book[:is_active])
+  .form-group
+    = f.label :isbn10, class: 'control-label'
+    .controls
+      = f.text_field :isbn10, class: 'form-control'
+    = error_span(@book[:isbn10])
+  .form-group
+    = f.label :isbn13, class: 'control-label'
+    .controls
+      = f.text_field :isbn13, class: 'form-control'
+    = error_span(@book[:isbn13])
+  .form-group
     = fields_for :author do |fa| 
-      = fa.label :full_name
+      = fa.label :full_name, class: 'control-label'
+    .controls
       = collection_select(:book, :author_id, Author.all, :id, :full_name)
-  .field
-    = f.label :isbn10
-    = f.text_field :isbn10
-  .field
-    = f.label :isbn13
-    = f.text_field :isbn13
-  .field
-    = f.label :is_active
-    = f.check_box :is_active
-  .field
-    = f.label :tags
-    = f.text_field :tag_list
-  .field
+    = error_span(@book[:author_id])
+  .form-group
+    = f.label :tags, class: 'control-label'
+    .controls
+      = f.text_field :tag_list, class: 'form-control'
+    = error_span(@book[:tag_list])
+  .form-group
+    = f.label :cover, class: 'control-label'
     = image_tag(@book.cover_url(:thumb)) if @book.cover?
-    = f.file_field :cover
-    = f.hidden_field :cover_cache
-  .field
-    = f.label :remote_cover_url, "or image URL"
-    - f.text_field :remote_cover_url
-  .actions
-    = f.submit 'Save'
+    .controls
+      = f.file_field :cover, class: 'form-control'
+      = f.hidden_field :cover_cache
+    = error_span(@book[:cover])
+  = f.submit nil,class: 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), books_path, :class => 'btn btn-default'
