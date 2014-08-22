@@ -13,7 +13,7 @@ FactoryGirl.define do
  end
 
  factory :author do
-   given_name 'A. A.'
+   sequence(:given_name) { |n| "A. A. #{n}" }
    family_name 'Milnes'
  end
 

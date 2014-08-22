@@ -47,11 +47,17 @@ describe 'Book Features' do
 
     describe 'an inactive book' do
       before(:each) do
-        @book = FactoryGirl.create(:book)
+        @author = FactoryGirl.create(:author)
+        @book   = FactoryGirl.create(:book, author: @author)
         @book.is_active = false
+        @book.save
       end
       it "should not be reviewable" do
         expect(@book.reviewable?). to be false
+        #FIXME I capybara is not seeing the New button
+        visit book_reviews_path @book
+        click_button 'New'
+        expect(page).to have_text("is inactive and can't be reviewed")
       end
     end
 
