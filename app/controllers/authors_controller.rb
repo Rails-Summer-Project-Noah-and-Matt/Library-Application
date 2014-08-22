@@ -1,45 +1,35 @@
 class AuthorsController < ApplicationController
   before_action :set_author, only: [:show, :edit, :update, :destroy]
 
-  # GET /authors
-  # GET /authors.json
   def index
     @authors = Author.all
   end
 
-  # GET /authors/1
-  # GET /authors/1.json
-  def show
-  end
-
-  # GET /authors/new
   def new
     @author = Author.new
   end
 
-  # GET /authors/1/edit
-  def edit
-  end
-
-  # POST /authors
-  # POST /authors.json
   def create
-    @author = Author.new(author_params)
-
-    respond_to_create({thing: @author})
+    @item = @author = Author.new(author_params)
+    super
   end
 
-  # PATCH/PUT /authors/1
-  # PATCH/PUT /authors/1.json
   def update
-    respond_to_update({thing: @author})
+    @item = @author
+    @current_parameters = author_params
+    super
   end
 
-  # DELETE /authors/1
-  # DELETE /authors/1.json
   def destroy
-    @author.destroy
-    respond_to_destroy({thing: @author, redirect: authors_url})
+    notice = "You can't destroy a published author."
+    if @author.destroyable?
+      @author.destroy
+      notice = 'Author was successfully destroyed.'
+    end
+    respond_to do |format|
+      format.html { redirect_to authors_url, notice: notice }
+      format.json { head :no_content }
+    end
   end
 
   private

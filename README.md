@@ -1,42 +1,43 @@
 Library-Application
 ===================
 
+Ruby version 2.1
+
+DB initalize:
+```
+rake db:setup
+```
+
+Testing:
+```
+rake
+```
+
 Production Dependencies
 =======================
 You will need 
 
-libpq-dev
-for postgres
-$ sudo apt-get install libpq-dev
-on Ubuntu / Debian
+libpq-dev for postgres
+```
+$ sudo apt-get install libpq-dev   # on Ubuntu / Debian
+```
 https://www.digitalocean.com/community/tutorials/how-to-setup-ruby-on-rails-with-postgres
 
-
 libmagickwand-dev or something similar for rmagick
+```
 $ sudo apt-get install libmagickwand-dev 
-or 
-$ sudo apt-get install graphicsmagick-libmagick-dev-compat 
-for ubuntu 12
-
-$ sudo apt-get install libmagickwand-dev 
-or
-$ sudo apt-get install libmagick9-dev 
-for ubuntu 11 or below.
-
-$ yum install ImageMagick-devel 
-for centos
-
-$ brew install imagemagick
-for Mac OS (using Homebrew)
-
+$ sudo apt-get install graphicsmagick-libmagick-dev-compat  # for ubuntu 12
+$ sudo apt-get install libmagick9-dev  # for ubuntu 11 or below.
+$ yum install ImageMagick-devel  # for centos
+$ brew install imagemagick # for Mac OS (using Homebrew)
+```
 
 http://stackoverflow.com/questions/3894225/imagemagick-rmagick-cant-install-rmagick-2-13-1-cant-find-magick-config
 
-Rails Summer Library Application
+README TODOs
+=======================
 
 Things to cover:
-
-* Ruby version
 
 * System dependencies
 
@@ -45,8 +46,6 @@ Things to cover:
 * Database creation
 
 * Database initialization
-
-* How to run the test suite
 
 * Services (job queues, cache servers, search engines, etc.)
 
@@ -75,24 +74,17 @@ Database Schema:
   - Books
     - Multiple Books can have the same title
     - is_active
-    - picture (foreign key to book_covers)
+    - cover (using carrierwave Uploader)
     - owner (foreign key to user_id, for req 5 only edit book you entered)
     - isbn10
     - isbn13
     - belongs_to :author
     - has_one :book_cover
     - has_many :book_tags
-    - has_many :tags, through :book_tags
+    - tags done through Acts_As_Taggable_On
     - has many :book_ratings
     - has_many :ratings, though :book_ratings
     - has_many :reviews
-  - Book_Covers
-    - foreign key book
-    - book_cover
-    (or however carrierwave wants to do this)
-  - Tags
-    - has_many :book_tags
-    - has_many :books, through :book_tags
   - Ratings
     - has_many :book_ratings
     - has_many :books, through :book_ratings
@@ -116,8 +108,7 @@ Database Schema:
       add'l tables
     - ? should we do a hook for "activity", or gen reports as requested?
       (for req 20) - I think as requested.
-    - has_many :owned_books
-    - has_many :books, through :owned_books
+    - has_many :books
     - has_many :followed_books           #(req 12)
     - has_many :books, through :followed_books
     - receives_ratings (boolean)  #(req13)

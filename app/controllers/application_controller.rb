@@ -3,47 +3,35 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  def respond_to_create params
-    thing    = params[:thing]
-    redirect = params[:redirect] ? params[:redirect] : thing
-    name     = params[:name]     ? params[:name]     : thing.class.to_s
-
+  def create
+    # The subclasses need to set @item 
+    # They may set @redirect if it is not the same as @item
+    @redirect ||= @item 
     respond_to do |format|
-      if thing.save
-        format.html { redirect_to redirect, notice: "#{name} was successfully created." }
-        format.json { render :show, status: :created, location: redirect }
+      if @item.save
+        format.html { redirect_to @redirect, notice: "#{@item.class.to_s} was successfully created." }
+        format.json { render :show, status: :created, location: @redirect }
       else
         format.html { render :new }
-        format.json { render json: thing.errors, status: :unprocessable_entity }
+        format.json { render json: @item.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  def respond_to_update params
-    thing    = params[:thing]
-    redirect = params[:redirect] ? params[:redirect] : thing
-    name     = params[:name]     ? params[:name]     : thing.class.to_s
-    thing_params = params[:thing_params] ? params[:thing_params] : eval(thing.class.to_s.downcase.sub(/$/, "_params"))
-
+  def update
+    # The subclasses need to set @item and @current_parameters
+    # They may set @redirect if it is not the same as @item
+    @redirect ||= @item 
+    
     respond_to do |format|
-      if thing.update(thing_params)
-        format.html { redirect_to redirect, notice: "#{name} was successfully updated." }
-        format.json { render :show, status: :created, location: redirect }
+      if @item.update(@current_parameters)
+        format.html { redirect_to @redirect, notice: "#{@item.class.to_s} was successfully updated." }
+        format.json { render :show, status: :ok, location: @redirect }
       else
         format.html { render :edit }
-        format.json { render json: thing.errors, status: :unprocessable_entity }
+        format.json { render json: @item.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  def respond_to_destroy params
-    thing    = params[:thing]
-    redirect = params[:redirect]
-    name     = params[:name]     ? params[:name]     : thing.class.to_s
-
-    respond_to do |format|
-      format.html { redirect_to redirect, notice: "#{name} was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 end
+

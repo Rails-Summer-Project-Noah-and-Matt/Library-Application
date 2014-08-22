@@ -1,16 +1,13 @@
-= form_for @author do |f|
-  - if @author.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(@author.errors.count, "error")} prohibited this author from being saved:"
-      %ul
-        - @author.errors.full_messages.each do |msg|
-          %li= msg
-
-  .field
-    = f.label :given_name
-    = f.text_field :given_name
-  .field
-    = f.label :family_name
-    = f.text_field :family_name
-  .actions
-    = f.submit 'Save'
+= form_for @author, html: { class: "form form-horizontal author" } do |f|
+  .form-group
+    = f.label :given_name, class: 'control-label'
+    .controls
+      = f.text_field :given_name, class: 'form-control'
+    = error_span(@author[:given_name])
+  .form-group
+    = f.label :family_name, class: 'control-label'
+    .controls
+      = f.text_field :family_name, class: 'form-control', required: true
+    = error_span(@author[:family_name])
+  = f.submit nil,class: 'btn btn-primary'
+  = link_to t('.cancel', :default => t("helpers.links.cancel")), authors_path, :class => 'btn btn-default'

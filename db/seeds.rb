@@ -5,5 +5,61 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-User.new({ :email => 'admin@example.com', :password => 'password', :admin => true, :password_confirmation => 'password'}).save
+
+def seed_tags_to_books book, tags
+  book.tag_list = tags
+  book.save
+end
+
+users = User.create([{ :email => 'admin@example.com', :password => 'password', :admin => true, :password_confirmation => 'password'},
+                     { :email => 'user@example.com', :password => 'foobarbaz', :admin => false, :password_confirmation => 'foobarbaz'}
+                   ])
+
+authors = Author.create([{ :given_name => 'Douglas', :family_name => 'Adams' },
+                         { :given_name => 'J.R.R.', :family_name => 'Tolkien' },
+                         { :given_name => 'Lewis', :family_name => 'Carrol' },
+                         { :given_name => 'David', :family_name => 'Brin' },
+                         { :given_name => 'Barbara', :family_name => 'Kafka' }
+])
+
+books = Book.create([{ :title => 'The Salmon of Doubt',
+                       :is_active => true,
+                       :owner_id => users[1].id,
+                       :author_id => authors[0].id,
+                       :cover => File.open(File.join(Rails.root, '/db/seed-images/cover.gif'))
+                     },
+                     { :title => 'The Hobbit',
+                       :is_active => true,
+                       :owner_id => users[1].id,
+                       :author_id => authors[1].id,
+                       :cover => File.open(File.join(Rails.root, '/db/seed-images/cover.gif'))
+                     },
+                     { :title => 'Alice in Wonderland',
+                       :is_active => true,
+                       :owner_id => users[1].id,
+                       :author_id => authors[2].id,
+                       :cover => File.open(File.join(Rails.root, '/db/seed-images/cover.gif'))
+                     },
+                     { :title => 'The Uplift War',
+                       :is_active => true,
+                       :owner_id => users[1].id,
+                       :author_id => authors[3].id,
+                       :cover => File.open(File.join(Rails.root, '/db/seed-images/cover.gif'))
+                     },
+                     { :title => 'The Opinionated Palate',
+                       :is_active => true,
+                       :owner_id => users[1].id,
+                       :author_id => authors[4].id,
+                       :cover => File.open(File.join(Rails.root, '/db/seed-images/cover.gif'))
+                     }
+])
+
+[ [ books[0], ['science fiction', 'funny']],
+  [ books[1], ['fantasy']],
+  [ books[2], ['funny', "children's", 'fantasy']],
+  [ books[3], ['science fiction', 'chimpanzees']],
+  [ books[4], ['food', 'funny']]
+].each do |book, tags|
+  seed_tags_to_books book, tags
+end
 

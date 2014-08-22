@@ -28,18 +28,10 @@
         %a.navbar-brand(href="#") LibraryApplication
         .navbar-collapse.collapse.navbar-responsive-collapse
           %ul.nav.navbar-nav
-            %li= link_to_unless_current "Books", root_path
-            %li= link_to_unless_current "Authors", authors_path
-
-            - if user_signed_in?
-              %li= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link'
-              %li= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' 
-              %p 
-                Logged in as 
-                %strong= current_user.email
-            - else 
-              %li= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'
-              %li= link_to "Login", new_user_session_path, :class => 'navbar-link'
+            %li= link_to "Link 1", "/path1"
+            %li= link_to "Link 2", "/path2"
+            %li= link_to "Link 3", "/path3"
+            %li= link_to "Link 3", "/path3"
 
     .container
       .row
@@ -51,16 +43,8 @@
             %h3 Sidebar
             %ul.nav.nav-list
               %li.nav-header Sidebar
-              %li= link_to_unless_current "Books", root_path
-              %li= link_to_unless_current "Authors", authors_path
-              - if user_signed_in?
-                %li= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link'
-                %li= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' 
-                %p 
-                  Logged in as 
-                  %strong= current_user.email
-              - else 
-                %li= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'
-                %li= link_to "Login", new_user_session_path, :class => 'navbar-link'
+              %li= link_to "Link 1", "/path1"
+              %li= link_to "Link 2", "/path2"
+              %li= link_to "Link 3", "/path3"
       %footer
-        %p &copy; 2014 Chris Ashfield, Matthew Spah, Noah Birnel 
+        %p &copy; Company 2014
