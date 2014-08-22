@@ -14,6 +14,10 @@ class ReviewsController < ApplicationController
 
   def new
     book = Book.find(params[:book_id])
+    unless book.reviewable?
+      redirect_to :back, notice: "#{book.title} is inactive and can't be reviewed."
+      return
+    end
     @review = book.reviews.build 
   end
 

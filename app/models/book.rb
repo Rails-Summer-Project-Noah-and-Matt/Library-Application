@@ -39,6 +39,10 @@ class Book < ActiveRecord::Base
     !reviews.any?
   end
 
+  def reviewable?
+    self.is_active == true
+  end
+
   private
 
   def clean_isbn

@@ -13,14 +13,14 @@ FactoryGirl.define do
  end
 
  factory :author do
-   given_name 'A. A.'
+   sequence(:given_name) { |n| "A. A. #{n}" }
    family_name 'Milnes'
  end
 
  factory :book do
    association :owner_id, factory: :user
    association :author_id, factory: :author
-   title 'The House at Pooh Corner'
+   sequence(:title) { |n| "The #{n}House at Pooh Corner" }
    cover { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'covers', 'cover.gif')) }
    is_active true
  end
