@@ -75,24 +75,17 @@ Database Schema:
   - Books
     - Multiple Books can have the same title
     - is_active
-    - picture (foreign key to book_covers)
+    - cover (using carrierwave Uploader)
     - owner (foreign key to user_id, for req 5 only edit book you entered)
     - isbn10
     - isbn13
     - belongs_to :author
     - has_one :book_cover
     - has_many :book_tags
-    - has_many :tags, through :book_tags
+    - tags done through Acts_As_Taggable_On
     - has many :book_ratings
     - has_many :ratings, though :book_ratings
     - has_many :reviews
-  - Book_Covers
-    - foreign key book
-    - book_cover
-    (or however carrierwave wants to do this)
-  - Tags
-    - has_many :book_tags
-    - has_many :books, through :book_tags
   - Ratings
     - has_many :book_ratings
     - has_many :books, through :book_ratings
@@ -116,8 +109,7 @@ Database Schema:
       add'l tables
     - ? should we do a hook for "activity", or gen reports as requested?
       (for req 20) - I think as requested.
-    - has_many :owned_books
-    - has_many :books, through :owned_books
+    - has_many :books
     - has_many :followed_books           #(req 12)
     - has_many :books, through :followed_books
     - receives_ratings (boolean)  #(req13)
