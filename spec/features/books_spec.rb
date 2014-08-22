@@ -38,6 +38,7 @@ describe 'Book Features' do
     describe 'an active book' do
       before(:each) do
         @book = FactoryGirl.create(:book)
+        @book.is_active = true
       end
       it "should be reviewable" do
         expect(@book.reviewable?). to be true
