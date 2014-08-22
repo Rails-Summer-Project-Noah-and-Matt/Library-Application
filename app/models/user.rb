@@ -20,5 +20,6 @@ class User < ActiveRecord::Base
     subscriptions.find_by(followed_id: book.id).destroy
   end
 
+  ratyrate_rater
 
 end

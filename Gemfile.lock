@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/wazery/ratyrate.git
+  revision: 22fdf05f23fe610a84a6736021608d59607b9080
+  specs:
+    ratyrate (1.2.0.alpha)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -163,7 +169,7 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (2.2.3)
+    turbolinks (2.3.0)
       coffee-rails
     twitter-bootstrap-rails (3.2.0)
       actionpack (~> 4.1)
@@ -199,6 +205,7 @@ DEPENDENCIES
   pg
   rails (= 4.1.0)
   rake
+  ratyrate!
   rmagick
   rspec-rails
   sass-rails (~> 4.0.3)

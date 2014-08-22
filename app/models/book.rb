@@ -35,6 +35,8 @@ class Book < ActiveRecord::Base
 
   mount_uploader :cover, CoverUploader
 
+  ratyrate_rateable 'rating'
+
   private
 
   def clean_isbn

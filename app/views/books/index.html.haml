@@ -14,6 +14,7 @@
       %th= model_class.human_attribute_name(:tag_list)
       %th= model_class.human_attribute_name(:owner_id)
       %th= model_class.human_attribute_name(:created_at)
+      %th= model_class.human_attribute_name(:rating)
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @books.each do |book|
@@ -28,6 +29,7 @@
         %td= book.tag_list.to_s.sub(/(.{15}).*/, '\1...')
         %td= User.find_by(book.owner_id).email
         %td=l book.created_at
+        %td= rating_for book, 'rating'
         %td
           = link_to 'Reviews', book_reviews_path(book), :class => 'btn btn-default btn-xs'
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_book_path(book), :class => 'btn btn-default btn-xs'
