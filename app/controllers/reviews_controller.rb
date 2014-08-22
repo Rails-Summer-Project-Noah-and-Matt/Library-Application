@@ -26,15 +26,19 @@ class ReviewsController < ApplicationController
     book = Book.find(params[:book_id])
     @review = book.reviews.create(review_params)
     @review.user_id = current_user.id
-    respond_to do |format|
-      if @review.save
-        format.html { redirect_to([@review.book, @review],  notice: 'Review was successfully created.') }
-        format.json { render :show, status: :created, location: [@review.book, @review] }
-      else
-        format.html { render :new }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
-    end
+
+    @item     = @review
+    @redirect = [@review.book, @review]
+    super
+#    respond_to do |format|
+#      if @review.save
+#        format.html { redirect_to([@review.book, @review],  notice: 'Review was successfully created.') }
+#        format.json { render :show, status: :created, location: [@review.book, @review] }
+#      else
+#        format.html { render :new }
+#        format.json { render json: @review.errors, status: :unprocessable_entity }
+#      end
+#    end
   end
 
 
