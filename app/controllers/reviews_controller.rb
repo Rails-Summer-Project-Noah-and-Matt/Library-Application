@@ -30,32 +30,16 @@ class ReviewsController < ApplicationController
     @item     = @review
     @redirect = [@review.book, @review]
     super
-#    respond_to do |format|
-#      if @review.save
-#        format.html { redirect_to([@review.book, @review],  notice: 'Review was successfully created.') }
-#        format.json { render :show, status: :created, location: [@review.book, @review] }
-#      else
-#        format.html { render :new }
-#        format.json { render json: @review.errors, status: :unprocessable_entity }
-#      end
-#    end
   end
 
 
   def update
    
     book = Book.find(params[:book_id])
-    @review = book.reviews.find(params[:id])
-   
-    respond_to do |format|
-      if @review.update(review_params)
-        format.html { redirect_to([@review.book, @review], notice: 'Review was successfully updated.') }
-        format.json { render :show, status: :ok, location: [@review.book, @review] }
-      else
-        format.html { render :edit }
-        format.json { render json: @review.errors, status: :unprocessable_entity }
-      end
-    end
+    @item = @review = book.reviews.find(params[:id])
+    @redirect = [@review.book, @review]
+    @current_parameters = review_params
+    super 
   end
 
   def destroy

@@ -15,15 +15,9 @@ class AuthorsController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @author.update(author_params)
-        format.html { redirect_to @author, notice: 'Author was successfully updated.' }
-        format.json { render :show, status: :ok, location: @author }
-      else
-        format.html { render :edit }
-        format.json { render json: @author.errors, status: :unprocessable_entity }
-      end
-    end
+    @item = @author
+    @current_parameters = author_params
+    super
   end
 
   def destroy
