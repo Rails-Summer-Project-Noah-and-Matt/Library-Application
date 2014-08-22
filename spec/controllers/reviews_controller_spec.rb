@@ -29,7 +29,12 @@ RSpec.describe ReviewsController, :type => :controller do
   Book.destroy_all
   @user = FactoryGirl.create(:user)
   @book = FactoryGirl.create(:book)
+  @inactive_book = FactoryGirl.create(:book, is_active: false)
  end
+
+  before(:each) do
+    request.env["HTTP_REFERER"] = books_path
+  end
 
   let(:valid_attributes) { {
     text: 'This is the review',
@@ -69,6 +74,11 @@ RSpec.describe ReviewsController, :type => :controller do
     it "assigns a new review as @review" do
       get :new, { :book_id=>@book }, valid_session
       expect(assigns(:review)).to be_a_new(Review)
+    end
+
+    it "does not assign a new review of an inactive book" do
+      get :new, { :book_id=>@inactive_book }, valid_session
+      expect(assigns(:review)).not_to be_a_new(Review)
     end
   end
 
