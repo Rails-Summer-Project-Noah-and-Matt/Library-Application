@@ -36,9 +36,13 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    @book.destroy
+    notice = "You can't destroy a viewed book."
+    if @book.destroyable?
+      @book.destroy
+      notice = 'Book was successfully destroyed.'
+    end
     respond_to do |format|
-      format.html { redirect_to books_url, notice: 'Book was successfully destroyed.' }
+      format.html { redirect_to books_url, notice: notice }
       format.json { head :no_content }
     end
   end
