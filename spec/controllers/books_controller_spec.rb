@@ -35,6 +35,7 @@ RSpec.describe BooksController, :type => :controller do
   # adjust the attributes here as well.
   let(:valid_attributes) { { title: 'The Horror at Dunwich',
                              is_active: true,
+                             owner_id: 1,
                              author: Author.create!( given_name:  "H.P.",
                                        family_name: "Lovecraft"
                              )
@@ -93,6 +94,7 @@ end
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Book" do
+        sign_in @user
         expect {
           post :create, {:book => valid_attributes}, valid_session
         }.to change(Book, :count).by(1)
