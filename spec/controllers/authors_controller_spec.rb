@@ -19,6 +19,12 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe AuthorsController, :type => :controller do
+  
+  before(:all) do
+    User.destroy_all
+    Author.destroy_all
+    @user = FactoryGirl.create(:user)
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Author. As you add validations to Author, be sure to
@@ -52,6 +58,7 @@ RSpec.describe AuthorsController, :type => :controller do
 
   describe "GET new" do
     it "assigns a new author as @author" do
+      sign_in @user
       get :new, {}, valid_session
       expect(assigns(:author)).to be_a_new(Author)
     end
@@ -59,6 +66,7 @@ RSpec.describe AuthorsController, :type => :controller do
 
   describe "GET edit" do
     it "assigns the requested author as @author" do
+      sign_in @user
       author = Author.create! valid_attributes
       get :edit, {:id => author.to_param}, valid_session
       expect(assigns(:author)).to eq(author)
@@ -68,18 +76,21 @@ RSpec.describe AuthorsController, :type => :controller do
   describe "POST create" do
     describe "with valid params" do
       it "creates a new Author" do
+        sign_in @user
         expect {
           post :create, {:author => valid_attributes}, valid_session
         }.to change(Author, :count).by(1)
       end
 
       it "assigns a newly created author as @author" do
+        sign_in @user
         post :create, {:author => valid_attributes}, valid_session
         expect(assigns(:author)).to be_a(Author)
         expect(assigns(:author)).to be_persisted
       end
 
       it "redirects to the created author" do
+        sign_in @user
         post :create, {:author => valid_attributes}, valid_session
         expect(response).to redirect_to(Author.last)
       end
@@ -87,11 +98,13 @@ RSpec.describe AuthorsController, :type => :controller do
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved author as @author" do
+        sign_in @user
         post :create, {:author => invalid_attributes}, valid_session
         expect(assigns(:author)).to be_a_new(Author)
       end
 
       it "re-renders the 'new' template" do
+        sign_in @user
         post :create, {:author => invalid_attributes}, valid_session
         expect(response).to render_template("new")
       end
@@ -105,6 +118,7 @@ RSpec.describe AuthorsController, :type => :controller do
       }
 
       it "updates the requested author" do
+        sign_in @user
         author = Author.create! valid_attributes
         put :update, {:id => author.to_param, :author => new_attributes}, valid_session
         author.reload
@@ -112,12 +126,14 @@ RSpec.describe AuthorsController, :type => :controller do
       end
 
       it "assigns the requested author as @author" do
+        sign_in @user
         author = Author.create! valid_attributes
         put :update, {:id => author.to_param, :author => valid_attributes}, valid_session
         expect(assigns(:author)).to eq(author)
       end
 
       it "redirects to the author" do
+        sign_in @user
         author = Author.create! valid_attributes
         put :update, {:id => author.to_param, :author => valid_attributes}, valid_session
         expect(response).to redirect_to(author)
@@ -126,12 +142,14 @@ RSpec.describe AuthorsController, :type => :controller do
 
     describe "with invalid params" do
       it "assigns the author as @author" do
+        sign_in @user
         author = Author.create! valid_attributes
         put :update, {:id => author.to_param, :author => invalid_attributes}, valid_session
         expect(assigns(:author)).to eq(author)
       end
 
       it "re-renders the 'edit' template" do
+        sign_in @user
         author = Author.create! valid_attributes
         put :update, {:id => author.to_param, :author => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
@@ -141,6 +159,7 @@ RSpec.describe AuthorsController, :type => :controller do
 
   describe "DELETE destroy" do
     it "destroys the requested author" do
+      sign_in @user
       author = Author.create! valid_attributes
       expect {
         delete :destroy, {:id => author.to_param}, valid_session
@@ -148,6 +167,7 @@ RSpec.describe AuthorsController, :type => :controller do
     end
 
     it "redirects to the authors list" do
+      sign_in @user
       author = Author.create! valid_attributes
       delete :destroy, {:id => author.to_param}, valid_session
       expect(response).to redirect_to(authors_url)

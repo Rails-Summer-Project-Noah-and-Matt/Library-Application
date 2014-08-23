@@ -72,6 +72,7 @@ RSpec.describe ReviewsController, :type => :controller do
 
   describe "GET new" do
     it "assigns a new review as @review" do
+      sign_in @user
       get :new, { :book_id=>@book }, valid_session
       expect(assigns(:review)).to be_a_new(Review)
     end
