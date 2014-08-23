@@ -78,17 +78,6 @@ ActiveRecord::Schema.define(version: 20140822143426) do
 
   add_index "rating_caches", ["cacheable_id", "cacheable_type"], name: "index_rating_caches_on_cacheable_id_and_cacheable_type"
 
-  create_table "ratings", force: true do |t|
-    t.integer  "review_id"
-    t.integer  "user_id"
-    t.integer  "stars",      default: 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "ratings", ["review_id"], name: "index_ratings_on_review_id"
-  add_index "ratings", ["user_id"], name: "index_ratings_on_user_id"
-
   create_table "reviews", force: true do |t|
     t.text     "text"
     t.integer  "user_id"
