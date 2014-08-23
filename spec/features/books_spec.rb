@@ -59,7 +59,7 @@ describe 'Book Features:' do
       describe 'a book I do not own' do
 
         it "I can't destroy" do
-          visit book_path @my_book
+          visit book_path @her_book
           expect{ click_link 'Delete' }.to_not change {Book.count}
         end
 
