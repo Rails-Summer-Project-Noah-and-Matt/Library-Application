@@ -15,6 +15,10 @@ class BooksController < ApplicationController
   end
 
   def update
+    unless @book.owner_id == current_user.id
+      redirect_to book_url, notice: "You can't edit someone else's book"
+      return
+    end
     @item = @book
     @current_parameters = book_params
     super
