@@ -72,11 +72,13 @@ RSpec.describe ReviewsController, :type => :controller do
 
   describe "GET new" do
     it "assigns a new review as @review" do
+      sign_in @user
       get :new, { :book_id=>@book }, valid_session
       expect(assigns(:review)).to be_a_new(Review)
     end
 
     it "does not assign a new review of an inactive book" do
+      sign_in @user
       get :new, { :book_id=>@inactive_book }, valid_session
       expect(assigns(:review)).not_to be_a_new(Review)
     end
@@ -84,6 +86,7 @@ RSpec.describe ReviewsController, :type => :controller do
 
   describe "GET edit" do
     it "assigns the requested review as @review" do
+      sign_in @user
       review = Review.create! valid_attributes
       get :edit, { :book_id=>@book, :id => review.to_param}, valid_session
       expect(assigns(:review)).to eq(review)

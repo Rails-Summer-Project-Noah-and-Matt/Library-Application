@@ -22,8 +22,13 @@ RSpec.describe BooksController, :type => :controller do
 
   before(:all) do
     Book.destroy_all
+    User.destroy_all
+    @user = FactoryGirl.create(:user)
   end
 
+  before(:each) do
+    request.env["HTTP_REFERER"] = books_path
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Book. As you add validations to Book, be sure to
@@ -55,6 +60,7 @@ RSpec.describe BooksController, :type => :controller do
 
   describe "GET show" do
     it "assigns the requested book as @book" do
+      sign_in @user
       book = Book.create! valid_attributes
       get :show, {:id => book.to_param}, valid_session
       expect(assigns(:book)).to eq(book)
@@ -63,13 +69,21 @@ RSpec.describe BooksController, :type => :controller do
 
   describe "GET new" do
     it "assigns a new book as @book" do
+      sign_in @user
       get :new, {}, valid_session
       expect(assigns(:book)).to be_a_new(Book)
     end
-  end
+    
+    it "shouldn't assign a new book with no @user signed in" do
+      get :new, {}, valid_session
+      expect(response).to redirect_to(books_path)
+   end
+end
+
 
   describe "GET edit" do
     it "assigns the requested book as @book" do
+      sign_in @user
       book = Book.create! valid_attributes
       get :edit, {:id => book.to_param}, valid_session
       expect(assigns(:book)).to eq(book)
@@ -85,12 +99,14 @@ RSpec.describe BooksController, :type => :controller do
       end
 
       it "assigns a newly created book as @book" do
+        sign_in @user
         post :create, {:book => valid_attributes}, valid_session
         expect(assigns(:book)).to be_a(Book)
         expect(assigns(:book)).to be_persisted
       end
 
       it "redirects to the created book" do
+        sign_in @user
         post :create, {:book => valid_attributes}, valid_session
         expect(response).to redirect_to(Book.last)
       end
@@ -98,11 +114,13 @@ RSpec.describe BooksController, :type => :controller do
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved book as @book" do
+        sign_in @user
         post :create, {:book => invalid_attributes}, valid_session
         expect(assigns(:book)).to be_a_new(Book)
       end
 
       it "re-renders the 'new' template" do
+        sign_in @user
         post :create, {:book => invalid_attributes}, valid_session
         expect(response).to render_template("new")
       end
@@ -116,6 +134,7 @@ RSpec.describe BooksController, :type => :controller do
       }}
 
       it "updates the requested book" do
+        sign_in @user
         book = Book.create! valid_attributes
         put :update, {:id => book.to_param, :book => new_attributes}, valid_session
         book.reload
@@ -123,12 +142,14 @@ RSpec.describe BooksController, :type => :controller do
       end
 
       it "assigns the requested book as @book" do
+        sign_in @user
         book = Book.create! valid_attributes
         put :update, {:id => book.to_param, :book => valid_attributes}, valid_session
         expect(assigns(:book)).to eq(book)
       end
 
       it "redirects to the book" do
+        sign_in @user
         book = Book.create! valid_attributes
         put :update, {:id => book.to_param, :book => valid_attributes}, valid_session
         expect(response).to redirect_to(book)
@@ -137,12 +158,14 @@ RSpec.describe BooksController, :type => :controller do
 
     describe "with invalid params" do
       it "assigns the book as @book" do
+        sign_in @user
         book = Book.create! valid_attributes
         put :update, {:id => book.to_param, :book => invalid_attributes}, valid_session
         expect(assigns(:book)).to eq(book)
       end
 
       it "re-renders the 'edit' template" do
+        sign_in @user
         book = Book.create! valid_attributes
         put :update, {:id => book.to_param, :book => invalid_attributes}, valid_session
         expect(response).to render_template("edit")
@@ -152,6 +175,7 @@ RSpec.describe BooksController, :type => :controller do
 
   describe "DELETE destroy" do
     it "destroys the requested book" do
+      sign_in @user
       book = Book.create! valid_attributes
       expect {
         delete :destroy, {:id => book.to_param}, valid_session
@@ -159,6 +183,7 @@ RSpec.describe BooksController, :type => :controller do
     end
 
     it "redirects to the books list" do
+      sign_in @user
       book = Book.create! valid_attributes
       delete :destroy, {:id => book.to_param}, valid_session
       expect(response).to redirect_to(books_url)
