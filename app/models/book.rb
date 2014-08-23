@@ -54,10 +54,10 @@ class Book < ActiveRecord::Base
     #  preprocess isbn { |i| i.gsub(/x/, 'X') }
     #end
 
-    self.isbn10 = self.isbn10.gsub(/[- ]/, '') if attribute_present?("isbn10")
-    self.isbn10 = self.isbn10.gsub(/x/, 'X')   if attribute_present?("isbn10")
-    self.isbn13 = self.isbn13.gsub(/[- ]/, '') if attribute_present?("isbn13")
-    self.isbn13 = self.isbn13.gsub(/x/, 'X')   if attribute_present?("isbn13")
+    self.isbn10 = self.isbn10.gsub(/[- ]/, '' ) if attribute_present?("isbn10")
+    self.isbn10 = self.isbn10.gsub(/x/   , 'X') if attribute_present?("isbn10")
+    self.isbn13 = self.isbn13.gsub(/[- ]/, '' ) if attribute_present?("isbn13")
+    self.isbn13 = self.isbn13.gsub(/x/   , 'X') if attribute_present?("isbn13")
   end
 
   def squash_whitespace
