@@ -28,7 +28,7 @@ describe 'Book Features:' do
 
   end
 
-  describe 'Deleting:' do
+  describe 'Changing:' do
     before(:each) do
       @me   = FactoryGirl.create(:user)
       @she  = FactoryGirl.create(:user)
@@ -39,7 +39,7 @@ describe 'Book Features:' do
       @my_book.save
     end
 
-    describe 'as a logged in user' do
+    describe 'as a logged in user,' do
       before(:each) do
         visit new_user_session_path
         fill_in 'Email', with: @me.email
@@ -48,45 +48,49 @@ describe 'Book Features:' do
       end
 
       describe 'a book I own' do
-
         it "I can destroy" do
           visit book_path @my_book
           expect{ click_link 'Delete' }.to change {Book.count}.by(-1)
         end
-
+        it "I can edit" do
+          visit book_path @my_book
+          click_link 'Edit'
+          expect(page).to have_text "Edit Book"
+        end
       end
 
       describe 'a book I do not own' do
-
         it "I can't destroy" do
           visit book_path @her_book
           expect{ click_link 'Delete' }.to_not change {Book.count}
         end
-
+        it "I can't edit" do
+          visit book_path @her_book
+          click_link 'Edit'
+          expect(page).to_not have_text "Edit Book"
+        end
       end
 
+      describe 'a book without reviews' do
+        it "should be deletable" do
+          expect(@my_book.destroyable?).to be true
+        end
+      end
+
+      describe 'a book with reviews' do
+        before(:each) do
+          @reviewer = FactoryGirl.create(:user)
+          @book     = FactoryGirl.create(:book)
+          @review   = FactoryGirl.create(:review, book: @book, user: @reviewer)
+        end
+        it "should not be deletable" do
+          expect(@book.destroyable?).to be false
+        end
+      end
     end
-
-    describe 'a book without reviews' do
-      it "should be deletable" do
-        expect(@my_book.destroyable?).to be true
-      end
-    end
-
-    describe 'a book with reviews' do
-      before(:each) do
-        @reviewer = FactoryGirl.create(:user)
-        @book     = FactoryGirl.create(:book)
-        @review   = FactoryGirl.create(:review, book: @book, user: @reviewer)
-      end
-      it "should not be deletable" do
-        expect(@book.destroyable?).to be false
-      end
-    end
-
   end
 
-  describe 'Reviews' do
+  describe 'Reviewing' do
 
     describe 'an active book' do
       before(:each) do
