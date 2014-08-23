@@ -10,7 +10,9 @@ class BooksController < ApplicationController
   end
 
   def create
-    @item = @book = Book.new(book_params)
+    @book = Book.new(book_params)
+    @book.owner_id = current_user.id
+    @item = @book
     super
   end
 
