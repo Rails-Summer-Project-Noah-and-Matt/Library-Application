@@ -42,6 +42,8 @@ class Book < ActiveRecord::Base
   def reviewable?
     self.is_active == true
   end
+  
+  ratyrate_rateable 'rating'
 
   private
 
