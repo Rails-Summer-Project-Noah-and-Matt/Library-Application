@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
-  before_filter :check_valid_user, only: [:new, :edit, :update, :destroy]                           
+  before_filter :check_valid_user, only:  [:edit, :update, :destroy, :new] 
   
   def index
     @book = book = Book.find(params[:book_id])

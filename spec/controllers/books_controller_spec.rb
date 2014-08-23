@@ -26,7 +26,9 @@ RSpec.describe BooksController, :type => :controller do
     @user = FactoryGirl.create(:user)
   end
 
-
+  before(:each) do
+    request.env["HTTP_REFERER"] = books_path
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Book. As you add validations to Book, be sure to
@@ -71,7 +73,13 @@ RSpec.describe BooksController, :type => :controller do
       get :new, {}, valid_session
       expect(assigns(:book)).to be_a_new(Book)
     end
-  end
+    
+    it "shouldn't assign a new book with no @user signed in" do
+      get :new, {}, valid_session
+      expect(response).to redirect_to(books_path)
+   end
+end
+
 
   describe "GET edit" do
     it "assigns the requested book as @book" do
