@@ -21,7 +21,7 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    notice = "You can't destroy a viewed book."
+    notice = "You can't destroy a reviewed book."
     if @book.destroyable?
       @book.destroy
       notice = 'Book was successfully destroyed.'

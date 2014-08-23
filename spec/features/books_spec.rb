@@ -1,13 +1,32 @@
-require 'spec_helper'
+require 'rails_helper'
 
-describe 'Book Features' do
+describe 'Book Features:' do
 
-  DatabaseCleaner.clean_with(:truncation)
+  before(:all) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
 
   let(:user)   { FactoryGirl.create(:user) }
   let(:author) { FactoryGirl.create(:author) }
   let(:book)   { FactoryGirl.create(:book, owner_id: user) }
   let(:review) { FactoryGirl.create(:review, book: book) }
+
+  describe 'Index' do
+    before(:all) do
+      @owner = FactoryGirl.create(:user)
+      @author = FactoryGirl.create(:author)
+      @books = []
+      3.times{ @books << FactoryGirl.create(:book, owner_id: @owner.id, author_id: @author.id) }
+    end
+
+    it 'should list the book titles' do
+      visit books_path
+      @books.each do |book|
+        expect(page).to have_content(book.title)
+      end
+    end
+
+  end
 
   describe 'Deleting' do
 
@@ -19,6 +38,19 @@ describe 'Book Features' do
         expect(@book.destroyable?).to be true
       end
     end
+
+#    describe 'a book I own' do
+#      before(:each) do
+#        @author = FactoryGirl.create(:author)
+#        @owner  = FactoryGirl.create(:user)
+#        @book   = FactoryGirl.create(:book, owner_id: @owner, author_id: @author)
+#        #sign_in @owner
+#      end
+#      it "I can destroy" do
+#        @book.save
+#        visit book_path @book
+#      end
+#    end
 
     describe 'a book with reviews' do
       before(:each) do
