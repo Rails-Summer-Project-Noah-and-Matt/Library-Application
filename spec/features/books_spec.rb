@@ -28,29 +28,50 @@ describe 'Book Features:' do
 
   end
 
-  describe 'Deleting' do
-
-    describe 'a book without reviews' do
-      before(:each) do
-        @book = FactoryGirl.create(:book)
-      end
-      it "should be deletable" do
-        expect(@book.destroyable?).to be true
-      end
+  describe 'Deleting:' do
+    before(:each) do
+      @me   = FactoryGirl.create(:user)
+      @she  = FactoryGirl.create(:user)
+      @author = FactoryGirl.create(:author)
+      @her_book = FactoryGirl.create(:book, owner_id: @she.id, author_id: @author.id)
+      @her_book.save
+      @my_book  = FactoryGirl.create(:book, owner_id: @me.id, author_id: @author.id)
+      @my_book.save
     end
 
-#    describe 'a book I own' do
-#      before(:each) do
-#        @author = FactoryGirl.create(:author)
-#        @owner  = FactoryGirl.create(:user)
-#        @book   = FactoryGirl.create(:book, owner_id: @owner, author_id: @author)
-#        #sign_in @owner
-#      end
-#      it "I can destroy" do
-#        @book.save
-#        visit book_path @book
-#      end
-#    end
+    describe 'as a logged in user' do
+      before(:each) do
+        visit new_user_session_path
+        fill_in 'Email', with: @me.email
+        fill_in 'Password', with: @me.password
+        click_button 'Sign in'
+      end
+
+      describe 'a book I own' do
+
+        it "I can destroy" do
+          visit book_path @my_book
+          expect{ click_link 'Delete' }.to change {Book.count}.by(-1)
+        end
+
+      end
+
+      describe 'a book I do not own' do
+
+        it "I can't destroy" do
+          visit book_path @my_book
+          expect{ click_link 'Delete' }.to_not change {Book.count}
+        end
+
+      end
+
+    end
+
+    describe 'a book without reviews' do
+      it "should be deletable" do
+        expect(@my_book.destroyable?).to be true
+      end
+    end
 
     describe 'a book with reviews' do
       before(:each) do
