@@ -3,5 +3,13 @@ class Review < ActiveRecord::Base
   belongs_to :book
 
   validates :text, :user_id, :book_id, presence: true
+  
+  after_create :email_users
+
+
+  def email_book_owner 
+    LibraryMailer.update_user_review_email(self.user, self.book).deliver
+  end
+
 
 end

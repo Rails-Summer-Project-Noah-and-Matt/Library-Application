@@ -5,13 +5,13 @@ class LibraryMailer < ActionMailer::Base
   def update_user_rating_email(user, book)
     @user = user
     @book = book
-    mail(to: @user.email, subject: "#{@book.title} has a new rating")
+    mail(to: @book.owner.email, subject: "#{@book.title} has a new rating")
   end
 
   def update_user_review_email(user, book)
     @user = user
     @book = book
-    mail(to: @user.email, subject: "#{@book.title} has a new review")
+    mail(:to => @book.owner.email, :subject => "#{@book.title} has a new review")
   end
 
   def user_followed_review_email(user, book)
