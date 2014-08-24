@@ -174,22 +174,4 @@ end
     end
   end
 
-  describe "DELETE destroy" do
-    it "destroys the requested book" do
-      sign_in @user
-      book = Book.create! valid_attributes
-      expect {
-        delete :destroy, {:id => book.to_param}, valid_session
-      }.to change(Book, :count).by(-1)
-    end
-
-    it "redirects to the books list" do
-      sign_in @user
-      book = Book.create! valid_attributes
-      delete :destroy, {:id => book.to_param}, valid_session
-      expect(response).to redirect_to(books_url)
-    end
-
-  end
-
 end

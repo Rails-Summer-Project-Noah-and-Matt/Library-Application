@@ -17,14 +17,18 @@ class BooksController < ApplicationController
   end
 
   def update
+    unless @book.owner_id == current_user.id
+      redirect_to book_url, notice: "You can't edit someone else's book"
+      return
+    end
     @item = @book
     @current_parameters = book_params
     super
   end
 
   def destroy
-    notice = "You can't destroy a viewed book."
-    if @book.destroyable?
+    notice = "You can't destroy a reviewed book, or one you don't own"
+    if (@book.destroyable? && @book.owner_id == current_user.id)
       @book.destroy
       notice = 'Book was successfully destroyed.'
     end
