@@ -62,12 +62,11 @@ describe 'Book Features:' do
       describe 'a book I do not own' do
         it "I can't destroy" do
           visit book_path @her_book
-          expect{ click_link 'Delete' }.to_not change {Book.count}
+          expect(page).to_not have_button("Delete")
         end
         it "I can't edit" do
           visit book_path @her_book
-          click_link 'Edit'
-          expect(page).to have_text "You can't edit someone else's book"
+          expect(page).to_not have_button("Edit")
         end
       end
 
