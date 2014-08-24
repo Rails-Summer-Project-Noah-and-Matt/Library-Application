@@ -1,39 +1,94 @@
 require 'rails_helper'
 
-describe 'Book Features' do
+describe 'Book Features:' do
 
-  DatabaseCleaner.clean_with(:truncation)
+  before(:all) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
 
   let(:user)   { FactoryGirl.create(:user) }
   let(:author) { FactoryGirl.create(:author) }
   let(:book)   { FactoryGirl.create(:book, owner_id: user) }
   let(:review) { FactoryGirl.create(:review, book: book) }
 
-  describe 'Deleting' do
-
-    describe 'a book without reviews' do
-      before(:each) do
-        @book = FactoryGirl.create(:book)
-      end
-      it "should be deletable" do
-        expect(@book.destroyable?).to be true
-      end
+  describe 'Index' do
+    before(:all) do
+      @owner = FactoryGirl.create(:user)
+      @author = FactoryGirl.create(:author)
+      @books = []
+      3.times{ @books << FactoryGirl.create(:book, owner_id: @owner.id, author_id: @author.id) }
     end
 
-    describe 'a book with reviews' do
-      before(:each) do
-        @reviewer = FactoryGirl.create(:user)
-        @book     = FactoryGirl.create(:book)
-        @review   = FactoryGirl.create(:review, book: @book, user: @reviewer)
-      end
-      it "should not be deletable" do
-        expect(@book.destroyable?).to be false
+    it 'should list the book titles' do
+      visit books_path
+      @books.each do |book|
+        expect(page).to have_content(book.title)
       end
     end
 
   end
 
-  describe 'Reviews' do
+  describe 'Changing:' do
+    before(:each) do
+      @me   = FactoryGirl.create(:user)
+      @she  = FactoryGirl.create(:user)
+      @author = FactoryGirl.create(:author)
+      @her_book = FactoryGirl.create(:book, owner_id: @she.id, author_id: @author.id)
+      @my_book  = FactoryGirl.create(:book, owner_id: @me.id, author_id: @author.id)
+    end
+
+    describe 'as a logged in user,' do
+      before(:each) do
+        visit new_user_session_path
+        fill_in 'Email', with: @me.email
+        fill_in 'Password', with: @me.password
+        click_button 'Sign in'
+      end
+
+      describe 'a book I own' do
+        it "I can destroy" do
+          visit book_path @my_book
+          expect{ click_link 'Delete' }.to change {Book.count}.by(-1)
+        end
+        it "I can edit" do
+          visit book_path @my_book
+          click_link 'Edit'
+          expect(page).to have_text "Edit Book"
+        end
+      end
+
+      describe 'a book I do not own' do
+        it "I can't destroy" do
+          visit book_path @her_book
+          expect(page).to_not have_button("Delete")
+        end
+        it "I can't edit" do
+          visit edit_book_path @her_book
+          click_button 'Update Book'
+          expect(page).to have_text("You can't edit someone else's book")
+        end
+      end
+
+      describe 'a book without reviews' do
+        it "should be deletable" do
+          expect(@my_book.destroyable?).to be true
+        end
+      end
+
+      describe 'a book with reviews' do
+        before(:each) do
+          @reviewer = FactoryGirl.create(:user)
+          @book     = FactoryGirl.create(:book)
+          @review   = FactoryGirl.create(:review, book: @book, user: @reviewer)
+        end
+        it "should not be deletable" do
+          expect(@book.destroyable?).to be false
+        end
+      end
+    end
+  end
+
+  describe 'Reviewing' do
 
     describe 'an active book' do
       before(:each) do

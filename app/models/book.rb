@@ -43,6 +43,10 @@ class Book < ActiveRecord::Base
   def reviewable?
     self.is_active == true
   end
+
+  def user
+    User.find(owner_id)
+  end
   
   ratyrate_rateable 'rating'
 
