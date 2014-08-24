@@ -28,8 +28,8 @@ RSpec.describe ReviewsController, :type => :controller do
   User.destroy_all
   Book.destroy_all
   @user = FactoryGirl.create(:user)
-  @book = FactoryGirl.create(:book)
-  @inactive_book = FactoryGirl.create(:book, is_active: false)
+  @book = FactoryGirl.create(:book, :owner_id => @user.id)
+  @inactive_book = FactoryGirl.create(:book, :owner_id => @user.id,  is_active: false)
  end
 
   before(:each) do

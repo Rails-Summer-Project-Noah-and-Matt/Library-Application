@@ -52,6 +52,7 @@ class BooksController < ApplicationController
                                    :cover,
                                    :cover_cache,
                                    :remote_cover_url,
+                                   :owner_id,
                                    :author_id,
                                    author_attributes: [:given_name, :family_name])
     end
