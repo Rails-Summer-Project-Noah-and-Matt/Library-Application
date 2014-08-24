@@ -34,9 +34,7 @@ describe 'Book Features:' do
       @she  = FactoryGirl.create(:user)
       @author = FactoryGirl.create(:author)
       @her_book = FactoryGirl.create(:book, owner_id: @she.id, author_id: @author.id)
-      @her_book.save
       @my_book  = FactoryGirl.create(:book, owner_id: @me.id, author_id: @author.id)
-      @my_book.save
     end
 
     describe 'as a logged in user,' do
@@ -65,8 +63,9 @@ describe 'Book Features:' do
           expect(page).to_not have_button("Delete")
         end
         it "I can't edit" do
-          visit book_path @her_book
-          expect(page).to_not have_button("Edit")
+          visit edit_book_path @her_book
+          click_button 'Update Book'
+          expect(page).to have_text("You can't edit someone else's book")
         end
       end
 
