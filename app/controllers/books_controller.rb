@@ -2,7 +2,7 @@ class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
   before_filter :check_valid_user, only: [:new, :edit, :update, :destroy]
   def index
-    @books = Book.all
+    @books = Book.paginate(:page => params[:page])
   end
 
   def new
@@ -37,8 +37,6 @@ class BooksController < ApplicationController
       format.json { head :no_content }
     end
   end
-
-
 
   private
     # Use callbacks to share common setup or constraints between actions.

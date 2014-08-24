@@ -81,3 +81,4 @@ gem 'acts-as-taggable-on'
 # try again to make not-ugly
 gem "twitter-bootstrap-rails"
 gem 'ratyrate', :github => 'wazery/ratyrate'            #star ratings 
+gem 'will_paginate', '~> 3.0'             #paginate
