@@ -67,7 +67,7 @@ describe 'Book Features:' do
         it "I can't edit" do
           visit book_path @her_book
           click_link 'Edit'
-          expect(page).to_not have_text "Edit Book"
+          expect(page).to have_text "You can't edit someone else's book"
         end
       end
 

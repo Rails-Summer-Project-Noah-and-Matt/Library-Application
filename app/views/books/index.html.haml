@@ -32,7 +32,7 @@
         %td= rating_for book, 'rating'
         %td
           = link_to 'Reviews', book_reviews_path(book), :class => 'btn btn-default btn-xs'
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_book_path(book), :class => 'btn btn-default btn-xs'
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), book_path(book), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger'
+          = link_to t('.edit', :default => t("helpers.links.edit")), edit_book_path(book), :class => 'btn btn-default btn-xs' if book.owner_id == current_user
+          = link_to t('.destroy', :default => t("helpers.links.destroy")), book_path(book), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs btn-danger' if book.owner_id == current_user
 
 = link_to t('.new', :default => t("helpers.links.new")), new_book_path, :class => 'btn btn-primary'
