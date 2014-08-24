@@ -4,7 +4,7 @@ class ReviewsController < ApplicationController
   
   def index
     @book = book = Book.find(params[:book_id])
-    @reviews = book.reviews
+    @reviews = book.reviews.paginate(:page => params[:page])
   end
 
   def show

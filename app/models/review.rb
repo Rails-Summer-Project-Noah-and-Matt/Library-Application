@@ -4,4 +4,6 @@ class Review < ActiveRecord::Base
 
   validates :text, :user_id, :book_id, presence: true
 
+  self.per_page = 5  #pagination
+
 end

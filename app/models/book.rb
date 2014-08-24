@@ -1,6 +1,8 @@
 class Book < ActiveRecord::Base
   acts_as_taggable_on :tags
 
+  self.per_page = 10   #pagination
+
   before_validation :clean_isbn
   before_validation :squash_whitespace
 
