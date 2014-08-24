@@ -27,7 +27,7 @@
         %td= book.isbn13
         %td= book.is_active
         %td= book.tag_list.to_s.sub(/(.{15}).*/, '\1...')
-        %td= User.find_by(book.owner_id).email
+        %td= User.find(book.owner_id).email
         %td=l book.created_at
         %td= rating_for book, 'rating'
         %td
