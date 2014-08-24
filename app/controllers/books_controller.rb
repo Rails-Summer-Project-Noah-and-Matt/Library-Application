@@ -20,14 +20,22 @@ class BooksController < ApplicationController
     @item = @book
     @current_parameters = book_params
     super
+    notice = "you can't edit a book you don't own"
   end
 
   def destroy
-    notice = "You can't destroy a viewed book."
-    if @book.destroyable?
-      @book.destroy
-      notice = 'Book was successfully destroyed.'
+    
+    unless @book.owner_id != current_user.id
+      if @book.destroyable?
+        @book.destroy
+        notice = 'Book was successfully destroyed.'
+      else 
+        notice = "You can't destroy a reviewed book"
+      end
+    else
+      notice = "You can't destroy a book you don't own"
     end
+    
     respond_to do |format|
       format.html { redirect_to books_url, notice: notice }
       format.json { head :no_content }

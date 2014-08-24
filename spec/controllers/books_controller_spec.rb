@@ -22,6 +22,7 @@ RSpec.describe BooksController, :type => :controller do
     Book.destroy_all
     User.destroy_all
     @user = FactoryGirl.create(:user)
+    @user2 = FactoryGirl.create(:user)
   end
 
   before(:each) do
@@ -182,6 +183,23 @@ end
         delete :destroy, {:id => book.to_param}, valid_session
       }.to change(Book, :count).by(-1)
     end
+    
+    it "shouldn't let you destroy the requested book if you don't own it" do
+      sign_in @user2
+      book = Book.create! valid_attributes
+      expect {
+        delete :destroy, {:id => book.to_param}, valid_session
+        }.to change(Book, :count).by(0)
+     end
+
+    it "shouldn't let you destroy the requested book if has a review" do
+      sign_in @user
+      book = Book.create! valid_attributes
+      review = Review.create(text: 'this is a review', user_id: @user.id, book_id: book.id)
+      expect {
+        delete :destroy, {:id => book.to_param}, valid_session
+        }.to change(Book, :count).by(0)
+     end
 
     it "redirects to the books list" do
       sign_in @user

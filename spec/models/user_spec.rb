@@ -9,6 +9,7 @@ RSpec.describe User, :type => :model do
   Book.destroy_all
   @user = FactoryGirl.create(:user)
   @book = FactoryGirl.create(:book)
+  @book2 = FactoryGirl.create(:book)
   end
 
 
@@ -28,17 +29,18 @@ RSpec.describe User, :type => :model do
   end
 
   it "should be able to follow a book" do
-     @user.follow!(@book)
+     assert @user.follow!(@book)
   end
 
 
   it "should be able to unfollow a book" do
      @user.follow!(@book)
-     @user.unfollow!(@book)
+     assert @user.unfollow!(@book)
+     assert !@user.following?(@book)
   end
 
   it "should be able to check if a user is following a book" do
-     @user.following?(@book)
+     assert !@user.following?(@book2)
   end
 
 
