@@ -1,10 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe "books/edit", :type => :view do
+  before(:all) do 
+    User.destroy_all
+    @user = FactoryGirl.create(:user)
+  end
+
   before(:each) do
+  
     @book = assign(:book, Book.create!(
       :title => "MyString",
-      :is_active => false
+      :is_active => false,
+      :owner_id => @user.id
     ))
   end
 

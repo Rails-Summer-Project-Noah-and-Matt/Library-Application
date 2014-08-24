@@ -20,6 +20,7 @@ class Book < ActiveRecord::Base
     message: 'ISBN13 is a 13 digit format'
   }
 
+  validates :owner_id, presence: true
   ##FIXME this breaks everything.
   ##Matt, could you convert the book tests to FactoryGirl and make this work?
   #validates :cover, presence: true

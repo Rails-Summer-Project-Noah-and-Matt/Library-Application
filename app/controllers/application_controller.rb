@@ -8,7 +8,9 @@ class ApplicationController < ActionController::Base
         return
       end
   end
-  def create
+
+
+def create
     # The subclasses need to set @item 
     # They may set @redirect if it is not the same as @item
     @redirect ||= @item 
