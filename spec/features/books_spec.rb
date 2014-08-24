@@ -9,6 +9,11 @@ describe 'Book Features' do
   let(:book)   { FactoryGirl.create(:book, owner_id: user) }
   let(:review) { FactoryGirl.create(:review, book: book) }
 
+  describe 'Index' do
+    describe 'is sortable' do
+    end
+  end
+
   describe 'Deleting' do
 
     describe 'a book without reviews' do

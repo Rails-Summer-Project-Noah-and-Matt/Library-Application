@@ -1,4 +1,6 @@
 class AuthorsController < ApplicationController
+  helper_method :sort_column, :sort_direction
+
   before_action :set_author, only: [:show, :edit, :update, :destroy]
   before_filter :check_valid_user, only: [:new, :edit, :update, :destroy]
   
@@ -34,6 +36,11 @@ class AuthorsController < ApplicationController
   end
 
   private
+
+    def sort_column
+      Author.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_author
       @author = Author.find(params[:id])
