@@ -13,8 +13,6 @@ Rails.application.configure do
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
 
-  # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -23,12 +21,12 @@ Rails.application.configure do
   config.active_record.migration_error = :page_load
 
 
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  #config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.delivery_method = :smtp
-  config.action_mailer.perform_deliveries = false
+  config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default :charset => "utf-8"
-
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.

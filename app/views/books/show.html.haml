@@ -27,6 +27,10 @@
   %br
   = @book.is_active
 %p
+  %strong= model_class.human_attribute_name(:following) + ':'
+  %br 
+  = current_user.following?(@book)
+%p
   %strong= model_class.human_attribute_name(:owner_id) + ':'
   %br
   = User.find(@book.owner_id).email
