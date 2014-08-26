@@ -129,9 +129,9 @@ Database Schema:
     1.	✓Anyone can see all the book titles and ratings in the library
     2.	✓You must login to add library books
     3.	Admin must approve the addition of lib books
-    4.	You must be logged in to rate a book
-    5.	To rate a book you must click on stars
-    6.	You can give a book 1-5 stars
+    4.	✓You must be logged in to rate a book
+    5.	✓To rate a book you must click on stars
+    6.	✓You can give a book 1-5 stars
     7.	✓You can add a review to any book
     8.	✓You can only edit/destroy books you entered into the system
     9.	If a book has ratings or reviews, you can not destroy it, only
