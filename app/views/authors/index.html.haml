@@ -4,8 +4,8 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= model_class.human_attribute_name(:id)
-      %th= model_class.human_attribute_name(:name)
+      %th= 'Id'
+      %th= 'Name'
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @authors.each do |author|

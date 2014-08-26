@@ -5,11 +5,11 @@
   %thead
     %tr
       %th= model_class.human_attribute_name(:cover)
-      %th= model_class.human_attribute_name(:id)
-      %th= model_class.human_attribute_name(:title)
-      %th= model_class.human_attribute_name(:author_id)
-      %th= model_class.human_attribute_name(:isbn10)
-      %th= model_class.human_attribute_name(:isbn13)
+      %th= sortable "id"
+      %th= sortable "title"
+      %th= "Author"
+      %th= sortable "isbn10"
+      %th= sortable "isbn13"
       %th= model_class.human_attribute_name(:is_active)
       %th= model_class.human_attribute_name(:tag_list)
       %th= model_class.human_attribute_name(:owner_id)

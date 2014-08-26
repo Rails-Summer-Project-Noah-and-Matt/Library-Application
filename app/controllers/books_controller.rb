@@ -1,8 +1,11 @@
 class BooksController < ApplicationController
+  helper_method :sort_column, :sort_direction
+
   before_action :set_book, only: [:show, :edit, :update, :destroy]
   before_filter :check_valid_user, only: [:new, :edit, :update, :destroy]
+
   def index
-    @books = Book.paginate(:page => params[:page])
+    @books = Book.order(sort_column + " " + sort_direction).paginate(:page => params[:page])
   end
 
   def new
@@ -38,7 +41,16 @@ class BooksController < ApplicationController
     end
   end
 
+  def author_name
+    author.sortable_name
+  end
+
   private
+    
+    def sort_column
+      Book.column_names.include?(params[:sort]) ? params[:sort] : "title"
+    end
+    
     # Use callbacks to share common setup or constraints between actions.
     def set_book
       @book = Book.find(params[:id])
