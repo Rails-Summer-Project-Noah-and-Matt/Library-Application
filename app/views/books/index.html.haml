@@ -7,8 +7,7 @@
       %th= model_class.human_attribute_name(:cover)
       %th= sortable "id"
       %th= sortable "title"
-      ~# FIXME this should be on author sortable_name
-      %th= sortable 'author.given_name', "Author"
+      %th= "Author"
       %th= sortable "isbn10"
       %th= sortable "isbn13"
       %th= model_class.human_attribute_name(:is_active)

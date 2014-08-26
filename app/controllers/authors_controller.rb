@@ -5,7 +5,7 @@ class AuthorsController < ApplicationController
   before_filter :check_valid_user, only: [:new, :edit, :update, :destroy]
   
   def index
-    @authors = Author.all
+    @authors = Author.order('family_name ASC, given_name ASC')
   end
 
   def new
@@ -38,7 +38,7 @@ class AuthorsController < ApplicationController
   private
 
     def sort_column
-      Author.column_names.include?(params[:sort]) ? params[:sort] : "name"
+      Author.column_names.include?(params[:sort]) ? params[:sort] : "family_name"
     end
     
     # Use callbacks to share common setup or constraints between actions.

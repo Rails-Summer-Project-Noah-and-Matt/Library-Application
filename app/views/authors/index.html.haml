@@ -4,8 +4,8 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= sortable "id"
-      %th= sortable "name"
+      %th= 'Id'
+      %th= 'Name'
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @authors.each do |author|
