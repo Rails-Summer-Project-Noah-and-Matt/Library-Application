@@ -41,10 +41,6 @@ class BooksController < ApplicationController
     end
   end
 
-  def author_name
-    author.sortable_name
-  end
-
   private
     
     def sort_column

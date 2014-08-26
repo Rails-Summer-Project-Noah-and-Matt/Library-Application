@@ -37,10 +37,6 @@ class AuthorsController < ApplicationController
 
   private
 
-    def sort_column
-      Author.column_names.include?(params[:sort]) ? params[:sort] : "family_name"
-    end
-    
     # Use callbacks to share common setup or constraints between actions.
     def set_author
       @author = Author.find(params[:id])
