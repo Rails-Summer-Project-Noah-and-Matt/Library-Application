@@ -29,7 +29,7 @@
 %p
   %strong= model_class.human_attribute_name(:following) + ':'
   %br 
-  = current_user.following?(@book)
+  = current_user ? current_user.following?(@book) : 'Not logged in'
 %p
   %strong= model_class.human_attribute_name(:owner_id) + ':'
   %br
