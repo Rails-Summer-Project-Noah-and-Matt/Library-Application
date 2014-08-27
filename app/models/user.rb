@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
   has_many :followed_books, :through => :subscriptions, source: :followed
   has_many :reviews, dependent: :destroy
   has_one :email_prefs
+
+  ratyrate_rater
   def following?(book)
     subscriptions.find_by(followed_id: book.id)
   end
@@ -21,6 +23,7 @@ class User < ActiveRecord::Base
     subscriptions.find_by(followed_id: book.id).destroy
   end
 
-  ratyrate_rater
+
+
 
 end
