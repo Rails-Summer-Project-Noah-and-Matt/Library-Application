@@ -1,11 +1,15 @@
 class BooksController < ApplicationController
+  load_and_authorize_resource
+
   helper_method :sort_column, :sort_direction
 
   before_action :set_book, only: [:show, :edit, :update, :destroy]
   before_filter :check_valid_user, only: [:new, :edit, :update, :destroy]
 
   def index
-    @books = Book.order(sort_column + " " + sort_direction).paginate(:page => params[:page])
+    @books = Book.all
+    @books = @books.where(approved: true) unless ( current_user && current_user.admin )
+    @books = @books.order(sort_column + " " + sort_direction).paginate(:page => params[:page])
   end
 
   def new
@@ -20,7 +24,7 @@ class BooksController < ApplicationController
   end
 
   def update
-    unless @book.owner_id == current_user.id
+    unless ( @book.owner_id == current_user.id || current_user.admin )
       redirect_to book_url, notice: "You can't edit someone else's book"
       return
     end
@@ -41,29 +45,49 @@ class BooksController < ApplicationController
     end
   end
 
+
+  def approve
+    notice = "Couldn't approve; something is wrong."
+    notice = '' if ( current_user && current_user.admin && @book.approve!)
+    redirect_to books_url, notice: notice
+  end
+
+  def deactivate
+    notice = "Couldn't deactivate; something is wrong."
+    notice = '' if ( current_user && @book.toggle_active! )
+    redirect_to books_url, notice: notice
+  end
+
+  def reactivate
+    notice = "Couldn't reactivate; something is wrong."
+    notice = '' if ( current_user && @book.toggle_active! )
+    redirect_to books_url, notice: notice
+  end
+
   private
     
-    def sort_column
-      Book.column_names.include?(params[:sort]) ? params[:sort] : "title"
-    end
-    
-    # Use callbacks to share common setup or constraints between actions.
-    def set_book
-      @book = Book.find(params[:id])
-    end
+  def sort_column
+    Book.column_names.include?(params[:sort]) ? params[:sort] : "title"
+  end
+  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_book
+    @book = Book.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def book_params
-      params.require(:book).permit(:title,
-                                   :isbn10,
-                                   :isbn13,
-                                   :is_active,
-                                   :tag_list,
-                                   :cover,
-                                   :cover_cache,
-                                   :remote_cover_url,
-                                   :owner_id,
-                                   :author_id,
-                                   author_attributes: [:given_name, :family_name])
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def book_params
+    params.require(:book).permit(:title,
+                                 :isbn10,
+                                 :isbn13,
+                                 :is_active,
+                                 :approved,
+                                 :tag_list,
+                                 :cover,
+                                 :cover_cache,
+                                 :remote_cover_url,
+                                 :owner_id,
+                                 :author_id,
+                                 author_attributes: [:given_name, :family_name])
+  end
 end

@@ -4,6 +4,8 @@
 %table.table.table-striped
   %thead
     %tr
+      - if current_user && current_user.admin 
+        %th
       %th= model_class.human_attribute_name(:cover)
       %th= sortable "id"
       %th= sortable "title"
@@ -19,6 +21,13 @@
   %tbody
     - @books.each do |book|
       %tr
+        - if current_user && current_user.admin 
+          - if book.approvable?
+            %td= link_to 'Approve', approve_book_path(book), class: 'btn btn-mini'
+          - elsif book.is_active?
+            %td= link_to 'Deactivate', deactivate_book_path(book), class: 'btn btn-mini'
+          - else 
+            %td= link_to 'Reactivate', reactivate_book_path(book), class: 'btn btn-mini'
         %td= image_tag book.cover_url(:thumb) if book.cover?
         %td= link_to book.id, book_path(book)
         %td= book.title

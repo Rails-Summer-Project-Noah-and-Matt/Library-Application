@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
 # Use SCSS for stylesheets
@@ -83,3 +82,5 @@ gem "twitter-bootstrap-rails"
 gem 'ratyrate', :github => 'wazery/ratyrate'            #star ratings 
 gem 'will_paginate', '~> 3.0'             #paginate
 gem 'will_paginate-bootstrap'             #make pagination pretty
+gem 'cancancan', '~> 1.9'                 #authorization
+gem 'rolify'                              #authorization

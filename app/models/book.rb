@@ -46,6 +46,20 @@ class Book < ActiveRecord::Base
     self.is_active == true
   end
 
+  def approvable?
+    cover? && (not approved)
+  end
+
+  def approve!
+    self.approved = true
+    self.save
+  end
+
+  def toggle_active!
+    self.is_active = (not self.is_active)
+    self.save
+  end
+
   def user
     User.find(owner_id)
   end
@@ -77,8 +91,5 @@ class Book < ActiveRecord::Base
   #  @param = eval "self.#{param}"
   #  @param = yield @param if attribute_present?(@attribute)
   #end
-
-    
-
 
 end
