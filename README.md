@@ -128,7 +128,7 @@ Database Schema:
 ### Renée's specs
     1.	✓Anyone can see all the book titles and ratings in the library
     2.	✓You must login to add library books
-    3.	Admin must approve the addition of lib books
+    3.	✓Admin must approve the addition of lib books
     4.	✓You must be logged in to rate a book
     5.	✓To rate a book you must click on stars
     6.	✓You can give a book 1-5 stars
@@ -145,7 +145,7 @@ Database Schema:
     15.	Users can configure their email preferences
     16.	Users can ask to receive a daily digest of email notifications instead
         of individual notifications
-    17.	Books must have a picture associated with them to be approved
+    17.	✓Books must have a picture associated with them to be approved
     18.	Admins can block users from creating ratings or reviews in the system
     19.	Books should be searchable by title, author, ISBN, tags, ratings, and
         reviews 
