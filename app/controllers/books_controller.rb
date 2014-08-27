@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  load_and_authorize_resource
+
   helper_method :sort_column, :sort_direction
 
   before_action :set_book, only: [:show, :edit, :update, :destroy]
