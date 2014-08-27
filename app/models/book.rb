@@ -46,6 +46,10 @@ class Book < ActiveRecord::Base
     self.is_active == true
   end
 
+  def approvable?
+    cover?
+  end
+
   def user
     User.find(owner_id)
   end
