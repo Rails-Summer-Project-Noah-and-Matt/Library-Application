@@ -1,7 +1,7 @@
 class EmailPrefsController < ApplicationController
    before_action :set_user, only: [:show]
    def update
-     @email_prefs = EmailPrefs.find(params[:ie])
+     @email_prefs = EmailPrefs.find(params[:id])
      @email_prefs.update(email_prefs_params)
      redirect_to email_pref_path
    end
