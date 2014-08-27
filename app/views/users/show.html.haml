@@ -1,0 +1,13 @@
+- model_class = User
+.page-header
+  %h1=t '.title', :default => @user.email
+
+%p
+  %strong= 'ID:'
+  %br
+  = @user.id
+%p
+  %strong= 'email:'
+  %br
+  = @user.email
+= link_to t('.back', :default => t("helpers.links.back")), useradmin_index_path, :class => 'btn btn-default'

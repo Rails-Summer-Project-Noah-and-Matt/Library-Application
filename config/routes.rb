@@ -2,6 +2,14 @@ Rails.application.routes.draw do
   post '/rate' => 'rater#create', :as => 'rate'
   resources :authors
 
+  # helpers will be useradmin_path, etc
+  resources :useradmin, :controller => 'users' do
+    member do
+      get 'block'
+      get 'unblock'
+    end
+  end
+
   root 'books#index'
   devise_for :users
   resources :books do

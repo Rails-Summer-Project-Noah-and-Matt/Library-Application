@@ -13,7 +13,7 @@ describe 'Book Features:' do
 
   describe 'Index' do
     before(:all) do
-      @owner = FactoryGirl.create(:user)
+      @owner  = FactoryGirl.create(:user)
       @author = FactoryGirl.create(:author)
 
       @unapproved_book = FactoryGirl.create(:book, owner_id: @owner.id, author_id: @author.id) 

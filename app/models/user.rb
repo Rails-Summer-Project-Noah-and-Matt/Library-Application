@@ -20,6 +20,11 @@ class User < ActiveRecord::Base
     subscriptions.find_by(followed_id: book.id).destroy
   end
 
+  def toggle_blocked!
+    self.blocked = (not self.blocked)
+    self.save
+  end
+
   ratyrate_rater
 
 end

@@ -1,0 +1,22 @@
+- model_class = User
+.page-header
+  %h1=t '.title', :default => 'Users'
+%table.table.table-striped
+  %thead
+    %tr
+      %th 
+      %th= 'ID'
+      %th= 'email'
+      %th= model_class.human_attribute_name(:created_at)
+  %tbody
+    - @users.each do |user|
+      %tr
+        - if current_user && current_user.admin 
+          - if user.blocked?
+            %td= link_to 'Unblock', unblock_useradmin_path(user), class: 'btn btn-mini'
+          - else 
+            %td= link_to 'Block', block_useradmin_path(user), class: 'btn btn-mini'
+        %td= link_to user.id, useradmin_path(user)
+        %td= user.email
+        %td=l user.created_at
+    = will_paginate @users, renderer: BootstrapPagination::Rails
