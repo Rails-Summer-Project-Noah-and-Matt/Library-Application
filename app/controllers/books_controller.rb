@@ -45,27 +45,27 @@ class BooksController < ApplicationController
 
   private
     
-    def sort_column
-      Book.column_names.include?(params[:sort]) ? params[:sort] : "title"
-    end
-    
-    # Use callbacks to share common setup or constraints between actions.
-    def set_book
-      @book = Book.find(params[:id])
-    end
+  def sort_column
+    Book.column_names.include?(params[:sort]) ? params[:sort] : "title"
+  end
+  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_book
+    @book = Book.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def book_params
-      params.require(:book).permit(:title,
-                                   :isbn10,
-                                   :isbn13,
-                                   :is_active,
-                                   :tag_list,
-                                   :cover,
-                                   :cover_cache,
-                                   :remote_cover_url,
-                                   :owner_id,
-                                   :author_id,
-                                   author_attributes: [:given_name, :family_name])
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def book_params
+    params.require(:book).permit(:title,
+                                 :isbn10,
+                                 :isbn13,
+                                 :is_active,
+                                 :tag_list,
+                                 :cover,
+                                 :cover_cache,
+                                 :remote_cover_url,
+                                 :owner_id,
+                                 :author_id,
+                                 author_attributes: [:given_name, :family_name])
+  end
 end
