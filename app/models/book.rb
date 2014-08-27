@@ -47,7 +47,17 @@ class Book < ActiveRecord::Base
   end
 
   def approvable?
-    cover?
+    cover? && (not approved)
+  end
+
+  def approve!
+    self.approved = true
+    self.save
+  end
+
+  def toggle_active!
+    self.is_active = (not self.is_active)
+    self.save
   end
 
   def user
@@ -81,8 +91,5 @@ class Book < ActiveRecord::Base
   #  @param = eval "self.#{param}"
   #  @param = yield @param if attribute_present?(@attribute)
   #end
-
-    
-
 
 end

@@ -15,15 +15,56 @@ describe 'Book Features:' do
     before(:all) do
       @owner = FactoryGirl.create(:user)
       @author = FactoryGirl.create(:author)
-      @books = []
-      3.times{ @books << FactoryGirl.create(:book, owner_id: @owner.id, author_id: @author.id) }
+
+      @unapproved_book = FactoryGirl.create(:book, owner_id: @owner.id, author_id: @author.id) 
+      @approved_book = FactoryGirl.create(:book, owner_id: @owner.id, author_id: @author.id, approved: true) 
     end
 
-    it 'should list the book titles' do
+    it 'should not list the unapproved book titles' do
       visit books_path
-      @books.each do |book|
-        expect(page).to have_content(book.title)
+      expect(page).to_not have_content(@unapproved_book.title)
+    end
+
+    it 'should list the approved book titles' do
+      visit books_path
+      expect(page).to have_content(@approved_book.title)
+    end
+
+    describe 'As Admin' do
+      before(:all) do
+        @admin = FactoryGirl.create(:admin)
       end
+      before(:each) do
+        visit new_user_session_path
+        fill_in 'Email', with: @admin.email
+        fill_in 'Password', with: @admin.password
+        click_button 'Sign in'
+      end
+
+      it 'should list the unapproved book titles' do
+        visit books_path
+        expect(page).to have_content(@unapproved_book.title)
+      end
+
+      it 'should let us approve unapproved titles' do
+        visit books_path
+        click_link 'Approve'
+        expect(page).to have_link('Deactivate', :count => 2)
+      end
+
+      it 'should let us deactivate approved titles' do
+        visit books_path
+        click_link 'Deactivate'
+        expect(page).to have_link('Reactivate', count: 1)
+      end
+
+      it 'should let us reactivate deactivated titles' do
+        visit books_path
+        click_link 'Deactivate'
+        click_link 'Reactivate'
+        expect(page).to have_link('Deactivate', count: 1)
+      end
+
     end
 
   end

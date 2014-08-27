@@ -36,7 +36,8 @@ RSpec.describe BooksController, :type => :controller do
                              owner_id: 1,
                              author: Author.create!( given_name:  "H.P.",
                                        family_name: "Lovecraft"),
-                             owner_id: @user.id 
+                             owner_id: @user.id,
+                             approved: true
                            
   } }
 

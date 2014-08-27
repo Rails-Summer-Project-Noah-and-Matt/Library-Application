@@ -24,7 +24,7 @@ class BooksController < ApplicationController
   end
 
   def update
-    unless @book.owner_id == current_user.id
+    unless ( @book.owner_id == current_user.id || current_user.admin )
       redirect_to book_url, notice: "You can't edit someone else's book"
       return
     end
@@ -45,6 +45,25 @@ class BooksController < ApplicationController
     end
   end
 
+
+  def approve
+    notice = "Couldn't approve; something is wrong."
+    notice = '' if ( current_user && current_user.admin && @book.approve!)
+    redirect_to books_url, notice: notice
+  end
+
+  def deactivate
+    notice = "Couldn't deactivate; something is wrong."
+    notice = '' if ( current_user && @book.toggle_active! )
+    redirect_to books_url, notice: notice
+  end
+
+  def reactivate
+    notice = "Couldn't reactivate; something is wrong."
+    notice = '' if ( current_user && @book.toggle_active! )
+    redirect_to books_url, notice: notice
+  end
+
   private
     
   def sort_column
@@ -62,6 +81,7 @@ class BooksController < ApplicationController
                                  :isbn10,
                                  :isbn13,
                                  :is_active,
+                                 :approved,
                                  :tag_list,
                                  :cover,
                                  :cover_cache,

@@ -5,6 +5,11 @@ Rails.application.routes.draw do
   root 'books#index'
   devise_for :users
   resources :books do
+    member do
+      get 'approve'
+      get 'deactivate'
+      get 'reactivate'
+    end
     resources :reviews
   end
   # The priority is based upon order of creation: first created -> highest priority.
