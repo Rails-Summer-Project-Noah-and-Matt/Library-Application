@@ -21,7 +21,7 @@
     - @books.each do |book|
       %tr
         - if current_user && current_user.admin && book.approvable?
-          %td= 'fooooooooooooo'
+          %td= check_box_tag 'approved'
         %td= image_tag book.cover_url(:thumb) if book.cover?
         %td= link_to book.id, book_path(book)
         %td= book.title

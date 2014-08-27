@@ -7,7 +7,9 @@ class BooksController < ApplicationController
   before_filter :check_valid_user, only: [:new, :edit, :update, :destroy]
 
   def index
-    @books = Book.order(sort_column + " " + sort_direction).paginate(:page => params[:page])
+    @books = Book.all
+    @books = @books.where(approved: true) unless ( current_user && current_user.admin )
+    @books = @books.order(sort_column + " " + sort_direction).paginate(:page => params[:page])
   end
 
   def new
