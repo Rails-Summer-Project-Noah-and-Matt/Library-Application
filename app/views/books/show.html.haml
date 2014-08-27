@@ -43,6 +43,10 @@
   %br
   = rating_for @book, "rating", :cancel => true
 
+- if current_user.following?(@book)
+  = button_to "Unfollow", current_user.unfollow!(@book)
+- elsif !current_user.following?(@book)
+  = button_to "Follow", current_user.follow!(@book)
 
 = link_to t('.back', :default => t("helpers.links.back")), books_path, :class => 'btn btn-default'
 = link_to 'Reviews', book_reviews_path(@book), :class => 'btn btn-default'

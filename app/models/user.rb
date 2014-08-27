@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :followed_books, :through => :subscriptions, source: :followed
   has_many :reviews, dependent: :destroy
   has_one :email_prefs
- def following?(book)
+  def following?(book)
     subscriptions.find_by(followed_id: book.id)
   end
 
