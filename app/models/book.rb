@@ -64,8 +64,6 @@ class Book < ActiveRecord::Base
     User.find(owner_id)
   end
   
-  ratyrate_rateable 'rating'
-
   private
 
   def clean_isbn

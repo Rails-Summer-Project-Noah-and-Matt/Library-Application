@@ -16,7 +16,6 @@
       %th= "Tag list"
       %th= "Owner ID"
       %th= sortable "created_at"
-      %th= "Rating"
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @books.each do |book|
@@ -38,10 +37,6 @@
         %td= book.tag_list.to_s.sub(/(.{15}).*/, '\1...')
         %td= User.find(book.owner_id).email
         %td=l book.created_at
-        - if current_user && (not current_user.blocked)
-          %td= rating_for book, 'rating'
-        - else
-          %td= imdb_style_rating_for book, 'rating'
         %td
           = link_to 'Reviews', book_reviews_path(book), :class => 'btn btn-default btn-xs'
           = link_to t('.edit', :default => t("helpers.links.edit")), edit_book_path(book), :class => 'btn btn-default btn-xs' if book.user == current_user

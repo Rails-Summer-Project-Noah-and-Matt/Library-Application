@@ -1,9 +1,3 @@
-GIT
-  remote: git://github.com/wazery/ratyrate.git
-  revision: 22fdf05f23fe610a84a6736021608d59607b9080
-  specs:
-    ratyrate (1.2.0.alpha)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -57,7 +51,7 @@ GEM
     coffee-script (2.3.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.7.1)
+    coffee-script-source (1.8.0)
     database_cleaner (1.3.0)
     devise (3.3.0)
       bcrypt (~> 3.0)
@@ -225,7 +219,6 @@ DEPENDENCIES
   pg
   rails (= 4.1.0)
   rake
-  ratyrate!
   rmagick
   rolify
   rspec-rails
