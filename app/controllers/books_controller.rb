@@ -45,7 +45,6 @@ class BooksController < ApplicationController
     end
   end
 
-
   def approve
     notice = "Couldn't approve; something is wrong."
     notice = '' if ( current_user && current_user.admin && @book.approve!)
