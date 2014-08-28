@@ -1,0 +1,41 @@
+#!/bin/sh
+
+USAGE="USAGE: $0 [setup]"
+ff="$(which firefox)"
+
+die() {
+    status=$1
+    shift
+    warn $@
+    exit $status
+}
+
+warn() {
+    echo $@ >&2
+}
+
+setup() {
+#    "$ff" -CreateProfile admin
+#    "$ff" -CreateProfile user
+#    "$ff" -CreateProfile user1
+#    "$ff" -CreateProfile nobody
+    die 1 "not implemented yet - try firefox -no-remote -ProfileManager"
+    exit
+}
+
+while [ $# -gt 0 ]; do
+    case "$1" in 
+      setup)
+        setup
+        ;;
+      *)
+        die 1 "$USAGE: command $1 not recognized"
+        ;;
+    esac
+done
+
+"$ff" -no-remote -P admin &
+"$ff" -no-remote -P user &
+"$ff" -no-remote -P user1 &
+"$ff" -no-remote -P nobody &
+
