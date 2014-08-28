@@ -63,6 +63,8 @@ group :test, :development do
   # flog and flay to test complexity quickly and locally
   gem 'flog'
   gem 'flay'
+  gem 'debugger'
+
 end
 
 group :production do

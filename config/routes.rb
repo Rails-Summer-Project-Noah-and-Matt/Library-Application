@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   resources :books do
     resources :reviews
   end
-  delete 'subscription/:id' => 'subscription#destroy'
-  post 'subscription/:id' => 'subscription#create', as: :subscription_create
+  delete 'subscription/:id' => 'subscription#destroy', as: :subscription_destroy
+  post 'subscription' => 'subscription#create', as: :subscription_create
   get 'email_prefs/:id' => 'email_prefs#show', as: :email_pref
   patch 'email_prefs/:id' => 'email_prefs#update', as: :email_prefs
   
