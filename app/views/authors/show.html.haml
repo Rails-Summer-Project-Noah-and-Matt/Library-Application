@@ -3,20 +3,16 @@
   %h1=t '.title', :default => @author.full_name
 
 %p
-  %strong= model_class.human_attribute_name(:full_name) + ':'
-  %br
+  %strong= 'Full name:'
   = @author.full_name
 %p
   %strong= "Last, First:"
-  %br
   = @author.sortable_name
 %p
-  %strong= model_class.human_attribute_name(:given_name) + ':'
-  %br
+  %strong= 'Given name:'
   = @author.given_name
 %p
-  %strong= model_class.human_attribute_name(:family_name) + ':'
-  %br
+  %strong= 'Family name:'
   = @author.family_name
 
 

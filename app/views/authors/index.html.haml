@@ -13,7 +13,7 @@
     - @authors.each do |author|
       %tr
         %td= link_to author.id, author_path(author)
-        %td= author.sortable_name
+        %td= link_to author.sortable_name, author_path(author)
         %td= author.family_name
         %td= author.given_name
         %td

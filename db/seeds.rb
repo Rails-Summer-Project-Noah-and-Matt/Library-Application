@@ -123,10 +123,10 @@ books = Book.create([{ :title => 'The Salmon of Doubt',
 ])
 
 [ [ books[0], ['science fiction', 'funny']],
-  [ books[1], ['fantasy']],
-  [ books[2], ['funny', "children's", 'fantasy']],
-  [ books[3], ['science fiction', 'chimpanzees']],
-  [ books[4], ['food', 'funny']]
+  [ books[2], ['fantasy']],
+  [ books[6], ['funny', "children's", 'fantasy']],
+  [ books[8], ['science fiction', 'chimpanzees']],
+  [ books[10], ['food', 'funny']]
 ].each do |book, tags|
   seed_tags_to_books book, tags
 end

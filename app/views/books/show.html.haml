@@ -3,44 +3,32 @@
   %h1=t '.title', :default => @book.title
 
 %p
-  %strong= model_class.human_attribute_name(:title) + ':'
-  %br
-  = @book.title
+  %strong= 'Author_id:'
+  = link_to @book.author.full_name, author_path(@book.author)
 %p
-  %strong= model_class.human_attribute_name(:author_id) + ':'
-  %br
-  = @book.author.full_name
-%p
-  %strong= model_class.human_attribute_name(:isbn10) + ':'
-  %br
+  %strong= 'ISBN (10 digit):'
   = @book.isbn10
 %p
-  %strong= model_class.human_attribute_name(:isbn13) + ':'
-  %br
+  %strong= 'ISBN (13 digit):'
   = @book.isbn13
 %p
-  %strong= model_class.human_attribute_name(:tag_list) + ':'
-  %br
+  %strong= 'Tag_list:'
   = @book.tag_list
 %p
-  %strong= model_class.human_attribute_name(:is_active) + ':'
-  %br
+  %strong= 'Active?:'
   = @book.is_active
 %p
-  %strong= model_class.human_attribute_name(:following) + ':'
-  %br 
+  %strong= 'Following:'
   = current_user ? current_user.following?(@book) : 'Not logged in'
 %p
-  %strong= model_class.human_attribute_name(:owner_id) + ':'
-  %br
+  %strong= 'Added by:'
   = User.find(@book.owner_id).email
 %p
-  %strong= model_class.human_attribute_name(:cover) + ':'
+  %strong= 'Cover:'
   %br
   = image_tag @book.cover.url if @book.cover?
 %p
-  %strong= model_class.human_attribute_name(:rating) + ':'
-  %br
+  %strong= 'Rating:'
   = rating_for @book, "rating", :cancel => true
 
 = link_to t('.back', :default => t("helpers.links.back")), books_path, :class => 'btn btn-default'
