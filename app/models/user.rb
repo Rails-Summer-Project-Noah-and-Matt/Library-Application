@@ -8,17 +8,7 @@ class User < ActiveRecord::Base
   has_many :subscriptions, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_books, :through => :subscriptions, source: :followed
   has_many :reviews, dependent: :destroy
-  def following?(book)
-    subscriptions.find_by(followed_id: book.id)
-  end
-
-  def follow!(book)
-    subscriptions.create!(followed_id: book.id)
-  end
-
-  def unfollow!(book)
-    subscriptions.find_by(followed_id: book.id).destroy
-  end
+  has_one :email_prefs
 
   def toggle_blocked!
     self.blocked = (not self.blocked)
@@ -26,5 +16,16 @@ class User < ActiveRecord::Base
   end
 
   ratyrate_rater
+  def following?(book)
+    subscriptions.find_by(followed_id: book.id)
+  end
+
+ # def follow!(book)
+  #  subscriptions.create!(followed_id: book.id)
+ # end
+
+ # def unfollow!(book)
+ #   subscriptions.find_by(followed_id: book.id).destroy
+ # end
 
 end

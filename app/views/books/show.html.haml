@@ -43,6 +43,11 @@
   %br
   = rating_for @book, "rating", :cancel => true
 
+- if current_user.following?(@book)
+  =  button_to "Unfollow", subscription_destroy_path(find_subscription_id), :method => "delete", remote: true
+- else 
+  =  button_to "Follow", subscription_create_path(followed_id: @book.id, follower_id: current_user.id), remote: true
+
 = link_to t('.back', :default => t("helpers.links.back")), books_path, :class => 'btn btn-default'
 = link_to 'Reviews', book_reviews_path(@book), :class => 'btn btn-default'
 = link_to t('.edit', :default => t("helpers.links.edit")), edit_book_path(@book), :class => 'btn btn-default' if @book.user == current_user

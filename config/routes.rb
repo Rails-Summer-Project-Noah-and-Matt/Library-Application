@@ -20,6 +20,11 @@ Rails.application.routes.draw do
     end
     resources :reviews
   end
+  delete 'subscription/:id' => 'subscription#destroy', as: :subscription_destroy
+  post 'subscription' => 'subscription#create', as: :subscription_create
+  get 'email_prefs/:id' => 'email_prefs#show', as: :email_pref
+  patch 'email_prefs/:id' => 'email_prefs#update', as: :email_prefs
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

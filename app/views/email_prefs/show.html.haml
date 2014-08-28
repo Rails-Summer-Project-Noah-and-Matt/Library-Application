@@ -1,0 +1,19 @@
+%h1 Email Preferences
+
+
+%p Enable Email notifications here:
+
+
+= form_for @email_prefs do |f|
+  .field
+    = f.label :Ratings
+    = f.check_box :all_ratings
+  .field
+    = f.label :Reviews
+    = f.check_box :all_reviews
+  .field
+    = f.label :Digest
+    = f.check_box :digest
+  .actions
+    = f.submit 'Update'
+

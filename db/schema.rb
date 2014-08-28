@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 20140827200706) do
   add_index "books", ["isbn10"], name: "index_books_on_isbn10"
   add_index "books", ["isbn13"], name: "index_books_on_isbn13"
 
+  create_table "email_prefs", force: true do |t|
+    t.integer  "user_id"
+    t.boolean  "all_ratings"
+    t.boolean  "all_reviews"
+    t.boolean  "digest"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "overall_averages", force: true do |t|
     t.integer  "rateable_id"
     t.string   "rateable_type"
