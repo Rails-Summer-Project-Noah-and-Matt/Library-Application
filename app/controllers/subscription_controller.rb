@@ -8,19 +8,16 @@ class SubscriptionController < ApplicationController
     @subscription = Subscription.new
     @subscription.followed_id = params[:followed_id]
     @subscription.follower_id = current_user.id
-    respond_to do |format|
-      if @subscription.save
-          format.html { redirect_to :controller => 'books', :action => 'index' }
-      else
-          format.html { render action: "new" }
-      end
-    end
+    @subscription.save
+    #redirect_to book_path(Book.find(params[:followed_id]))
+    redirect_to :back 
   end
 
   def destroy
     @subscription = Subscription.find(params[:id])
     @book = Book.find(@subscription.followed_id)
     @subscription.destroy
-    redirect_to book_path(@book.id)
+    #redirect_to book_path(@book.id)
+    redirect_to :back 
    end
  end
