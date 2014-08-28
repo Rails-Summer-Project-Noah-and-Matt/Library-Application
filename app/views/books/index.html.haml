@@ -1,22 +1,22 @@
 - model_class = Book
 .page-header
-  %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
+  %h1=t '.title', :default => 'Books'
 %table.table.table-striped
   %thead
     %tr
       - if current_user && current_user.admin 
         %th
-      %th= model_class.human_attribute_name(:cover)
+      %th= "Cover"
       %th= sortable "id"
       %th= sortable "title"
       %th= "Author"
       %th= sortable "isbn10"
       %th= sortable "isbn13"
-      %th= model_class.human_attribute_name(:is_active)
-      %th= model_class.human_attribute_name(:tag_list)
-      %th= model_class.human_attribute_name(:owner_id)
-      %th= model_class.human_attribute_name(:created_at)
-      %th= model_class.human_attribute_name(:rating)
+      %th= "Active?"
+      %th= "Tag list"
+      %th= "Owner ID"
+      %th= sortable "created_at"
+      %th= "Rating"
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @books.each do |book|

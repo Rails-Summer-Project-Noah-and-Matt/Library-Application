@@ -30,6 +30,7 @@
           %ul.nav.navbar-nav
             %li= link_to_unless_current "Books", root_path
             %li= link_to_unless_current "Authors", authors_path
+            %li= link_to_unless_current("User Administation", useradmin_index_path) if (current_user && current_user.admin)
 
             - if user_signed_in?
               %li= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link'
