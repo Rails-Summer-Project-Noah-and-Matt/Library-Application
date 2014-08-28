@@ -44,7 +44,7 @@
   = rating_for @book, "rating", :cancel => true
 
 - if current_user.following?(@book)
-  =  button_to "Unfollow", subscription_destroy_path(find_subscription_id(current_user.id, @book.id)), :method => "delete", remote: true
+  =  button_to "Unfollow", subscription_destroy_path(find_subscription_id), :method => "delete", remote: true
 - else 
   =  button_to "Follow", subscription_create_path(followed_id: @book.id, follower_id: current_user.id), remote: true
 
