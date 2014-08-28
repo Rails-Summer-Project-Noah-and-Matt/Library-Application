@@ -5,9 +5,9 @@
   %thead
     %tr
       %th 
-      %th= 'ID'
-      %th= 'email'
-      %th= model_class.human_attribute_name(:created_at)
+      %th= sortable 'id'
+      %th= sortable 'email'
+      %th= sortable "created_at"
   %tbody
     - @users.each do |user|
       %tr

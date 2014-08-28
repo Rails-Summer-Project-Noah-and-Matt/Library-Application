@@ -7,6 +7,18 @@ describe 'Author Features' do
   let(:author) { FactoryGirl.create(:author) }
   let(:book)   { FactoryGirl.create(:book, owner_id: user) }
 
+  describe 'Index' do
+    before(:all) do
+      @author = FactoryGirl.create(:author)
+    end
+
+    it 'should list an author' do
+      visit authors_path
+      expect(page).to have_text(@author.sortable_name)
+    end
+
+  end
+
   describe 'deleting' do
 
     describe 'an author without books' do

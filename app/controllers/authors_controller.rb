@@ -7,7 +7,7 @@ class AuthorsController < ApplicationController
   before_filter :check_valid_user, only: [:new, :edit, :update, :destroy]
   
   def index
-    @authors = Author.order('family_name ASC, given_name ASC')
+    @authors = Author.order(sort_column + " " + sort_direction).paginate(:page => params[:page])
   end
 
   def new
@@ -39,13 +39,17 @@ class AuthorsController < ApplicationController
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_author
-      @author = Author.find(params[:id])
-    end
+  def sort_column
+    Author.column_names.include?(params[:sort]) ? params[:sort] : "given_name, family_name"
+  end
+  
+  # Use callbacks to share common setup or constraints between actions.
+  def set_author
+    @author = Author.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def author_params
-      params.require(:author).permit(:given_name, :family_name)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def author_params
+    params.require(:author).permit(:given_name, :family_name)
+  end
 end
