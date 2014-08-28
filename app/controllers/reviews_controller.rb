@@ -14,10 +14,9 @@ class ReviewsController < ApplicationController
 
   def new
     book = Book.find(params[:book_id])
-    unless book.reviewable?
-      redirect_to :back, notice: "#{book.title} is inactive and can't be reviewed."
-      return
-    end
+    book.reviewable? || err = "#{book.title} is inactive and can't be reviewed."
+    ( current_user && !current_user.blocked ) || err = "You are blocked or not logged in."
+    ( redirect_to(:back, notice: err) and return ) if err
     @review = book.reviews.build 
   end
 
@@ -38,7 +37,6 @@ class ReviewsController < ApplicationController
 
 
   def update
-   
     book = Book.find(params[:book_id])
     @item = @review = book.reviews.find(params[:id])
     @redirect = [@review.book, @review]

@@ -6,11 +6,9 @@ class Review < ActiveRecord::Base
   
   after_create :email_users
 
-
   def email_users 
     LibraryMailer.update_user_review_email(self.user, self.book).deliver
   end
-
 
   self.per_page = 5  #pagination
 

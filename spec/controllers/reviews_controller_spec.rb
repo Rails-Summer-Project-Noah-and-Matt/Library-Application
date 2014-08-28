@@ -27,8 +27,9 @@ RSpec.describe ReviewsController, :type => :controller do
  before(:all) do
   User.destroy_all
   Book.destroy_all
-  @user = FactoryGirl.create(:user)
-  @book = FactoryGirl.create(:book, :owner_id => @user.id)
+  @user          = FactoryGirl.create(:user)
+  @bad_user      = FactoryGirl.create(:user, blocked: true)
+  @book          = FactoryGirl.create(:book, :owner_id => @user.id)
   @inactive_book = FactoryGirl.create(:book, :owner_id => @user.id,  is_active: false)
  end
 
@@ -71,6 +72,17 @@ RSpec.describe ReviewsController, :type => :controller do
   end
 
   describe "GET new" do
+    it 'does not let non users assign new reviews' do
+      get :new, { :book_id=>@book }, valid_session
+      expect(assigns(:review)).to_not be_a_new(Review)
+    end
+
+    it 'does not let blocked users assign new reviews' do
+      sign_in @bad_user
+      get :new, { :book_id=>@book }, valid_session
+      expect(assigns(:review)).to_not be_a_new(Review)
+    end
+
     it "assigns a new review as @review" do
       sign_in @user
       get :new, { :book_id=>@book }, valid_session

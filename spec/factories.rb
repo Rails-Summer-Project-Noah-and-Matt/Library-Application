@@ -3,6 +3,7 @@ FactoryGirl.define do
    sequence(:email) { |n| "test#{n}@user.com" }
    password "password"
    password_confirmation { "password" }
+   blocked false
  end
 
  factory :admin, class: User  do
