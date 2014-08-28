@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/emaiax/jquery-raty-rails.git
+  revision: bf3053957c423610888814e9445f4a46c4af5c35
+  specs:
+    jquery-raty-rails (0.0.2)
+      rails (>= 3.2.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -216,6 +223,7 @@ DEPENDENCIES
   haml-rails
   jbuilder (~> 2.0)
   jquery-rails
+  jquery-raty-rails!
   pg
   rails (= 4.1.0)
   rake

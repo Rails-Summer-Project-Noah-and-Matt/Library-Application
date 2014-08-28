@@ -77,9 +77,9 @@ gem 'rmagick', require: false
 # hopefully easy implementation of tags
 gem 'acts-as-taggable-on'
 
-# try again to make not-ugly
-gem "twitter-bootstrap-rails"
-gem 'will_paginate', '~> 3.0'             #paginate
-gem 'will_paginate-bootstrap'             #make pagination pretty
-gem 'cancancan', '~> 1.9'                 #authorization
-gem 'rolify'                              #authorization
+gem "twitter-bootstrap-rails"                               #pretty   
+gem 'will_paginate', '~> 3.0'                               #paginate
+gem 'will_paginate-bootstrap'                               #pretty pagination
+gem 'cancancan', '~> 1.9'                                   #authorization
+gem 'rolify'                                                #authorization
+gem 'jquery-raty-rails', github: 'emaiax/jquery-raty-rails' #rate
