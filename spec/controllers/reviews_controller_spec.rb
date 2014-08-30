@@ -40,13 +40,15 @@ RSpec.describe ReviewsController, :type => :controller do
   let(:valid_attributes) { {
     text: 'This is the review',
     user_id: @user.id,
-    book_id: @book.id
+    book_id: @book.id,
+    rating: 0
   } }
 
   let(:invalid_attributes) { {
     text: '',
     user_id: @user.id,
-    book_id: @book.id
+    book_id: @book.id,
+    rating: 0
   } }
 
 

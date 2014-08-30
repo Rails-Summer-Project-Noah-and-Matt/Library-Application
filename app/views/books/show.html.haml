@@ -38,6 +38,10 @@
   %strong= model_class.human_attribute_name(:cover) + ':'
   %br
   = image_tag @book.cover.url if @book.cover?
+%p
+  %strong= 'Rating:'
+  %br
+  = @book.rating
 
 = link_to t('.back', :default => t("helpers.links.back")), books_path, :class => 'btn btn-default'
 = link_to 'Reviews', book_reviews_path(@book), :class => 'btn btn-default'

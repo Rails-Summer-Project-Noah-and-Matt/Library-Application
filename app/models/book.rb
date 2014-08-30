@@ -64,6 +64,9 @@ class Book < ActiveRecord::Base
     User.find(owner_id)
   end
   
+  def update_rating!
+  end
+
   private
 
   def clean_isbn

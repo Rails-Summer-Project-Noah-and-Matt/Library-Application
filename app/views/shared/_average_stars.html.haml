@@ -1,0 +1,9 @@
+<%= div_for object do %>
+:javascript
+  $('<%= "##{object.class}_#{object.id}.#{object.class}".downcase %>').raty({
+        readOnly: true,
+        score: <%= object.rating %>,
+        size: 24,
+        path: '/assets',
+        });
+<% end %>

@@ -1,8 +1,15 @@
 = form_for [@review.book, @review], html: { class: "form form-horizontal review" } do |f|
   .form-group
-    = f.label :text, class: 'control-label'
+    = f.label :review, class: 'control-label'
     .controls
       = f.text_field :text, class: 'form-control', required: true
     = error_span(@review[:text])
+  .form-group
+    = f.label :rating, class: 'control-label'
+    .controls
+      = render 'rating_stars.html.haml', review: @review, book: @book
+    = error_span(@review[:text])
   = f.submit nil,class: 'btn btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), book_reviews_path(@review.book), :class => 'btn btn-default'
+
+

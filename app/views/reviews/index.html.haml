@@ -4,16 +4,18 @@
 %table.table.table-striped
   %thead
     %tr
-      %th= model_class.human_attribute_name(:id)
-      %th= model_class.human_attribute_name(:text)
-      %th= model_class.human_attribute_name(:reviewer)
-      %th= model_class.human_attribute_name(:created_at)
+      %th= 'ID'
+      %th= 'Text'
+      %th= 'Rating'
+      %th= 'Reviewer'
+      %th= 'Created_at'
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
     - @reviews.each do |review|
       %tr
         %td= link_to review.id, [review.book, review] 
         %td= review.text
+        %td= review.rating
         %td= User.find(review.user_id).email
         %td=l review.created_at
         %td

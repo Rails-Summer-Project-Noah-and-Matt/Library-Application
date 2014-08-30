@@ -6,6 +6,10 @@
   %strong= model_class.human_attribute_name(:text) + ':'
   %br
   = @review.text
+%p
+  %strong= 'Rating:'
+  %br
+  = @review.rating
 
 = link_to t('.back', :default => t("helpers.links.back")), book_reviews_path(@review.book), :class => 'btn btn-default'
 = link_to t('.edit', :default => t("helpers.links.edit")), edit_book_review_path(@review.book, @review), :class => 'btn btn-default'
