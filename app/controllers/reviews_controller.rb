@@ -28,6 +28,9 @@ class ReviewsController < ApplicationController
   end
 
   def update
+    @book.reviewable? || err = "#{@book.title} is inactive and can't be reviewed."
+    ( current_user && !current_user.blocked ) || err = "You are blocked or not logged in."
+    ( redirect_to(:back, notice: err) and return ) if err
     @item = @review
     @redirect = [@review.book, @review]
     @current_parameters = review_params

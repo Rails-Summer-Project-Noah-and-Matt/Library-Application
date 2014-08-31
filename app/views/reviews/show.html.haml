@@ -1,9 +1,9 @@
 - model_class = Review
 .page-header
-  %h1=t '.title', :default => "#{User.find(@review.user_id).email}'s Review of #{@book.title}"
+  %h1=t '.title', :default => "#{@review.reviewer.email}'s Review of #{@book.title}"
 
 %p
-  %strong= model_class.human_attribute_name(:text) + ':'
+  %strong= 'Review Text:'
   %br
   = @review.text
 %p

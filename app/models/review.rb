@@ -15,6 +15,10 @@ class Review < ActiveRecord::Base
   def update_book_rating
     self.book.update_rating!
   end
+  
+  def reviewer
+    User.find(user_id)
+  end
 
   self.per_page = 5  #pagination
 
