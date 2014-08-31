@@ -7,8 +7,9 @@
   .form-group
     = f.label :rating, class: 'control-label'
     .controls
-      = render 'rating_stars.html.haml', review: @review, book: @book
-    = error_span(@review[:text])
+      ~#= render 'rating_stars.html.haml', review: @review, book: @book
+      = number_field_tag 'quantity', nil, in: 1...5
+    = error_span(@review[:rating])
   = f.submit nil,class: 'btn btn-primary'
   = link_to t('.cancel', :default => t("helpers.links.cancel")), book_reviews_path(@review.book), :class => 'btn btn-default'
 

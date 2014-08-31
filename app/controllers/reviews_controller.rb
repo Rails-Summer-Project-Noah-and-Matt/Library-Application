@@ -1,11 +1,14 @@
 class ReviewsController < ApplicationController
+  
+  helper_method :sort_column, :sort_direction
+
   before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :set_book, only: [:index, :show, :new, :edit, :create, :update]
 
   before_filter :check_valid_user, only:  [:edit, :update, :destroy, :new] 
   
   def index
-    @reviews = @book.reviews.paginate(:page => params[:page])
+    @reviews = @book.reviews.order(sort_column + " " + sort_direction).paginate(:page => params[:page])
   end
 
   def new
@@ -40,7 +43,11 @@ class ReviewsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+    def sort_column
+      Review.column_names.include?(params[:sort]) ? params[:sort] : "rating"
+    end
+  
     def set_review
       @review = Review.find(params[:id])
     end
@@ -49,7 +56,6 @@ class ReviewsController < ApplicationController
       @book = Book.find(params[:book_id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
       params.require(:review).permit(:text, :rating)
     end

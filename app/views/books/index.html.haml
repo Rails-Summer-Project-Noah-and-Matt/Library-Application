@@ -15,6 +15,7 @@
       %th= "Active?"
       %th= "Tag list"
       %th= "Owner ID"
+      %th= sortable "rating"
       %th= sortable "created_at"
       %th=t '.actions', :default => t("helpers.actions")
   %tbody
@@ -36,6 +37,7 @@
         %td= book.is_active
         %td= book.tag_list.to_s.sub(/(.{15}).*/, '\1...')
         %td= User.find(book.owner_id).email
+        %td= rating_view book
         %td=l book.created_at
         %td
           = link_to 'Reviews', book_reviews_path(book), :class => 'btn btn-default btn-xs'

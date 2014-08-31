@@ -9,7 +9,7 @@
 %p
   %strong= 'Rating:'
   %br
-  = @review.rating
+  = rating_view @review
 
 = link_to t('.back', :default => t("helpers.links.back")), book_reviews_path(@review.book), :class => 'btn btn-default'
 = link_to t('.edit', :default => t("helpers.links.edit")), edit_book_review_path(@review.book, @review), :class => 'btn btn-default'

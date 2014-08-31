@@ -65,6 +65,13 @@ class Book < ActiveRecord::Base
   end
   
   def update_rating!
+    rated = self.reviews.where("rating != 0")
+    rates = rated.map{ |r| r.rating }
+    sum   = rates.inject(:+)
+    average = 0.0
+    average = (sum / rates.count.to_f ) unless rates.count == 0
+    self.rating = average
+    self.save
   end
 
   private
