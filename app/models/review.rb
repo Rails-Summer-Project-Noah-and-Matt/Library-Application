@@ -8,7 +8,7 @@ class Review < ActiveRecord::Base
 
 
   def email_users
-    LibraryMailer.update_user_review_email(self.user, self.book).deliver if self.user.email_prefs.all_reviews
+    LibraryMailer.update_user_review_email(self.user, self.book).deliver 
   end
 
   self.per_page = 5  #pagination

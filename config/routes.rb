@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   post '/rate' => 'rater#create', :as => 'rate'
   resources :authors
-
+  resources :subscriptions, only: [:create, :destroy] 
   # helpers will be useradmin_path, etc
   resources :useradmin, :controller => 'users' do
     member do
@@ -20,8 +20,6 @@ Rails.application.routes.draw do
     end
     resources :reviews
   end
-  delete 'subscription/:id' => 'subscription#destroy', as: :subscription_destroy
-  post 'subscription' => 'subscription#create', as: :subscription_create
   get 'email_prefs/:id' => 'email_prefs#show', as: :email_pref
   patch 'email_prefs/:id' => 'email_prefs#update', as: :email_prefs
   

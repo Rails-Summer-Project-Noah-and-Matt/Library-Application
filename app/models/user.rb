@@ -20,12 +20,12 @@ class User < ActiveRecord::Base
     subscriptions.find_by(followed_id: book.id)
   end
 
- # def follow!(book)
-  #  subscriptions.create!(followed_id: book.id)
- # end
+  def follow!(book)
+    subscriptions.create!(followed_id: book.id)
+  end
 
- # def unfollow!(book)
- #   subscriptions.find_by(followed_id: book.id).destroy
- # end
+  def unfollow!(book)
+    subscriptions.find_by(followed_id: book.id).destroy
+  end
 
 end
