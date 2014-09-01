@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 
   ratyrate_rater
   def following?(book)
-    subscriptions.find_by(followed_id: book.id)
+    return 'True' if subscriptions.find_by(followed_id: book.id) 
   end
 
   def follow!(book)
