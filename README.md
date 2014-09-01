@@ -137,13 +137,13 @@ Database Schema:
     9.	✓If a book has ratings or reviews, you can not destroy it, only
         deactivate it
     10.	✓Deactivated books can not get new reviews or ratings
-    11.	Users can receive emails when their books get rated or reviewed
+    11.	✓Users can receive emails when their books get rated or reviewed
     12.	Users can "follow" books - which means they get email notifications on
         ratings and reviews
     13.	Users can opt out of all or by book rating emails 
     14.	Users can opt out of all or by book review emails
     15.	Users can configure their email preferences
-    16.	Users can ask to receive a daily digest of email notifications instead
+    16. Users can ask to receive a daily digest of email notifications instead
         of individual notifications
     17.	✓Books must have a picture associated with them to be approved
     18.	✓Admins can block users from creating ratings or reviews in the system
