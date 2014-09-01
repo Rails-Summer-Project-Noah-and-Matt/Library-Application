@@ -8,6 +8,7 @@ class User < ActiveRecord::Base
   has_many :subscriptions, foreign_key: "follower_id", dependent: :destroy
   has_many :followed_books, :through => :subscriptions, source: :followed
   has_many :reviews, dependent: :destroy
+
   def following?(book)
     subscriptions.find_by(followed_id: book.id)
   end
@@ -24,7 +25,5 @@ class User < ActiveRecord::Base
     self.blocked = (not self.blocked)
     self.save
   end
-
-  ratyrate_rater
 
 end

@@ -1,11 +1,15 @@
 - model_class = Review
 .page-header
-  %h1=t '.title', :default => "#{User.find(@review.user_id).email}'s Review of #{@book.title}"
+  %h1=t '.title', :default => "#{@review.reviewer.email}'s Review of #{@book.title}"
 
 %p
-  %strong= model_class.human_attribute_name(:text) + ':'
+  %strong= 'Review Text:'
   %br
   = @review.text
+%p
+  %strong= 'Rating:'
+  %br
+  = rating_view @review
 
 = link_to t('.back', :default => t("helpers.links.back")), book_reviews_path(@review.book), :class => 'btn btn-default'
 = link_to t('.edit', :default => t("helpers.links.edit")), edit_book_review_path(@review.book, @review), :class => 'btn btn-default'

@@ -66,7 +66,7 @@ class BooksController < ApplicationController
   private
     
   def sort_column
-    Book.column_names.include?(params[:sort]) ? params[:sort] : "title"
+    Book.column_names.include?(params[:sort]) ? params[:sort] : "rating"
   end
   
   # Use callbacks to share common setup or constraints between actions.

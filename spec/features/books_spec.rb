@@ -161,5 +161,21 @@ describe 'Book Features:' do
 
   end
 
+  describe 'Showing' do
+    before(:each) do
+      @author = FactoryGirl.create(:author)
+      @book = FactoryGirl.create(:book, author_id: @author.id)
+      @book.is_active = true
+    end
+
+    describe 'an unrated book' do
+      it 'shows no ratings' do
+        visit book_path @book
+        expect(page).to have_text "No ratings"
+      end
+    end
+  end
+
+
 end
 
