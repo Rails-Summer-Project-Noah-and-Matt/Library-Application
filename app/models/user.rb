@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
 
   has_one :email_prefs
+  after_create :create_email_prefs
 
   def following?(book)
     return 'True' if subscriptions.find_by(followed_id: book.id) 
@@ -27,5 +28,6 @@ class User < ActiveRecord::Base
     self.blocked = (not self.blocked)
     self.save
   end
+
 
 end
