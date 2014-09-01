@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :authors
-
+  resources :subscriptions, only: [:create, :destroy] 
   # helpers will be useradmin_path, etc
   resources :useradmin, :controller => 'users' do
     member do
@@ -19,6 +19,9 @@ Rails.application.routes.draw do
     end
     resources :reviews
   end
+  get 'email_prefs/:id' => 'email_prefs#show', as: :email_pref
+  patch 'email_prefs/:id' => 'email_prefs#update', as: :email_prefs
+  
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

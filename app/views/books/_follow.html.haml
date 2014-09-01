@@ -1,0 +1,3 @@
+= form_for(current_user.subscriptions.build(followed_id: @book.id)) do |f|
+  %div= f.hidden_field :followed_id
+  = f.submit "Follow", class: "btn btn-large btn-primary"

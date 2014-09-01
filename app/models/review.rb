@@ -8,8 +8,9 @@ class Review < ActiveRecord::Base
   after_create :email_users, :update_book_rating
   after_update :update_book_rating
 
-  def email_users 
-    LibraryMailer.update_user_review_email(self.user, self.book).deliver
+
+  def email_users
+    LibraryMailer.update_user_review_email(self.user, self.book).deliver 
   end
 
   def update_book_rating
