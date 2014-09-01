@@ -1,0 +1,2 @@
+module EmailPrefsHelper
+end

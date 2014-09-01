@@ -32,6 +32,8 @@
   %br
   = avg_rating_view @book
 
+= render 'follow_form' if current_user
+
 = link_to t('.back', :default => t("helpers.links.back")), books_path, :class => 'btn btn-default'
 = link_to 'Reviews', book_reviews_path(@book), :class => 'btn btn-default'
 = link_to t('.edit', :default => t("helpers.links.edit")), edit_book_path(@book), :class => 'btn btn-default' if @book.user == current_user
