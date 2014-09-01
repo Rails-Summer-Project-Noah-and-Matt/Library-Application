@@ -10,7 +10,8 @@ class Review < ActiveRecord::Base
 
 
   def email_users
-    LibraryMailer.update_user_review_email(self.user, self.book).deliver 
+    emailowner(self.user, self.book)
+    emailfollowers(self.book)  
   end
 
   def update_book_rating
