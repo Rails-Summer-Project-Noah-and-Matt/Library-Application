@@ -29,7 +29,8 @@
   = image_tag @book.cover.url if @book.cover?
 %p
   %strong= 'Rating:'
-  = rating_for @book, "rating", :cancel => true
+  %br
+  = avg_rating_view @book
 
 = link_to t('.back', :default => t("helpers.links.back")), books_path, :class => 'btn btn-default'
 = link_to 'Reviews', book_reviews_path(@book), :class => 'btn btn-default'

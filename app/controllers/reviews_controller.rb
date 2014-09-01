@@ -1,33 +1,25 @@
 class ReviewsController < ApplicationController
+  
+  helper_method :sort_column, :sort_direction
+
   before_action :set_review, only: [:show, :edit, :update, :destroy]
+  before_action :set_book, only: [:index, :show, :new, :edit, :create, :update]
+
   before_filter :check_valid_user, only:  [:edit, :update, :destroy, :new] 
   
   def index
-    @book = book = Book.find(params[:book_id])
-    @reviews = book.reviews.paginate(:page => params[:page])
-  end
-
-  def show
-    @book = book = Book.find(params[:book_id])
-    @review = book.reviews.find(params[:id])
+    @reviews = @book.reviews.order(sort_column + " " + sort_direction).paginate(:page => params[:page])
   end
 
   def new
-    book = Book.find(params[:book_id])
-    book.reviewable? || err = "#{book.title} is inactive and can't be reviewed."
+    @book.reviewable? || err = "#{@book.title} is inactive and can't be reviewed."
     ( current_user && !current_user.blocked ) || err = "You are blocked or not logged in."
     ( redirect_to(:back, notice: err) and return ) if err
-    @review = book.reviews.build 
-  end
-
-  def edit      
-    book = Book.find(params[:book_id])
-    @review = book.reviews.find(params[:id])
+    @review = @book.reviews.build 
   end
 
   def create
-    book = Book.find(params[:book_id])
-    @review = book.reviews.create(review_params)
+    @review = @book.reviews.create(review_params)
     @review.user_id = current_user.id
 
     @item     = @review
@@ -35,10 +27,11 @@ class ReviewsController < ApplicationController
     super
   end
 
-
   def update
-    book = Book.find(params[:book_id])
-    @item = @review = book.reviews.find(params[:id])
+    @book.reviewable? || err = "#{@book.title} is inactive and can't be reviewed."
+    ( current_user && !current_user.blocked ) || err = "You are blocked or not logged in."
+    ( redirect_to(:back, notice: err) and return ) if err
+    @item = @review
     @redirect = [@review.book, @review]
     @current_parameters = review_params
     super 
@@ -53,13 +46,20 @@ class ReviewsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
+    def sort_column
+      Review.column_names.include?(params[:sort]) ? params[:sort] : "rating"
+    end
+  
     def set_review
       @review = Review.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+    def set_book
+      @book = Book.find(params[:book_id])
+    end
+
     def review_params
-      params.require(:review).permit(:text)
+      params.require(:review).permit(:text, :rating)
     end
 end
