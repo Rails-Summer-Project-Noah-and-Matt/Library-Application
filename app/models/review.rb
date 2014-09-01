@@ -10,8 +10,8 @@ class Review < ActiveRecord::Base
 
 
   def email_users
-    emailowner(self.user, self.book)
-    emailfollowers(self.book)  
+    email_owner(self.user, self.book)
+    email_followers(self.book)  
   end
 
   def update_book_rating
