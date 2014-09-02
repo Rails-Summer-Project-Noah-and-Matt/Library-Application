@@ -20,9 +20,7 @@ class Review < ActiveRecord::Base
 
   def email_owner(book)
      user = find_book_owner(book) 
-     if user.email_prefs.all_reviews
-        LibraryMailer.update_user_review_email(user, book).deliver
-     end
+     LibraryMailer.update_user_review_email(user, book).deliver if user.email_prefs.all_reviews
   end
   
   def email_following_users(book)

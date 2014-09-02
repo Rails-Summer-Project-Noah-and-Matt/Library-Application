@@ -26,8 +26,7 @@ FactoryGirl.define do
    is_active true
  end 
 
-
-  factory :review do 
+ factory :review do 
    association :user_id, factory: :user
    association :book_id, factory: :book
    text 'This is a great review' 
