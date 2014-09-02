@@ -32,6 +32,36 @@
         %td= link_to reviewer[:user].email, useradmin_path(reviewer[:user])
         %td= reviewer[:reviews]
 
+%h2 Highest Ratings
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= "ID"
+      %th= 'Email'
+      %th= 'Rating Average'
+  %tbody
+    - @highest_ratings.each do |rater|
+      %tr
+        %td= link_to rater[:user].id,    useradmin_path(rater[:user])
+        %td= link_to rater[:user].email, useradmin_path(rater[:user])
+        %td= '%0.2f' % rater[:avg]
+
+%h2 Lowest Ratings
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= "ID"
+      %th= 'Email'
+      %th= 'Rating Average'
+  %tbody
+    - @lowest_ratings.each do |rater|
+      %tr
+        %td= link_to rater[:user].id,    useradmin_path(rater[:user])
+        %td= link_to rater[:user].email, useradmin_path(rater[:user])
+        %td= '%0.2f' % rater[:avg]
+
 %h2 Most Books
 
 %table.table.table-striped

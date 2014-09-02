@@ -8,6 +8,8 @@ class ReportsController < ApplicationController
     @most_logins = most_logins
     @most_reviews = most_reviews
     @most_books = most_books
+    @highest_ratings = highest_ratings
+    @lowest_ratings = lowest_ratings
     @most_activity = most_activity
   end
 
@@ -96,9 +98,27 @@ class ReportsController < ApplicationController
   end
 
   def highest_ratings
+    most = rating_averages.reverse
+    presentables= []
+    most.map do |el|
+      rater = {}
+      rater[:user] = User.find(el[0])
+      rater[:avg]  = el[1]
+      presentables << rater
+    end
+    presentables
   end
 
   def lowest_ratings
+    most = rating_averages
+    presentables= []
+    most.map do |el|
+      rater = {}
+      rater[:user] = User.find(el[0])
+      rater[:avg]  = el[1]
+      presentables << rater
+    end
+    presentables
   end
 
   def rated
@@ -114,11 +134,11 @@ class ReportsController < ApplicationController
       stats[r.true_user_id.to_s.to_sym][:rated] += 1
       stats[r.true_user_id.to_s.to_sym][:sum] += r.rating
     end
-    averages = []
+    averages = {}
     stats.map do |id, s|
       averages[id] = s[:sum] / s[:rated].to_f
     end
-    averages
+    averages.sort_by{|id, avg| avg}
   end
 
 end
