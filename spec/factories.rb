@@ -25,12 +25,15 @@ FactoryGirl.define do
     sequence(:title) { |n| "The #{n}House at Pooh Corner" }
     cover { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'covers', 'cover.gif')) }
     is_active true
+    after(:build) { |book| book.true_user_id = book.owner.id }
   end 
 
   factory :review do 
     association :user_id, factory: :user
     association :book_id, factory: :book
     text 'This is a great review' 
+    rating 3
+    after(:build) { |review| review.true_user_id = review.user_id }
   end
 
 end

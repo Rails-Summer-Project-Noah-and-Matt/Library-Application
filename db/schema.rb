@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140828220011) do
+ActiveRecord::Schema.define(version: 20140902183001) do
 
   create_table "authors", force: true do |t|
     t.string   "given_name"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20140828220011) do
 
   create_table "books", force: true do |t|
     t.string   "title"
-    t.boolean  "is_active",  default: true
+    t.boolean  "is_active",    default: true
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "owner_id"
@@ -30,8 +30,9 @@ ActiveRecord::Schema.define(version: 20140828220011) do
     t.string   "isbn13"
     t.integer  "author_id"
     t.string   "cover"
-    t.boolean  "approved",   default: false
-    t.float    "rating",     default: 0.0
+    t.boolean  "approved",     default: false
+    t.float    "rating",       default: 0.0
+    t.integer  "true_user_id"
   end
 
   add_index "books", ["author_id"], name: "index_books_on_author_id"
@@ -53,7 +54,8 @@ ActiveRecord::Schema.define(version: 20140828220011) do
     t.integer  "book_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "rating",     default: 0
+    t.integer  "rating",       default: 0
+    t.integer  "true_user_id"
   end
 
   create_table "subscriptions", force: true do |t|
