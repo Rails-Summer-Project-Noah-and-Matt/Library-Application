@@ -53,4 +53,31 @@ describe 'User Administration Features:' do
       
   end
 
+  describe 'Show' do
+    before(:each) do
+      @user  = FactoryGirl.create(:user)
+      @admin = FactoryGirl.create(:admin)
+      visit new_user_session_path
+      fill_in 'Email', with: @admin.email
+      fill_in 'Password', with: @admin.password
+      click_button 'Sign in'
+    end
+
+    it 'lets the admin sign in as another user' do
+      visit useradmin_path @user
+      expect(page).to have_link("Impersonate Me!", count: 1)
+      click_link 'Impersonate Me!'
+      expect(page).to have_text("You are actually #{@admin.email}")
+    end
+
+    it 'and we can sign back out' do
+      visit useradmin_path @user
+      click_link 'Impersonate Me!'
+      expect(page).to have_link("Stop impersonating", count: 1)
+      click_link "Stop impersonating"
+      expect(page).to have_text("User Administration Page")
+    end
+
+  end
+
 end

@@ -85,3 +85,4 @@ gem 'will_paginate-bootstrap'                               #pretty pagination
 gem 'cancancan', '~> 1.9'                                   #authorization
 gem 'rolify'                                                #authorization
 gem 'jquery-raty-rails', github: 'emaiax/jquery-raty-rails' #rate
+gem 'pretender'                           #admin fakes being someone else
