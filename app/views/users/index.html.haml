@@ -1,6 +1,6 @@
 - model_class = User
 .page-header
-  %h1=t '.title', :default => 'Users'
+  %h1=t '.title', :default => 'User Administration Page'
 %table.table.table-striped
   %thead
     %tr
@@ -13,10 +13,10 @@
       %tr
         - if current_user && current_user.admin 
           - if user.blocked?
-            %td= link_to 'Unblock', unblock_useradmin_path(user), class: 'btn btn-mini'
+            %td= link_to 'Unblock', unblock_useradmin_path(user), class: 'btn btn-default'
           - else 
-            %td= link_to 'Block', block_useradmin_path(user), class: 'btn btn-mini'
+            %td= link_to 'Block', block_useradmin_path(user), class: 'btn btn-default'
         %td= link_to user.id, useradmin_path(user)
-        %td= user.email
+        %td= link_to user.email, useradmin_path(user)
         %td=l user.created_at
     = will_paginate @users, renderer: BootstrapPagination::Rails

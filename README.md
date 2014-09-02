@@ -157,7 +157,7 @@ Database Schema:
         Books and Reviews is rating)
     22.	Admins can create/invite other admins
     23.	Users can invite other users
-    24.	Admins can login as any other user in the system
+    24.	✓Admins can login as any other user in the system
     25.	When an Admin logs in as another user, the Admin's activities do not
         impact the User's activity ratings in the system
 
