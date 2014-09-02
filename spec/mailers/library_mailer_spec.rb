@@ -12,7 +12,7 @@ RSpec.describe LibraryMailer, :type => :mailer do
   end
 
   it 'should send emails' do
-    ActionMailer::Base.deliveries.count.should == 2
+    expect(ActionMailer::Base.deliveries.count).to eq 2
   end
 
 end
