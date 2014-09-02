@@ -1,0 +1,20 @@
+- model_class = Report
+.page-header
+  %h1=t '.title', :default => 'User Administration Reports'
+
+%h2 Most Logins
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= "ID"
+      %th= 'Email'
+      %th= 'logins'
+  %tbody
+    - @most_logins.each do |user|
+      %tr
+        %td= link_to user.id,    useradmin_path(user)
+        %td= link_to user.email, useradmin_path(user)
+        %td= user.sign_in_count
+
+

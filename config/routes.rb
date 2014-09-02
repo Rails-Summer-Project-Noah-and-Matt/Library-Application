@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   resources :authors
   resources :subscriptions, only: [:create, :destroy] 
+
   # helpers will be useradmin_path, etc
   resources :useradmin, :controller => 'users' do
     member do
@@ -10,6 +11,8 @@ Rails.application.routes.draw do
       get 'stop_impersonating'
     end
   end
+
+  get 'reports' => 'reports#index'
 
   root 'books#index'
   devise_for :users
