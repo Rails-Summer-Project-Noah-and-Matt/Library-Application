@@ -4,10 +4,10 @@ FactoryGirl.define do
    password "password"
    password_confirmation { "password" }
    blocked false
- end
+  end
 
  factory :email_prefs do
-   association :user_id, factory: :user
+   association :user, factory: :user
    all_reviews true
    all_ratings true
    digest true

@@ -58,11 +58,7 @@ describe 'Review Features:' do
   describe 'Notifications' do
    
    before(:all) do 
-     User.destroy_all
-     Book.destroy_all
-     Author.destroy_all
      @user1 = FactoryGirl.create(:user)
-     @user1.email_prefs.all_reviews = true
      @user2 = FactoryGirl.create(:user)
      @author = FactoryGirl.create(:author) 
      @book  = FactoryGirl.create(:book, author_id: @author.id, owner_id: @user2.id, is_active: true, approved: true)
@@ -73,6 +69,9 @@ describe 'Review Features:' do
      fill_in 'Email',   with: @user1.email
      fill_in 'Password', with: @user1.password
      click_button 'Sign in'
+     visit email_prefs_path @user1
+     check 'email_prefs_all_reviews'
+     click_button 'Update'
      visit book_path @book
      expect(page).to have_button('Follow')
      click_button 'Follow'
