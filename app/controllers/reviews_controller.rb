@@ -21,6 +21,7 @@ class ReviewsController < ApplicationController
   def create
     @review = @book.reviews.create(review_params)
     @review.user_id = current_user.id
+    @review.true_user_id = true_user.id
 
     @item     = @review
     @redirect = [@review.book, @review]
