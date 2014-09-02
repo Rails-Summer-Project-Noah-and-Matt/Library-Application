@@ -6,6 +6,13 @@ FactoryGirl.define do
    blocked false
  end
 
+ factory :email_prefs do
+   association :user_id, factory: :user
+   all_reviews true
+   all_ratings true
+   digest true
+ end
+
  factory :admin, class: User  do
    email "admin@user.com"
    password "password"

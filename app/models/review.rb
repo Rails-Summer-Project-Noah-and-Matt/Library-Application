@@ -8,11 +8,11 @@ class Review < ActiveRecord::Base
   after_create :email_users, :update_book_rating
   after_update :update_book_rating
 
-
   def email_users
-      email_owner(self.book)
-      email_following_users(self.book)
+    email_owner(self.book)
+    email_following_users(self.book)
   end
+
 
   def find_book_owner(book)
     User.find(book.owner_id)
