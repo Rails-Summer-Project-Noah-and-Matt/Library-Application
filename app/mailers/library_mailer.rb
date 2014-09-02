@@ -14,11 +14,11 @@ class LibraryMailer < ActionMailer::Base
     mail(:to => @book.owner.email, :subject => "#{@book.title} has a new review")
   end
 
-#  def user_followed_review_email(user, book)
-#    @user = user
-#    @book = book
-#    mail(to: @user.email, subject: "The book you are following #{@book.title} has a new review")
-#  end
+  def user_followed_review_email(user, book)
+    @user = user
+    @book = book
+    mail(to: @user.email, subject: "The book you are following #{@book.title} has a new review")
+  end
 
 #  def user_followed_rating_email(user, book)
 #    @user = user
