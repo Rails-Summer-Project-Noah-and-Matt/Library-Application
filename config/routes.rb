@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     member do
       get 'block'
       get 'unblock'
+      get 'impersonate'
+      get 'stop_impersonating'
     end
   end
 

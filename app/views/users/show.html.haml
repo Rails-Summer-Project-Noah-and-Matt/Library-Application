@@ -10,4 +10,9 @@
   %strong= 'email:'
   %br
   = @user.email
+- if @user.blocked?
+  %td= link_to 'Unblock', unblock_useradmin_path(@user), class: 'btn btn-default'
+- else 
+  %td= link_to 'Block', block_useradmin_path(@user), class: 'btn btn-default'
 = link_to t('.back', :default => t("helpers.links.back")), useradmin_index_path, :class => 'btn btn-default'
+= link_to 'Impersonate Me!', impersonate_useradmin_path(@user), class: 'btn btn-default'

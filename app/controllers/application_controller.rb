@@ -2,13 +2,15 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
+
+  impersonates :user    #pretender gem
+
   def check_valid_user
       unless current_user
         redirect_to :back, notice: "You must login to or sign up to user this feature"
         return
       end
   end
-
 
   def create
     # The subclasses need to set @item 
