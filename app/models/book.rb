@@ -1,4 +1,5 @@
 class Book < ActiveRecord::Base
+
   acts_as_taggable_on :tags
 
   self.per_page = 10   #pagination
@@ -11,7 +12,7 @@ class Book < ActiveRecord::Base
     maximum: 256,
     message: 'Titles must be between 1 and 256 characters long'
   }
-  
+
   validates :isbn10, allow_blank: true, format: { 
     with: /\A[[:digit:]Xx]{10}\z/,
     message: 'ISBN10 is a 10 digit format'

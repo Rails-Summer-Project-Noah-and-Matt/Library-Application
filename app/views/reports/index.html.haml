@@ -1,0 +1,93 @@
+- model_class = Report
+.page-header
+  %h1=t '.title', :default => 'User Administration Reports'
+
+%h2 Most Logins
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= "ID"
+      %th= 'Email'
+      %th= 'logins'
+  %tbody
+    - @most_logins.each do |user|
+      %tr
+        %td= link_to user.id,    useradmin_path(user)
+        %td= link_to user.email, useradmin_path(user)
+        %td= user.sign_in_count
+
+%h2 Most Reviews
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= "ID"
+      %th= 'Email'
+      %th= 'Reviews'
+  %tbody
+    - @most_reviews.each do |reviewer|
+      %tr
+        %td= link_to reviewer[:user].id,    useradmin_path(reviewer[:user])
+        %td= link_to reviewer[:user].email, useradmin_path(reviewer[:user])
+        %td= reviewer[:reviews]
+
+%h2 Highest Ratings
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= "ID"
+      %th= 'Email'
+      %th= 'Rating Average'
+  %tbody
+    - @highest_ratings.each do |rater|
+      %tr
+        %td= link_to rater[:user].id,    useradmin_path(rater[:user])
+        %td= link_to rater[:user].email, useradmin_path(rater[:user])
+        %td= '%0.2f' % rater[:avg]
+
+%h2 Lowest Ratings
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= "ID"
+      %th= 'Email'
+      %th= 'Rating Average'
+  %tbody
+    - @lowest_ratings.each do |rater|
+      %tr
+        %td= link_to rater[:user].id,    useradmin_path(rater[:user])
+        %td= link_to rater[:user].email, useradmin_path(rater[:user])
+        %td= '%0.2f' % rater[:avg]
+
+%h2 Most Books
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= "ID"
+      %th= 'Email'
+      %th= 'Books'
+  %tbody
+    - @most_books.each do |owner|
+      %tr
+        %td= link_to owner[:user].id,    useradmin_path(owner[:user])
+        %td= link_to owner[:user].email, useradmin_path(owner[:user])
+        %td= owner[:books]
+
+%h2 Most Activity
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th= "ID"
+      %th= 'Email'
+      %th= 'Actions'
+  %tbody
+    - @most_activity.each do |actor|
+      %tr
+        %td= link_to actor[:user].id,    useradmin_path(actor[:user])
+        %td= link_to actor[:user].email, useradmin_path(actor[:user])
+        %td= actor[:actions]
