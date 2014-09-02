@@ -8,11 +8,36 @@ class Review < ActiveRecord::Base
   after_create :email_users, :update_book_rating
   after_update :update_book_rating
 
-
   def email_users
-    LibraryMailer.update_user_review_email(self.user, self.book).deliver 
+    email_owner(self.book)
+    email_following_users(self.book)
   end
 
+  def find_book_owner(book)
+    User.find(book.owner_id)
+  end
+
+  def email_owner(book)
+     user = find_book_owner(book) 
+    LibraryMailer.update_user_review_email(user, book).deliver if user.email_prefs.all_reviews
+  end
+  
+  def email_following_users(book)
+     users = get_following_users(book)
+     users.each do |user|
+       LibraryMailer.user_followed_review_email(user, book).deliver
+     end
+  end
+
+  def get_following_users(book)
+    users = []
+    book.subscriptions.each do |x|
+      user = User.find(x.follower_id)
+      users << user if user.email_prefs.all_reviews
+    end
+    return users
+  end
+ 
   def update_book_rating
     self.book.update_rating!
   end

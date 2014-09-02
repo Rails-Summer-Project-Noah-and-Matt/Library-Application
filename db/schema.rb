@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140828220011) do
+ActiveRecord::Schema.define(version: 20140901064801) do
 
   create_table "authors", force: true do |t|
     t.string   "given_name"
@@ -40,9 +40,9 @@ ActiveRecord::Schema.define(version: 20140828220011) do
 
   create_table "email_prefs", force: true do |t|
     t.integer  "user_id"
-    t.boolean  "all_ratings"
-    t.boolean  "all_reviews"
-    t.boolean  "digest"
+    t.boolean  "all_ratings", default: false
+    t.boolean  "all_reviews", default: false
+    t.boolean  "digest",      default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

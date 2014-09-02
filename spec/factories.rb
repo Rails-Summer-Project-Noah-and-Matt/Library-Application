@@ -4,6 +4,13 @@ FactoryGirl.define do
    password "password"
    password_confirmation { "password" }
    blocked false
+  end
+
+ factory :email_prefs do
+   association :user, factory: :user
+   all_reviews true
+   all_ratings true
+   digest true
  end
 
  factory :admin, class: User  do
@@ -26,8 +33,7 @@ FactoryGirl.define do
    is_active true
  end 
 
-
-  factory :review do 
+ factory :review do 
    association :user_id, factory: :user
    association :book_id, factory: :book
    text 'This is a great review' 
