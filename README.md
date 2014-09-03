@@ -140,8 +140,8 @@ Database Schema:
     11.	✓Users can receive emails when their books get rated or reviewed
     12.	✓Users can "follow" books - which means they get email notifications on
         ratings and reviews
-    13.	✓Users can opt out of all or by book rating emails 
-    14.	✓Users can opt out of all or by book review emails
+    13.	Users can opt out of all or by book rating emails 
+    14.	Users can opt out of all or by book review emails
     15.	✓Users can configure their email preferences
     16. Users can ask to receive a daily digest of email notifications instead
         of individual notifications
