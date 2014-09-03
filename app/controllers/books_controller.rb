@@ -1,13 +1,13 @@
 class BooksController < ApplicationController
-  load_and_authorize_resource
 
   helper_method :sort_column, :sort_direction
 
-  before_action :set_book, only: [:show, :edit, :update, :destroy]
+  before_action :set_book, only: [:show, :edit, :update, :destroy, :approve, :deactivate, :reactivate]
   before_filter :check_valid_user, only: [:new, :edit, :update, :destroy]
 
   def index
-    @books = Book.all
+    @q = Book.search(params[:q])
+    @books = @q.result.includes(:author, :reviews, :tags)
     @books = @books.where(approved: true) unless ( current_user && current_user.admin )
     @books = @books.order(sort_column + " " + sort_direction).paginate(:page => params[:page])
   end
@@ -63,6 +63,11 @@ class BooksController < ApplicationController
     redirect_to books_url, notice: notice
   end
 
+  def search
+    index
+    render :index
+  end
+
   private
     
   def sort_column
@@ -71,25 +76,6 @@ class BooksController < ApplicationController
   
   def set_book
     @book = Book.find(params[:id])
-  end
-
-  def by_title
-  end
-
-  def by_author
-    Author.where('given_name LIKE ? OR family_name LIKE ?', "#{params[:search]}", "#{params[:search]}").pluck(:id)
-  end
-
-  def by_isbn
-  end
-
-  def by_tags
-  end
-
-  def by_rating
-  end
-
-  def by_review
   end
 
   def book_params
