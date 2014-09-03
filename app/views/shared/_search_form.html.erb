@@ -1,0 +1,24 @@
+<%= search_form_for @q, url: search_books_path,
+    html: { method: :post } do |f| %>
+  <%= f.label 'Title:' %>
+  <%= f.search_field :title_cont %>
+
+  <%= f.label 'ISBN:' %>
+  <%= f.search_field :isbn10_or_isbn13_cont %>
+
+  <%= f.label 'Author:' %>
+  <%= f.search_field :author_given_name_or_author_family_name_cont %>
+
+  <br>
+
+  <%= f.label 'Reviews:' %>
+  <%= f.search_field :reviews_text_cont %>
+
+  <%= f.label 'Tags:' %>
+  <%= f.search_field :tags_name_cont %>
+
+  <%= f.label 'Average rating better than:' %>
+  <%= f.search_field :rating_gteq %>
+
+  <%= f.submit %>
+<% end %>
