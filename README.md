@@ -147,7 +147,7 @@ Database Schema:
         of individual notifications
     17.	✓Books must have a picture associated with them to be approved
     18.	✓Admins can block users from creating ratings or reviews in the system
-    19.	Books should be searchable by title, author, ISBN, tags, ratings, and
+    19.	✓Books should be searchable by title, author, ISBN, tags, ratings, and
         reviews 
     20.	✓Admins can see a report of activities by User: Most active* users,
         Users who give the lowest ratings, Users who give the highest ratings,
