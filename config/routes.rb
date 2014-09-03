@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   root 'books#index'
   devise_for :users
   resources :books do
+    collection do
+      match 'search' => 'books#search', via: [:get, :post], as: :search
+    end
     member do
       get 'approve'
       get 'deactivate'
