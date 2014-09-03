@@ -52,21 +52,5 @@
         .col-lg-9
           = bootstrap_flash
           = yield
-        .col-lg-3
-          .well.sidebar-nav
-            %h3 Sidebar
-            %ul.nav.nav-list
-              %li.nav-header Sidebar
-              %li= link_to_unless_current "Books", root_path
-              %li= link_to_unless_current "Authors", authors_path
-              - if user_signed_in?
-                %li= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link'
-                %li= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link' 
-                %p 
-                  Logged in as 
-                  %strong= current_user.email
-              - else 
-                %li= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'
-                %li= link_to "Login", new_user_session_path, :class => 'navbar-link'
       %footer
         %p &copy; 2014 Chris Ashfield, Matthew Spah, Noah Birnel 
