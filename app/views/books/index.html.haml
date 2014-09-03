@@ -23,11 +23,11 @@
       %tr
         - if current_user && current_user.admin 
           - if book.approvable?
-            %td= link_to 'Approve', approve_book_path(book), class: 'btn btn-mini'
+            %td= link_to 'Approve', approve_book_path(book), class: 'btn btn-default'
           - elsif book.is_active?
-            %td= link_to 'Deactivate', deactivate_book_path(book), class: 'btn btn-mini'
+            %td= link_to 'Deactivate', deactivate_book_path(book), class: 'btn btn-default'
           - else 
-            %td= link_to 'Reactivate', reactivate_book_path(book), class: 'btn btn-mini'
+            %td= link_to 'Reactivate', reactivate_book_path(book), class: 'btn btn-default'
         %td= link_to(image_tag(book.cover_url(:thumb)), book_path(book)) if book.cover?
         %td= link_to book.id, book_path(book)
         %td= link_to book.title, book_path(book)
