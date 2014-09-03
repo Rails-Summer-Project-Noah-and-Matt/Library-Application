@@ -69,12 +69,29 @@ class BooksController < ApplicationController
     Book.column_names.include?(params[:sort]) ? params[:sort] : "rating"
   end
   
-  # Use callbacks to share common setup or constraints between actions.
   def set_book
     @book = Book.find(params[:id])
   end
 
-  # Never trust parameters from the scary internet, only allow the white list through.
+  def by_title
+  end
+
+  def by_author
+    Author.where('given_name LIKE ? OR family_name LIKE ?', "#{params[:search]}", "#{params[:search]}").pluck(:id)
+  end
+
+  def by_isbn
+  end
+
+  def by_tags
+  end
+
+  def by_rating
+  end
+
+  def by_review
+  end
+
   def book_params
     params.require(:book).permit(:title,
                                  :isbn10,
