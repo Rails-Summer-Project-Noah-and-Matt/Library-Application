@@ -1,6 +1,9 @@
 - model_class = User
 .page-header
   %h1=t '.title', :default => 'User Administration Page'
+
+= link_to 'Reports', reports_path, class: 'btn btn-default'
+
 %table.table.table-striped
   %thead
     %tr
