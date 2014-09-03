@@ -10,16 +10,18 @@
       %th 
       %th= sortable 'id'
       %th= sortable 'email'
+      %th= 'Admin?'
       %th= sortable "created_at"
   %tbody
     - @users.each do |user|
       %tr
-        - if current_user && current_user.admin 
-          - if user.blocked?
-            %td= link_to 'Unblock', unblock_useradmin_path(user), class: 'btn btn-default'
-          - else 
-            %td= link_to 'Block', block_useradmin_path(user), class: 'btn btn-default'
+        - if user.blocked?
+          %td= link_to 'Unblock', unblock_useradmin_path(user), class: 'btn btn-default'
+        - else 
+          %td= link_to 'Block', block_useradmin_path(user), class: 'btn btn-default'
+
         %td= link_to user.id, useradmin_path(user)
         %td= link_to user.email, useradmin_path(user)
+        %td= user.admin
         %td=l user.created_at
     = will_paginate @users, renderer: BootstrapPagination::Rails

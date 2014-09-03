@@ -16,3 +16,5 @@
   %td= link_to 'Block', block_useradmin_path(@user), class: 'btn btn-default'
 = link_to t('.back', :default => t("helpers.links.back")), useradmin_index_path, :class => 'btn btn-default'
 = link_to 'Impersonate Me!', impersonate_useradmin_path(@user), class: 'btn btn-default'
+- if !@user.admin?
+  %td= link_to 'Make Admin', adminify_useradmin_path(@user), class: 'btn btn-default'

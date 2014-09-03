@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :require_admin
   skip_before_action :require_admin, only: :stop_impersonating
 
-  before_action :set_user, only: [:show, :edit, :update, :destroy, :block, :unblock, :impersonate]
+  before_action :set_user, only: [:show, :edit, :update, :destroy, :block, :unblock, :impersonate, :adminify]
 
   def impersonate
     impersonate_user(@user)
@@ -32,6 +32,13 @@ class UsersController < ApplicationController
     notice = '' if @user.toggle_blocked!
     redirect_to useradmin_index_path, notice: notice
   end
+
+  def adminify
+    notice = "Couldn't make admin; something is wrong."
+    notice = '' if @user.adminify!
+    redirect_to useradmin_index_path, notice: notice
+  end
+
 
   private
 
