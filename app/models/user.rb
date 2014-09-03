@@ -29,5 +29,9 @@ class User < ActiveRecord::Base
     self.save
   end
 
+  def adminify!
+    self.admin = true
+    self.save
+  end
 
 end
