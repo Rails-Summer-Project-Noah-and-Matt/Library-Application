@@ -17,12 +17,6 @@ Production Dependencies
 =======================
 You will need 
 
-libpq-dev for postgres
-```
-$ sudo apt-get install libpq-dev   # on Ubuntu / Debian
-```
-https://www.digitalocean.com/community/tutorials/how-to-setup-ruby-on-rails-with-postgres
-
 libmagickwand-dev or something similar for rmagick
 ```
 $ sudo apt-get install libmagickwand-dev 
@@ -34,96 +28,37 @@ $ brew install imagemagick # for Mac OS (using Homebrew)
 
 http://stackoverflow.com/questions/3894225/imagemagick-rmagick-cant-install-rmagick-2-13-1-cant-find-magick-config
 
-README TODOs
+sqlite3
+
+Configuration and deployment
 =======================
 
-Things to cover:
+Run
+```
+rake db:setup
+```
 
-* System dependencies
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+We are running this:
+```
+rails s --binding (your IP address here):(PORT)
+```
 
 [![Build Status](https://travis-ci.org/Rails-Summer-Project-Noah-and-Matt/Library-Application.png?branch=master)](https://travis-ci.org/Rails-Summer-Project-Noah-and-Matt/Library-Application)
 [![Code Climate](https://codeclimate.com/github/Rails-Summer-Project-Noah-and-Matt/Library-Application.png)](https://codeclimate.com/github/Rails-Summer-Project-Noah-and-Matt/Library-Application)
 
 
-Project Plan: 
-  - Build a GIT repo to share with Noah
-  - We are going to be strict about testing
-  - Failing tests or code w/o tests gets committed to a branch
-  - Passing tests get merged to master with an issue number
-  - No commits / merges to master w/o issue number
+Contributing
+=======================
+Fork.
 
-Concerns:
-  - Multiple branches could cause issues with DB migrations
+Make an feature branch or a bugfix branch.
 
-Progress Tracking:
-  - We'll use GIT issues for Project Tracking
+Code, and make a pull request 
+when all tests pass and simplecov shows 100% coverage.
 
-Database Schema:
-  - Books
-    - Multiple Books can have the same title
-    - is_active
-    - cover (using carrierwave Uploader)
-    - owner (foreign key to user_id, for req 5 only edit book you entered)
-    - isbn10
-    - isbn13
-    - belongs_to :author
-    - has_one :book_cover
-    - has_many :book_tags
-    - tags done through Acts_As_Taggable_On
-    - has many :book_ratings
-    - has_many :ratings, though :book_ratings
-    - has_many :reviews
-  - Ratings
-    - has_many :book_ratings
-    - has_many :books, through :book_ratings
-  - Reviews
-    - text will be searchable - we think we will use a rails sql wrapper,
-      not regex/ruby
-    - book
-    - user
-    - review
-  - Authors 
-    - first_name
-    - last_name
-    - has_many :books
-  - Users
-    - Reviews and Tags, ratings
-    - email
-    - username
-    - is admin ?
-    - is_blocked (req 18)
-    - email preferences - how to handle - req 11-16 - probably one or more 
-      add'l tables
-    - ? should we do a hook for "activity", or gen reports as requested?
-      (for req 20) - I think as requested.
-    - has_many :books
-    - has_many :followed_books           #(req 12)
-    - has_many :books, through :followed_books
-    - receives_ratings (boolean)  #(req13)
-    - receives_reviews (boolean)  #(req14)
-    - receives_notifications_of_owned_book_rating_or_review (boolean) #(req11)
-    - emails_as_daily_digest (boolean) #(req16)
-  - Followed_Books
-    - book
-    - user
-    - following (boolean)
-    - receives_ratings (boolean)  #(req13)
-    - receives_reviews (boolean)  #(req14)
-  Database:
-    - SQlite for Dev and Test
-    - Postgres for Production
+Please make or use a github issue
+and reference it in your pull request, or your last commit.
 
 ### Renée's specs
     1.	✓Anyone can see all the book titles and ratings in the library

@@ -54,8 +54,6 @@ group :test, :development do
   gem 'capybara'
   # travis needs rake explicitly installed!
   gem 'rake'
-  # sqlite3 for test / devel ; postgres for production
-  gem 'sqlite3'
   gem "factory_girl_rails", "~> 4.0"
   # show our test coverage
   gem 'simplecov', require: false
@@ -64,11 +62,6 @@ group :test, :development do
   gem 'flay'
   gem 'debugger'
 
-end
-
-group :production do
-  # sqlite3 for test / devel ; postgres for production
-  gem 'pg'
 end
 
 # upload book covers
@@ -86,3 +79,4 @@ gem 'jquery-raty-rails', github: 'emaiax/jquery-raty-rails' #rate
 gem 'pretender'                           #admin fakes being someone else
 gem 'ransack'                             #search
 gem 'devise_invitable', '~> 1.3.4'        # invite users
+gem 'sqlite3'                     # that's right, sqlite in production.
