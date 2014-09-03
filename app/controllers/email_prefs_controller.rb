@@ -10,7 +10,6 @@ class EmailPrefsController < ApplicationController
      @email_prefs = EmailPrefs.find_or_create_by(user: current_user)
    end
 
-
    private
    def set_user
      @user = current_user
@@ -20,7 +19,3 @@ class EmailPrefsController < ApplicationController
      params[:email_prefs].permit(:user_id, :all_ratings, :all_reviews, :digest)
    end
 end
-
-
- 
-

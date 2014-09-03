@@ -156,7 +156,7 @@ Database Schema:
     21.	✓Book and review listings are sortable, and paginated (default sort for
         Books and Reviews is rating)
     22.	✓Admins can create/invite other admins
-    23.	Users can invite other users
+    23.	✓Users can invite other users
     24.	✓Admins can login as any other user in the system
     25.	✓When an Admin logs in as another user, the Admin's activities do not
         impact the User's activity ratings in the system
