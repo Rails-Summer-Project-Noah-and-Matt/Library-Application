@@ -85,3 +85,4 @@ gem 'will_paginate-bootstrap'                               #pretty pagination
 gem 'jquery-raty-rails', github: 'emaiax/jquery-raty-rails' #rate
 gem 'pretender'                           #admin fakes being someone else
 gem 'ransack'                             #search
+gem 'devise_invitable', '~> 1.3.4'        # invite users
